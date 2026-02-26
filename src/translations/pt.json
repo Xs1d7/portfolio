@@ -2,9 +2,56 @@
   "header": {
     "name": "Andressa"
   },
+  "nav": {
+    "about": "Sobre",
+    "experience": "Experiência",
+    "education": "Educação",
+    "courses": "Cursos",
+    "languages": "Idiomas",
+    "contact": "Contato"
+  },
   "hero": {
-    "title": "Portfolio",
-    "subtitle": "Em construção"
+    "greeting": "Olá, eu sou",
+    "name": "Andressa",
+    "role": "Desenvolvedora Frontend",
+    "description": "Criando experiências digitais modernas com foco em performance, acessibilidade e design elegante.",
+    "cta": "Entre em contato",
+    "download": "Baixar CV"
+  },
+  "about": {
+    "title": "Sobre mim",
+    "p1": "Sou uma desenvolvedora frontend apaixonada por criar interfaces bonitas e funcionais. Com experiência em React, Next.js e TypeScript, transformo ideias em produtos digitais que encantam os usuários.",
+    "p2": "Acredito que bom código é código limpo, acessível e performático. Busco constantemente aprender novas tecnologias e aprimorar minhas habilidades para entregar soluções cada vez melhores.",
+    "location": "São Paulo, Brasil",
+    "available": "Disponível para projetos"
+  },
+  "experience": {
+    "title": "Experiência",
+    "present": "Atual"
+  },
+  "education": {
+    "title": "Educação"
+  },
+  "courses": {
+    "title": "Cursos & Certificações",
+    "hours": "horas"
+  },
+  "languages": {
+    "title": "Idiomas",
+    "native": "Nativo",
+    "fluent": "Fluente",
+    "intermediate": "Intermediário",
+    "basic": "Básico"
+  },
+  "contact": {
+    "title": "Contato",
+    "subtitle": "Tem um projeto em mente? Vamos conversar.",
+    "email": "Email",
+    "linkedin": "LinkedIn",
+    "github": "GitHub"
+  },
+  "footer": {
+    "rights": "Todos os direitos reservados."
   },
   "meta": {
     "title": "Andressa | Portfolio",

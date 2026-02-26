@@ -2,9 +2,56 @@
   "header": {
     "name": "Andressa"
   },
+  "nav": {
+    "about": "About",
+    "experience": "Experience",
+    "education": "Education",
+    "courses": "Courses",
+    "languages": "Languages",
+    "contact": "Contact"
+  },
   "hero": {
-    "title": "Portfolio",
-    "subtitle": "Under construction"
+    "greeting": "Hi, I'm",
+    "name": "Andressa",
+    "role": "Frontend Developer",
+    "description": "Building modern digital experiences focused on performance, accessibility, and elegant design.",
+    "cta": "Get in touch",
+    "download": "Download CV"
+  },
+  "about": {
+    "title": "About me",
+    "p1": "I'm a frontend developer passionate about creating beautiful and functional interfaces. With experience in React, Next.js, and TypeScript, I turn ideas into digital products that delight users.",
+    "p2": "I believe good code is clean, accessible, and performant code. I'm constantly learning new technologies and improving my skills to deliver better solutions.",
+    "location": "São Paulo, Brazil",
+    "available": "Available for projects"
+  },
+  "experience": {
+    "title": "Experience",
+    "present": "Present"
+  },
+  "education": {
+    "title": "Education"
+  },
+  "courses": {
+    "title": "Courses & Certifications",
+    "hours": "hours"
+  },
+  "languages": {
+    "title": "Languages",
+    "native": "Native",
+    "fluent": "Fluent",
+    "intermediate": "Intermediate",
+    "basic": "Basic"
+  },
+  "contact": {
+    "title": "Contact",
+    "subtitle": "Have a project in mind? Let's talk.",
+    "email": "Email",
+    "linkedin": "LinkedIn",
+    "github": "GitHub"
+  },
+  "footer": {
+    "rights": "All rights reserved."
   },
   "meta": {
     "title": "Andressa | Portfolio",

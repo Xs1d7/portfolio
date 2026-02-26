@@ -1,14 +1,23 @@
 "use client";
 
-import { useTranslation } from "@/components/language-provider";
+import { Hero } from "@/sections/hero";
+import { About } from "@/sections/about";
+import { Experience } from "@/sections/experience";
+import { Education } from "@/sections/education";
+import { Courses } from "@/sections/courses";
+import { Languages } from "@/sections/languages-section";
+import { Contact } from "@/sections/contact";
 
 export default function Home() {
-  const { t } = useTranslation();
-
   return (
-    <main className="flex min-h-svh flex-col items-center justify-center">
-      <h1 className="text-2xl font-semibold tracking-tight">{t.hero.title}</h1>
-      <p className="mt-2 text-muted">{t.hero.subtitle}</p>
+    <main>
+      <Hero />
+      <About />
+      <Experience />
+      <Education />
+      <Courses />
+      <Languages />
+      <Contact />
     </main>
   );
 }
