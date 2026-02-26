@@ -128,6 +128,24 @@ export const languages: Language[] = [
   { name: { pt: "Espanhol", en: "Spanish" }, level: "intermediate" },
 ];
 
+export interface Skill {
+  name: string;
+  icon: "code" | "palette" | "server" | "tool";
+}
+
+export const skills: Skill[] = [
+  { name: "React", icon: "code" },
+  { name: "Next.js", icon: "code" },
+  { name: "TypeScript", icon: "code" },
+  { name: "Tailwind CSS", icon: "palette" },
+  { name: "JavaScript", icon: "code" },
+  { name: "HTML & CSS", icon: "palette" },
+  { name: "Git & GitHub", icon: "tool" },
+  { name: "REST APIs", icon: "server" },
+  { name: "Figma", icon: "palette" },
+  { name: "Node.js", icon: "server" },
+];
+
 export const socials: Social[] = [
   {
     name: "GitHub",

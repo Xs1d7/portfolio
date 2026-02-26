@@ -23,7 +23,9 @@
     "p1": "Sou uma desenvolvedora frontend apaixonada por criar interfaces bonitas e funcionais. Com experiência em React, Next.js e TypeScript, transformo ideias em produtos digitais que encantam os usuários.",
     "p2": "Acredito que bom código é código limpo, acessível e performático. Busco constantemente aprender novas tecnologias e aprimorar minhas habilidades para entregar soluções cada vez melhores.",
     "location": "São Paulo, Brasil",
-    "available": "Disponível para projetos"
+    "available": "Disponível para projetos",
+    "skillsTitle": "Habilidades",
+    "photoAlt": "Foto de Andressa"
   },
   "experience": {
     "title": "Experiência",
