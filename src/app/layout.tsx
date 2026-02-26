@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import { ThemeProvider } from "@/components/theme-provider";
+import { LanguageProvider } from "@/components/language-provider";
 import { Header } from "@/components/header";
 import "./globals.css";
 
@@ -16,7 +17,7 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "Andressa | Portfolio",
-  description: "Desenvolvedor Frontend — Portfolio profissional",
+  description: "Desenvolvedora Frontend — Portfolio profissional",
 };
 
 const themeScript = `
@@ -47,10 +48,12 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} font-sans antialiased`}
       >
         <ThemeProvider>
-          <div className="mx-auto w-full max-w-5xl px-4 sm:px-6 lg:px-8">
-            <Header />
-            {children}
-          </div>
+          <LanguageProvider>
+            <div className="mx-auto w-full max-w-5xl px-4 sm:px-6 lg:px-8">
+              <Header />
+              {children}
+            </div>
+          </LanguageProvider>
         </ThemeProvider>
       </body>
     </html>
