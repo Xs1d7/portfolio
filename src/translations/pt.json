@@ -29,7 +29,10 @@
   },
   "experience": {
     "title": "Experiência",
-    "present": "Atual"
+    "present": "Atual",
+    "technologies": "Tecnologias",
+    "gallery": "Galeria",
+    "scrollHint": "Role para ver mais experiências"
   },
   "education": {
     "title": "Educação"
