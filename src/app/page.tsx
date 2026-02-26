@@ -3,6 +3,7 @@
 import { Hero } from "@/sections/hero";
 import { About } from "@/sections/about";
 import { Experience } from "@/sections/experience";
+import { Skills } from "@/sections/skills";
 import { Education } from "@/sections/education";
 import { Courses } from "@/sections/courses";
 import { Languages } from "@/sections/languages-section";
@@ -14,6 +15,7 @@ export default function Home() {
       <Hero />
       <About />
       <Experience />
+      <Skills />
       <Education />
       <Courses />
       <Languages />

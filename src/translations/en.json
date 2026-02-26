@@ -5,6 +5,7 @@
   "nav": {
     "about": "About",
     "experience": "Experience",
+    "skills": "Skills",
     "education": "Education",
     "courses": "Courses",
     "languages": "Languages",
@@ -33,6 +34,15 @@
     "technologies": "Technologies",
     "gallery": "Gallery",
     "scrollHint": "Scroll to see more experiences"
+  },
+  "skills": {
+    "title": "Technical Skills",
+    "categories": {
+      "frontend": "Frontend",
+      "backend": "Backend",
+      "tools": "Tools",
+      "design": "Design"
+    }
   },
   "education": {
     "title": "Education"

@@ -8,6 +8,7 @@ import { useTranslation } from "@/components/language-provider";
 const NAV_ITEMS = [
   "about",
   "experience",
+  "skills",
   "education",
   "courses",
   "languages",
