@@ -10,20 +10,37 @@ export interface Education {
 
 export const education: Education[] = [
   {
-    institution: "Universidade Federal de São Paulo",
-    degree: { pt: "Bacharelado", en: "Bachelor's Degree" },
-    field: { pt: "Ciência da Computação", en: "Computer Science" },
-    period: { start: "2018", end: "2022" },
+    institution: "Unigranrio Afya",
+    degree: {
+      pt: "Tecnólogo",
+      en: "Associate Degree",
+    },
+    field: {
+      pt: "Análise e Desenvolvimento de Sistemas",
+      en: "Systems Analysis and Development",
+    },
+    period: { start: "2023-08", end: "2025-12" },
     description: {
-      pt: "Foco em engenharia de software, estruturas de dados e desenvolvimento web.",
-      en: "Focus on software engineering, data structures, and web development.",
+      pt: "Formação focada em desenvolvimento de software, arquitetura de sistemas, banco de dados e práticas modernas de engenharia de software.",
+      en: "Program focused on software development, systems architecture, databases, and modern software engineering practices.",
     },
   },
+
   {
-    institution: "ETEC São Paulo",
-    degree: { pt: "Técnico", en: "Technical Diploma" },
-    field: { pt: "Informática para Internet", en: "Internet Computing" },
-    period: { start: "2016", end: "2017" },
+    institution: "Aulas Particulares de Inglês",
+    degree: {
+      pt: "Formação em Idioma",
+      en: "Language Studies",
+    },
+    field: {
+      pt: "Inglês (Nível A2/B1)",
+      en: "English (A2/B1 Level)",
+    },
+    period: { start: "2024-07", end: null },
+    description: {
+      pt: "Aulas particulares com foco no desenvolvimento da fluência, comunicação profissional e compreensão em contextos técnicos e cotidianos.",
+      en: "Private lessons focused on fluency development, professional communication, and comprehension in both technical and everyday contexts.",
+    },
   },
 ];
 
@@ -39,40 +56,64 @@ export interface Course {
 
 export const courses: Course[] = [
   {
-    name: { pt: "React Avançado — Aplicações com Next.js", en: "Advanced React — Apps with Next.js" },
-    institution: "Udemy",
-    year: "2024",
-    hours: 95,
-  },
-  {
-    name: { pt: "Formação TypeScript", en: "TypeScript Training" },
-    institution: "Rocketseat",
-    year: "2023",
+    name: {
+      pt: "Curso ADVPL e TOTVS Protheus",
+      en: "ADVPL and TOTVS Protheus Development Course",
+    },
+    institution: "LF Soluções",
+    year: "2025",
     hours: 40,
+    credential: "ADVPL · TOTVS Protheus · SQL Server · SSMS",
   },
+
   {
-    name: { pt: "UX/UI Design Fundamentals", en: "UX/UI Design Fundamentals" },
-    institution: "Coursera",
-    year: "2023",
-    hours: 30,
+    name: {
+      pt: "AWS S3 — Manipulação e Armazenamento de Objetos na Nuvem",
+      en: "AWS S3 — Object Storage and Management in the Cloud",
+    },
+    institution: "Alura",
+    year: "2024",
+    hours: 10,
   },
+
   {
-    name: { pt: "Acessibilidade Web", en: "Web Accessibility" },
-    institution: "W3Cx",
-    year: "2022",
-    hours: 20,
+    name: {
+      pt: "AWS EC2 — Alta Disponibilidade e Escalabilidade",
+      en: "AWS EC2 — High Availability and Scalability",
+    },
+    institution: "Alura",
+    year: "2024",
+    hours: 10,
   },
+
   {
-    name: { pt: "JavaScript Moderno — ES6+", en: "Modern JavaScript — ES6+" },
-    institution: "Origamid",
-    year: "2021",
-    hours: 35,
-  },
-  {
-    name: { pt: "Git e GitHub Completo", en: "Complete Git and GitHub" },
-    institution: "Udemy",
-    year: "2020",
+    name: {
+      pt: "Java e Spring Security — Protegendo Aplicações Web",
+      en: "Java and Spring Security — Securing Web Applications",
+    },
+    institution: "Alura",
+    year: "2024",
     hours: 12,
+  },
+
+  {
+    name: {
+      pt: "Java — Lambdas, Streams e Spring Framework",
+      en: "Java — Lambdas, Streams and Spring Framework",
+    },
+    institution: "Alura",
+    year: "2024",
+    hours: 12,
+  },
+
+  {
+    name: {
+      pt: "Java — Aplicando Orientação a Objetos",
+      en: "Java — Applying Object-Oriented Programming",
+    },
+    institution: "Alura",
+    year: "2024",
+    hours: 10,
   },
 ];
 
@@ -88,29 +129,24 @@ export interface Skill {
 
 export const skills: Skill[] = [
   // Frontend
-  { name: "React", level: 5, category: "frontend" },
-  { name: "Next.js", level: 5, category: "frontend" },
+  { name: "React", level: 4, category: "frontend" },
+  { name: "Next.js", level: 3, category: "frontend" },
   { name: "TypeScript", level: 5, category: "frontend" },
   { name: "JavaScript", level: 5, category: "frontend" },
   { name: "HTML & CSS", level: 5, category: "frontend" },
   { name: "Tailwind CSS", level: 4, category: "frontend" },
   { name: "SASS", level: 4, category: "frontend" },
-  { name: "Framer Motion", level: 3, category: "frontend" },
   // Backend
-  { name: "Node.js", level: 3, category: "backend" },
+  { name: "Node.js", level: 5, category: "backend" },
   { name: "REST APIs", level: 4, category: "backend" },
-  { name: "GraphQL", level: 3, category: "backend" },
   { name: "PostgreSQL", level: 2, category: "backend" },
   // Tools
   { name: "Git & GitHub", level: 5, category: "tools" },
   { name: "VS Code", level: 5, category: "tools" },
-  { name: "Storybook", level: 3, category: "tools" },
-  { name: "Testing Library", level: 3, category: "tools" },
-  { name: "Webpack / Vite", level: 3, category: "tools" },
   // Design
-  { name: "Figma", level: 4, category: "design" },
-  { name: "UI Design", level: 3, category: "design" },
-  { name: "Responsive Design", level: 5, category: "design" },
+  { name: "Figma", level: 3, category: "design" },
+  { name: "UI Design", level: 2, category: "design" },
+  { name: "Responsive Design", level: 2, category: "design" },
 ];
 
 export const skillCategories = ["frontend", "backend", "tools", "design"] as const;
@@ -125,8 +161,8 @@ export interface Language {
 
 export const languages: Language[] = [
   { name: { pt: "Português", en: "Portuguese" }, level: "native", flag: "🇧🇷" },
-  { name: { pt: "Inglês", en: "English" }, level: "fluent", flag: "🇺🇸" },
-  { name: { pt: "Espanhol", en: "Spanish" }, level: "intermediate", flag: "🇪🇸" },
+  { name: { pt: "Inglês", en: "English" }, level: "intermediate", flag: "🇺🇸" },
+  { name: { pt: "Espanhol", en: "Spanish" }, level: "basic", flag: "🇪🇸" },
 ];
 
 // ── Socials ──────────────────────────────────────────────
@@ -140,5 +176,5 @@ export interface Social {
 export const socials: Social[] = [
   { name: "GitHub", url: "https://github.com/andressa", icon: "github" },
   { name: "LinkedIn", url: "https://linkedin.com/in/andressa", icon: "linkedin" },
-  { name: "Email", url: "mailto:andressa@email.com", icon: "email" },
+  { name: "Email", url: "mailto:andressaricardo.developer@gmail.com", icon: "email" },
 ];

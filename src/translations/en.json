@@ -1,6 +1,6 @@
 {
   "header": {
-    "name": "Andressa"
+    "name": "Andressa Ricardo"
   },
   "nav": {
     "about": "About",
@@ -14,16 +14,17 @@
   "hero": {
     "greeting": "Hi, I'm",
     "name": "Andressa",
-    "role": "Frontend Developer",
-    "description": "Building modern digital experiences focused on performance, accessibility, and elegant design.",
+    "role": "Fullstack Developer",
+    "description": "Creating modern digital solutions focused on quality, efficiency, and intuitive experiences that connect people and technology.",
+
     "cta": "Get in touch",
     "download": "Download CV"
   },
   "about": {
     "title": "About me",
-    "p1": "I'm a frontend developer passionate about creating beautiful and functional interfaces. With experience in React, Next.js, and TypeScript, I turn ideas into digital products that delight users.",
-    "p2": "I believe good code is clean, accessible, and performant code. I'm constantly learning new technologies and improving my skills to deliver better solutions.",
-    "location": "São Paulo, Brazil",
+   "p1": "I am a software developer with experience in backend, frontend, automation, and RPA, focused on building efficient, scalable, and well-structured solutions. I enjoy turning ideas into functional digital products by combining solid logic, performance, and great user experience.",
+"p2": "I am constantly seeking new challenges that allow me to grow professionally, explore modern technologies, and contribute meaningfully to the success of projects.",
+    "location": "Rio de Janeiro, Brazil",
     "available": "Available for projects",
     "skillsTitle": "Skills",
     "photoAlt": "Photo of Andressa"
@@ -63,13 +64,15 @@
     "subtitle": "Have a project in mind? Let's talk.",
     "email": "Email",
     "linkedin": "LinkedIn",
-    "github": "GitHub"
+    "github": "GitHub",
+    "copyEmail": "Copy email",
+    "copied": "Copied!"
   },
   "footer": {
     "rights": "All rights reserved."
   },
   "meta": {
     "title": "Andressa | Portfolio",
-    "description": "Frontend Developer — Professional portfolio"
+    "description": "Software Developer — Professional portfolio"
   }
 }

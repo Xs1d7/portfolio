@@ -18,7 +18,38 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "Andressa | Portfolio",
-  description: "Desenvolvedora Frontend — Portfolio profissional",
+  description:
+    "Desenvolvedora Frontend — Portfolio profissional. React, Next.js, TypeScript.",
+  keywords: [
+    "frontend developer",
+    "react",
+    "next.js",
+    "typescript",
+    "portfolio",
+    "desenvolvedora frontend",
+  ],
+  authors: [{ name: "Andressa" }],
+  openGraph: {
+    title: "Andressa | Portfolio",
+    description:
+      "Desenvolvedora Frontend — Portfolio profissional. React, Next.js, TypeScript.",
+    type: "website",
+    locale: "pt_BR",
+    alternateLocale: "en_US",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Andressa | Portfolio",
+    description:
+      "Desenvolvedora Frontend — Portfolio profissional. React, Next.js, TypeScript.",
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
+  icons: {
+    icon: "/favicon.svg",
+  },
 };
 
 const themeScript = `

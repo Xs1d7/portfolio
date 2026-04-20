@@ -1,6 +1,6 @@
 {
   "header": {
-    "name": "Andressa"
+    "name": "Andressa Ricardo"
   },
   "nav": {
     "about": "Sobre",
@@ -14,16 +14,16 @@
   "hero": {
     "greeting": "Olá, eu sou",
     "name": "Andressa",
-    "role": "Desenvolvedora Frontend",
-    "description": "Criando experiências digitais modernas com foco em performance, acessibilidade e design elegante.",
+    "role": "Desenvolvedora Fullstack",
+  "description": "Criando soluções digitais modernas com foco em qualidade, eficiência e experiências intuitivas que conectam pessoas e tecnologia.",
     "cta": "Entre em contato",
     "download": "Baixar CV"
   },
   "about": {
     "title": "Sobre mim",
-    "p1": "Sou uma desenvolvedora frontend apaixonada por criar interfaces bonitas e funcionais. Com experiência em React, Next.js e TypeScript, transformo ideias em produtos digitais que encantam os usuários.",
-    "p2": "Acredito que bom código é código limpo, acessível e performático. Busco constantemente aprender novas tecnologias e aprimorar minhas habilidades para entregar soluções cada vez melhores.",
-    "location": "São Paulo, Brasil",
+    "p1": "Sou desenvolvedora de software com experiência em backend, frontend, automações e RPA, focada em criar soluções eficientes, escaláveis e bem estruturadas. Gosto de transformar ideias em produtos digitais funcionais, unindo lógica, performance e boa experiência do usuário.",
+"p2": "Estou sempre em busca de novos desafios que me permitam evoluir profissionalmente, explorar tecnologias modernas e contribuir de forma significativa para os projetos em que atuo.",
+    "location": "Rio de Janeiro, Brasil",
     "available": "Disponível para projetos",
     "skillsTitle": "Habilidades",
     "photoAlt": "Foto de Andressa"
@@ -63,13 +63,15 @@
     "subtitle": "Tem um projeto em mente? Vamos conversar.",
     "email": "Email",
     "linkedin": "LinkedIn",
-    "github": "GitHub"
+    "github": "GitHub",
+    "copyEmail": "Copiar email",
+    "copied": "Copiado!"
   },
   "footer": {
     "rights": "Todos os direitos reservados."
   },
   "meta": {
     "title": "Andressa | Portfolio",
-    "description": "Desenvolvedora Frontend — Portfolio profissional"
+    "description": "Desenvolvedora de Software"
   }
 }
