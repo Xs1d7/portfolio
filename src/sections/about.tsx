@@ -27,14 +27,14 @@ export function About() {
             <div className="absolute -inset-3 rounded-3xl border-2 border-accent/20" />
             {/* Decorative dot */}
             <div className="absolute -right-2 -top-2 h-4 w-4 rounded-full bg-accent" />
-<Image
-  src="/andressa_picture.jpeg"
-  alt={t.about.photoAlt}
-  width={280}
-  height={280}
-  className="relative rounded-2xl object-cover"
-  priority
-/>
+            <Image
+              src="/andressa_picture.jpeg"
+              alt={t.about.photoAlt}
+              width={280}
+              height={280}
+              className="relative rounded-2xl object-cover"
+              priority
+            />
           </div>
         </motion.div>
 
@@ -68,7 +68,17 @@ export function About() {
             className="flex flex-wrap gap-4 pt-2"
           >
             <span className="inline-flex items-center gap-2 text-sm text-foreground">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-accent">
+              <svg
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                className="text-accent"
+              >
                 <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z" />
                 <circle cx="12" cy="10" r="3" />
               </svg>
@@ -82,7 +92,6 @@ export function About() {
           </motion.div>
         </div>
       </div>
-
     </section>
   );
 }
