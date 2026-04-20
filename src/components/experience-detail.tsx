@@ -1,6 +1,7 @@
 "use client";
 
 import { motion, AnimatePresence } from "framer-motion";
+import ReactMarkdown, { type Components } from "react-markdown";
 import { useTranslation } from "@/components/language-provider";
 import { MediaGallery } from "@/components/media-gallery";
 import type { ExperienceEntry } from "@/data/experience";
@@ -9,6 +10,24 @@ interface Props {
   entry: ExperienceEntry;
   onClose: () => void;
 }
+
+const markdownComponents: Components = {
+  p: ({ children }) => (
+    <p className="leading-8 text-muted">{children}</p>
+  ),
+  ul: ({ children }) => (
+    <ul className="my-5 space-y-2.5 pl-1">{children}</ul>
+  ),
+  li: ({ children }) => (
+    <li className="flex gap-3 leading-7 text-muted">
+      <span className="mt-3 h-1.5 w-1.5 shrink-0 rounded-full bg-accent shadow-[0_0_0_4px_rgba(225,29,115,0.10)] dark:shadow-[0_0_0_4px_rgba(244,114,182,0.12)]" />
+      <span className="min-w-0">{children}</span>
+    </li>
+  ),
+  strong: ({ children }) => (
+    <strong className="font-semibold text-foreground">{children}</strong>
+  ),
+};
 
 export function ExperienceDetail({ entry, onClose }: Props) {
   const { locale, t } = useTranslation();
@@ -56,9 +75,13 @@ export function ExperienceDetail({ entry, onClose }: Props) {
           </div>
 
           {/* Description */}
-          <p className="mb-8 text-base leading-relaxed text-muted">
-            {entry.fullDescription[locale]}
-          </p>
+          <div className="mb-8 rounded-2xl border border-border/70 bg-foreground/[0.015] p-5 text-base shadow-sm dark:bg-white/[0.025] sm:p-6">
+            <div className="space-y-4">
+              <ReactMarkdown components={markdownComponents}>
+                {entry.fullDescription[locale]}
+              </ReactMarkdown>
+            </div>
+          </div>
 
           {/* Technologies */}
           <div className="mb-8">

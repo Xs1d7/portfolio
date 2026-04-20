@@ -21,8 +21,8 @@
   },
   "about": {
     "title": "Sobre mim",
-    "p1": "Sou desenvolvedora de software com experiência em backend, frontend, automações e RPA, focada em criar soluções eficientes, escaláveis e bem estruturadas. Gosto de transformar ideias em produtos digitais funcionais, unindo lógica, performance e boa experiência do usuário.",
-"p2": "Estou sempre em busca de novos desafios que me permitam evoluir profissionalmente, explorar tecnologias modernas e contribuir de forma significativa para os projetos em que atuo.",
+     "p1": "Desenvolvedora de software com experiência em construção de aplicações web e mobile, utilizando React, Next.js, TypeScript e Node.js. Já atuei no desenvolvimento de plataformas completas, incluindo integrações com pagamentos, autenticação, IA e serviços em nuvem.",
+  "p2": "Tenho foco em criar soluções bem estruturadas, escaláveis e com boa experiência de uso, participando desde a concepção até a entrega do produto.",
     "location": "Rio de Janeiro, Brasil",
     "available": "Disponível para projetos",
     "skillsTitle": "Habilidades",
@@ -41,7 +41,7 @@
       "frontend": "Frontend",
       "backend": "Backend",
       "tools": "Ferramentas",
-      "design": "Design"
+      "database": "Database"
     }
   },
   "education": {

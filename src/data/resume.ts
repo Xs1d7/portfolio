@@ -1,5 +1,3 @@
-// ── Education ────────────────────────────────────────────
-
 export interface Education {
   institution: string;
   degree: { pt: string; en: string };
@@ -44,8 +42,6 @@ export const education: Education[] = [
   },
 ];
 
-// ── Courses ──────────────────────────────────────────────
-
 export interface Course {
   name: { pt: string; en: string };
   institution: string;
@@ -55,17 +51,6 @@ export interface Course {
 }
 
 export const courses: Course[] = [
-  {
-    name: {
-      pt: "Curso ADVPL e TOTVS Protheus",
-      en: "ADVPL and TOTVS Protheus Development Course",
-    },
-    institution: "LF Soluções",
-    year: "2025",
-    hours: 40,
-    credential: "ADVPL · TOTVS Protheus · SQL Server · SSMS",
-  },
-
   {
     name: {
       pt: "AWS S3 — Manipulação e Armazenamento de Objetos na Nuvem",
@@ -117,14 +102,12 @@ export const courses: Course[] = [
   },
 ];
 
-// ── Skills ───────────────────────────────────────────────
-
 export type SkillLevel = 1 | 2 | 3 | 4 | 5;
 
 export interface Skill {
   name: string;
   level: SkillLevel;
-  category: "frontend" | "backend" | "tools" | "design";
+  category: "frontend" | "backend" | "tools" | "database";
 }
 
 export const skills: Skill[] = [
@@ -132,24 +115,36 @@ export const skills: Skill[] = [
   { name: "React", level: 4, category: "frontend" },
   { name: "Next.js", level: 3, category: "frontend" },
   { name: "TypeScript", level: 5, category: "frontend" },
+  { name: "Vue.js", level: 3, category: "frontend" },
+
   { name: "JavaScript", level: 5, category: "frontend" },
   { name: "HTML & CSS", level: 5, category: "frontend" },
   { name: "Tailwind CSS", level: 4, category: "frontend" },
-  { name: "SASS", level: 4, category: "frontend" },
   // Backend
   { name: "Node.js", level: 5, category: "backend" },
   { name: "REST APIs", level: 4, category: "backend" },
-  { name: "PostgreSQL", level: 2, category: "backend" },
+  { name: "Convex", level: 3, category: "backend" },
+  { name: "Supabase", level: 3, category: "backend" },
+  { name: "Java", level: 2, category: "backend" },
+
   // Tools
   { name: "Git & GitHub", level: 5, category: "tools" },
   { name: "VS Code", level: 5, category: "tools" },
-  // Design
-  { name: "Figma", level: 3, category: "design" },
-  { name: "UI Design", level: 2, category: "design" },
-  { name: "Responsive Design", level: 2, category: "design" },
+  { name: "IntelliJ", level: 2, category: "tools" },
+
+  // Database
+  { name: "PostgreSQL", level: 2, category: "database" },
+  { name: "MySQL", level: 4, category: "database" },
+  { name: "Prisma", level: 3, category: "database" },
+  { name: "Sequelize", level: 3, category: "database" },
 ];
 
-export const skillCategories = ["frontend", "backend", "tools", "design"] as const;
+export const skillCategories = [
+  "frontend",
+  "backend",
+  "tools",
+  "database",
+] as const;
 
 // ── Languages ────────────────────────────────────────────
 
@@ -174,7 +169,19 @@ export interface Social {
 }
 
 export const socials: Social[] = [
-  { name: "GitHub", url: "https://github.com/andressa", icon: "github" },
-  { name: "LinkedIn", url: "https://linkedin.com/in/andressa", icon: "linkedin" },
-  { name: "Email", url: "mailto:andressaricardo.developer@gmail.com", icon: "email" },
+  {
+    name: "GitHub",
+    url: "https://github.com/andressa-ricardo",
+    icon: "github",
+  },
+  {
+    name: "LinkedIn",
+    url: "https://linkedin.com/in/andressa-ricardo",
+    icon: "linkedin",
+  },
+  {
+    name: "Email",
+    url: "mailto:andressaricardo.developer@gmail.com",
+    icon: "email",
+  },
 ];
