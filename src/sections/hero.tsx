@@ -10,7 +10,11 @@ const container = {
 
 const item = {
   hidden: { opacity: 0, y: 20 },
-  show: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" as const } },
+  show: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.5, ease: "easeOut" as const },
+  },
 };
 
 export function Hero() {
@@ -52,18 +56,15 @@ export function Hero() {
           {t.hero.description}
         </motion.p>
 
-        <motion.div variants={item} className="mt-8 flex flex-col gap-3 min-[380px]:flex-row sm:mt-10 sm:flex-wrap sm:gap-4">
+        <motion.div
+          variants={item}
+          className="mt-8 flex flex-col gap-3 min-[380px]:flex-row sm:mt-10 sm:flex-wrap sm:gap-4"
+        >
           <a
             href="#contact"
             className="inline-flex h-11 items-center justify-center rounded-full bg-accent px-6 text-sm font-medium text-white transition-colors duration-200 hover:bg-accent-hover"
           >
             {t.hero.cta}
-          </a>
-          <a
-            href="#"
-            className="inline-flex h-11 items-center justify-center rounded-full border border-border px-6 text-sm font-medium text-foreground transition-colors duration-200 hover:bg-accent/10"
-          >
-            {t.hero.download}
           </a>
         </motion.div>
       </motion.div>
