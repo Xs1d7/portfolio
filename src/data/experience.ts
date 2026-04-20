@@ -182,13 +182,7 @@ On the mobile application, I contribute by implementing requested visual adjustm
       "UI/UX",
       "Responsive Design",
     ],
-    media: [
-      {
-        type: "video",
-        src: "/media/projects/ondish-video.mp4",
-        alt: "Ondish platform demo",
-      },
-    ],
+    media: [],
   },
   {
     id: "athena-ti",
