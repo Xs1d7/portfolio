@@ -9,18 +9,18 @@ export function About() {
   const { t } = useTranslation();
 
   return (
-    <section id="about" className="scroll-mt-20 py-24">
+    <section id="about" className="scroll-mt-20 py-16 sm:py-24">
       <SectionHeading>{t.about.title}</SectionHeading>
 
       {/* Photo + Text — side by side desktop, stacked mobile */}
-      <div className="flex flex-col items-center gap-12 lg:flex-row lg:items-start lg:gap-16">
+      <div className="flex flex-col items-center gap-10 lg:flex-row lg:items-start lg:gap-16">
         {/* Photo */}
         <motion.div
           initial={{ opacity: 0, scale: 0.9 }}
           whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
-          className="shrink-0"
+          className="w-full max-w-[240px] shrink-0 sm:max-w-[280px]"
         >
           <div className="relative">
             {/* Decorative ring */}
@@ -32,7 +32,7 @@ export function About() {
               alt={t.about.photoAlt}
               width={280}
               height={280}
-              className="relative rounded-2xl object-cover"
+              className="relative aspect-square w-full rounded-2xl object-cover"
               priority
             />
           </div>

@@ -16,7 +16,7 @@ export function Languages() {
   const { t, locale } = useTranslation();
 
   return (
-    <section id="languages" className="scroll-mt-20 py-24">
+    <section id="languages" className="scroll-mt-20 py-16 sm:py-24">
       <SectionHeading>{t.languages.title}</SectionHeading>
 
       <div className="grid gap-4 sm:grid-cols-3">
@@ -27,7 +27,7 @@ export function Languages() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.4, delay: i * 0.1 }}
-            className="rounded-2xl border border-border p-6 text-center transition-all duration-200 hover:border-accent/30 hover:shadow-lg hover:shadow-accent/5"
+            className="rounded-2xl border border-border p-5 text-center transition-all duration-200 hover:border-accent/30 hover:shadow-lg hover:shadow-accent/5 sm:p-6"
           >
             {/* Flag */}
             <span className="text-4xl">{lang.flag}</span>

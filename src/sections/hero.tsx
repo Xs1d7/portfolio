@@ -17,7 +17,7 @@ export function Hero() {
   const { t } = useTranslation();
 
   return (
-    <section className="flex min-h-[calc(100svh-73px)] flex-col justify-center py-20">
+    <section className="flex min-h-[calc(100svh-61px)] flex-col justify-center py-14 sm:min-h-[calc(100svh-73px)] sm:py-20">
       <motion.div
         className="max-w-2xl"
         variants={container}
@@ -26,7 +26,7 @@ export function Hero() {
       >
         <motion.p
           variants={item}
-          className="mb-4 text-sm font-medium tracking-widest text-accent uppercase"
+          className="mb-4 text-xs font-medium tracking-widest text-accent uppercase sm:text-sm"
         >
           {t.hero.greeting}
         </motion.p>
@@ -40,7 +40,7 @@ export function Hero() {
 
         <motion.p
           variants={item}
-          className="mt-2 text-2xl font-medium text-muted sm:text-3xl"
+          className="mt-3 text-xl font-medium leading-snug text-muted sm:text-3xl"
         >
           {t.hero.role}
         </motion.p>
@@ -52,16 +52,16 @@ export function Hero() {
           {t.hero.description}
         </motion.p>
 
-        <motion.div variants={item} className="mt-10 flex flex-wrap gap-4">
+        <motion.div variants={item} className="mt-8 flex flex-col gap-3 min-[380px]:flex-row sm:mt-10 sm:flex-wrap sm:gap-4">
           <a
             href="#contact"
-            className="inline-flex h-11 items-center rounded-full bg-accent px-6 text-sm font-medium text-white transition-colors duration-200 hover:bg-accent-hover"
+            className="inline-flex h-11 items-center justify-center rounded-full bg-accent px-6 text-sm font-medium text-white transition-colors duration-200 hover:bg-accent-hover"
           >
             {t.hero.cta}
           </a>
           <a
             href="#"
-            className="inline-flex h-11 items-center rounded-full border border-border px-6 text-sm font-medium text-foreground transition-colors duration-200 hover:bg-accent/10"
+            className="inline-flex h-11 items-center justify-center rounded-full border border-border px-6 text-sm font-medium text-foreground transition-colors duration-200 hover:bg-accent/10"
           >
             {t.hero.download}
           </a>

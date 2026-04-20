@@ -53,7 +53,7 @@ export function Contact() {
   };
 
   return (
-    <section id="contact" className="scroll-mt-20 py-24">
+    <section id="contact" className="scroll-mt-20 py-16 sm:py-24">
       <SectionHeading>{t.contact.title}</SectionHeading>
 
       <motion.p
@@ -61,7 +61,7 @@ export function Contact() {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 0.4 }}
-        className="mb-12 max-w-md text-base text-muted sm:text-lg"
+        className="mb-8 max-w-md text-base text-muted sm:mb-12 sm:text-lg"
       >
         {t.contact.subtitle}
       </motion.p>
@@ -72,18 +72,18 @@ export function Contact() {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 0.4, delay: 0.1 }}
-        className="mb-8 rounded-2xl border border-border p-6 transition-all duration-200 hover:border-accent/30 hover:shadow-lg hover:shadow-accent/5"
+        className="mb-8 rounded-2xl border border-border p-5 transition-all duration-200 hover:border-accent/30 hover:shadow-lg hover:shadow-accent/5 sm:p-6"
       >
         <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-          <div className="flex items-center gap-4">
+          <div className="flex min-w-0 items-center gap-4">
             <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-accent/10 text-accent">
               {ICONS.email}
             </div>
-            <div>
+            <div className="min-w-0">
               <p className="text-sm font-medium text-muted">{t.contact.email}</p>
               <a
                 href={`mailto:${EMAIL_ADDRESS}`}
-                className="text-lg font-semibold text-foreground transition-colors hover:text-accent"
+                className="break-all text-base font-semibold text-foreground transition-colors hover:text-accent sm:text-lg"
               >
                 {EMAIL_ADDRESS}
               </a>
@@ -92,7 +92,7 @@ export function Contact() {
 
           <button
             onClick={handleCopy}
-            className="inline-flex h-10 items-center gap-2 rounded-full border border-border px-5 text-sm font-medium text-foreground transition-all duration-200 hover:border-accent/30 hover:text-accent active:scale-95"
+            className="inline-flex h-10 w-full items-center justify-center gap-2 rounded-full border border-border px-5 text-sm font-medium text-foreground transition-all duration-200 hover:border-accent/30 hover:text-accent active:scale-95 sm:w-auto"
           >
             {copied ? (
               <>
@@ -128,7 +128,7 @@ export function Contact() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.4, delay: 0.2 + i * 0.1 }}
-              className="group flex items-center gap-4 rounded-2xl border border-border p-6 transition-all duration-200 hover:border-accent/30 hover:shadow-lg hover:shadow-accent/5"
+              className="group flex items-center gap-4 rounded-2xl border border-border p-5 transition-all duration-200 hover:border-accent/30 hover:shadow-lg hover:shadow-accent/5 sm:p-6"
             >
               <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-accent/10 text-accent transition-colors group-hover:bg-accent group-hover:text-white">
                 {ICONS[social.icon]}

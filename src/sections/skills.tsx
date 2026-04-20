@@ -55,7 +55,7 @@ export function Skills() {
   const { t } = useTranslation();
 
   return (
-    <section id="skills" className="scroll-mt-20 py-24">
+    <section id="skills" className="scroll-mt-20 py-16 sm:py-24">
       <SectionHeading>{t.skills.title}</SectionHeading>
 
       <div className="grid gap-8 sm:grid-cols-2">
@@ -69,7 +69,7 @@ export function Skills() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.4 }}
-              className="rounded-2xl border border-border p-6"
+              className="rounded-2xl border border-border p-5 sm:p-6"
             >
               {/* Category header */}
               <div className="mb-5 flex items-center gap-3">
@@ -84,8 +84,8 @@ export function Skills() {
               {/* Skills list */}
               <div className="space-y-3">
                 {catSkills.map((skill) => (
-                  <div key={skill.name} className="flex items-center justify-between">
-                    <span className="text-sm text-foreground">{skill.name}</span>
+                  <div key={skill.name} className="flex items-center justify-between gap-4">
+                    <span className="min-w-0 text-sm text-foreground">{skill.name}</span>
                     <LevelDots level={skill.level} />
                   </div>
                 ))}

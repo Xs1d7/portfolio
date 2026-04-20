@@ -9,7 +9,7 @@ export function Education() {
   const { t, locale } = useTranslation();
 
   return (
-    <section id="education" className="scroll-mt-20 py-24">
+    <section id="education" className="scroll-mt-20 py-16 sm:py-24">
       <SectionHeading>{t.education.title}</SectionHeading>
 
       <div className="space-y-6">
@@ -20,9 +20,9 @@ export function Education() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.4, delay: i * 0.1 }}
-            className="group rounded-2xl border border-border p-6 transition-all duration-200 hover:border-accent/30 hover:shadow-lg hover:shadow-accent/5"
+            className="group rounded-2xl border border-border p-5 transition-all duration-200 hover:border-accent/30 hover:shadow-lg hover:shadow-accent/5 sm:p-6"
           >
-            <div className="flex items-start gap-4">
+            <div className="flex flex-col gap-4 min-[420px]:flex-row min-[420px]:items-start">
               {/* Icon */}
               <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-accent/10 text-accent">
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">

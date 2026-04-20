@@ -32,7 +32,7 @@ export function ExperienceDetail({ entry, onClose }: Props) {
         transition={{ type: "spring", damping: 30, stiffness: 300 }}
         className="fixed bottom-0 right-0 top-0 z-[91] w-full overflow-y-auto bg-background shadow-2xl sm:w-[540px] lg:w-[600px]"
       >
-        <div className="p-6 sm:p-8">
+        <div className="p-5 sm:p-8">
           {/* Close */}
           <button
             onClick={onClose}
@@ -47,7 +47,7 @@ export function ExperienceDetail({ entry, onClose }: Props) {
           {/* Header */}
           <div className="mb-6">
             <p className="text-sm font-medium text-accent">{entry.company}</p>
-            <h3 className="mt-1 text-2xl font-bold tracking-tight text-foreground">
+            <h3 className="mt-1 text-xl font-bold tracking-tight text-foreground sm:text-2xl">
               {entry.role[locale]}
             </h3>
             <p className="mt-1 text-sm text-muted">

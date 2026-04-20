@@ -24,7 +24,7 @@ export function Experience() {
   const [selected, setSelected] = useState<ExperienceEntry | null>(null);
 
   return (
-    <section id="experience" className="scroll-mt-20 py-24">
+    <section id="experience" className="scroll-mt-20 py-16 sm:py-24">
       <SectionHeading>{t.experience.title}</SectionHeading>
 
       {/* Scroll container with fade gradients */}
@@ -33,7 +33,7 @@ export function Experience() {
         <div className="pointer-events-none absolute left-0 right-0 top-0 z-10 h-6 bg-gradient-to-b from-background to-transparent" />
 
         {/* Scrollable list — shows ~3 items, rest via scroll */}
-        <div className="scrollbar-hidden max-h-[540px] overflow-y-auto py-6">
+        <div className="scrollbar-hidden max-h-[520px] overflow-y-auto py-4 sm:max-h-[540px] sm:py-6">
           <div className="space-y-4">
             {experienceEntries.map((entry, i) => (
               <motion.button
@@ -43,14 +43,14 @@ export function Experience() {
                 viewport={{ once: true, margin: "-40px" }}
                 transition={{ duration: 0.4, delay: i * 0.08 }}
                 onClick={() => setSelected(entry)}
-                className="group w-full rounded-2xl border border-border p-5 text-left transition-all duration-200 hover:border-accent/40 hover:shadow-lg hover:shadow-accent/5 sm:p-6"
+                className="group w-full rounded-2xl border border-border p-4 text-left transition-all duration-200 hover:border-accent/40 hover:shadow-lg hover:shadow-accent/5 sm:p-6"
               >
                 <div className="flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between">
                   <div className="min-w-0 flex-1">
                     {/* Role + company */}
                     <div className="flex items-center gap-3">
                       <div className="h-2.5 w-2.5 shrink-0 rounded-full bg-accent" />
-                      <h3 className="text-base font-semibold text-foreground sm:text-lg">
+                      <h3 className="text-base font-semibold leading-snug text-foreground sm:text-lg">
                         {entry.role[locale]}
                       </h3>
                     </div>

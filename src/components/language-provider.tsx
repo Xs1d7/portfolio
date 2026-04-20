@@ -29,8 +29,15 @@ const LanguageContext = createContext<LanguageContextValue | undefined>(
 
 const STORAGE_KEY = "locale";
 
+function getStoredLocale(): Locale {
+  if (typeof window === "undefined") return "pt";
+
+  const stored = localStorage.getItem(STORAGE_KEY);
+  return stored === "pt" || stored === "en" ? stored : "pt";
+}
+
 export function LanguageProvider({ children }: { children: React.ReactNode }) {
-  const [locale, setLocaleState] = useState<Locale>("pt");
+  const [locale, setLocaleState] = useState<Locale>(getStoredLocale);
 
   const setLocale = useCallback((newLocale: Locale) => {
     setLocaleState(newLocale);
@@ -39,12 +46,8 @@ export function LanguageProvider({ children }: { children: React.ReactNode }) {
   }, []);
 
   useEffect(() => {
-    const stored = localStorage.getItem(STORAGE_KEY) as Locale | null;
-    if (stored && (stored === "pt" || stored === "en")) {
-      setLocaleState(stored);
-      document.documentElement.lang = stored === "pt" ? "pt-BR" : "en";
-    }
-  }, []);
+    document.documentElement.lang = locale === "pt" ? "pt-BR" : "en";
+  }, [locale]);
 
   return (
     <LanguageContext.Provider

@@ -11,7 +11,7 @@ export function Courses() {
   const maxHours = Math.max(...courses.map((c) => c.hours));
 
   return (
-    <section id="courses" className="scroll-mt-20 py-24">
+    <section id="courses" className="scroll-mt-20 py-16 sm:py-24">
       <SectionHeading>{t.courses.title}</SectionHeading>
 
       <div className="grid gap-4 sm:grid-cols-2">
@@ -22,7 +22,7 @@ export function Courses() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.4, delay: i * 0.06 }}
-            className="group rounded-2xl border border-border p-6 transition-all duration-200 hover:border-accent/30 hover:shadow-lg hover:shadow-accent/5"
+            className="group rounded-2xl border border-border p-5 transition-all duration-200 hover:border-accent/30 hover:shadow-lg hover:shadow-accent/5 sm:p-6"
           >
             <div className="flex items-start gap-4">
               {/* Certificate icon */}

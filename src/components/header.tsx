@@ -21,11 +21,11 @@ export function Header() {
 
   return (
     <header className="sticky top-0 z-50 border-b border-border/50 bg-background/80 backdrop-blur-md">
-      <div className="mx-auto flex w-full max-w-5xl items-center justify-between px-4 py-4 sm:px-6 lg:px-8">
+      <div className="mx-auto flex w-full max-w-5xl items-center justify-between gap-3 px-5 py-3 sm:px-6 sm:py-4 lg:px-8">
         {/* Logo */}
         <a
           href="#"
-          className="text-lg font-bold tracking-tight text-foreground"
+          className="min-w-0 truncate text-lg font-bold tracking-tight text-foreground"
         >
           {t.header.name}
           <span className="text-accent">.</span>
@@ -45,7 +45,7 @@ export function Header() {
         </nav>
 
         {/* Actions */}
-        <div className="flex items-center gap-2">
+        <div className="flex shrink-0 items-center gap-2">
           <LanguageToggle />
           <ThemeToggle />
 
@@ -73,7 +73,7 @@ export function Header() {
 
       {/* Mobile nav */}
       {open && (
-        <nav className="border-t border-border/50 bg-background px-4 pb-4 md:hidden">
+        <nav className="border-t border-border/50 bg-background px-5 pb-4 md:hidden">
           {NAV_ITEMS.map((key) => (
             <a
               key={key}
