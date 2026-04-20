@@ -31,8 +31,8 @@ export const education: Education[] = [
       en: "Language Studies",
     },
     field: {
-      pt: "Inglês (Nível A2/B1)",
-      en: "English (A2/B1 Level)",
+      pt: "Inglês (Nível B1)",
+      en: "English (B1 Level)",
     },
     period: { start: "2024-07", end: null },
     description: {

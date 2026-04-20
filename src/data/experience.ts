@@ -77,7 +77,7 @@ This project demonstrates my ability to design and build a complete product, inc
       pt: "Full Stack Developer",
       en: "Full Stack Developer",
     },
-    period: { start: "2026-01", end: null },
+    period: { start: "2026-02", end: null },
     shortDescription: {
       pt: "Plataforma de geração de imagens e vídeos com IA, com sistema de créditos, automações e pipelines assíncronos.",
       en: "AI-powered image and video generation platform with credit-based billing, automations, and asynchronous pipelines.",
@@ -138,7 +138,7 @@ My work spans both backend (APIs, integrations, processing logic) and frontend (
       pt: "Frontend Developer",
       en: "Frontend Developer",
     },
-    period: { start: "2025-10", end: null },
+    period: { start: "2025-11", end: null },
     shortDescription: {
       pt: "Desenvolvimento de interfaces web e mobile para plataforma de menu digital com pagamentos integrados e gestão inteligente para restaurantes.",
       en: "Development of web and mobile interfaces for a digital menu platform with integrated payments and smart restaurant management.",
@@ -191,7 +191,7 @@ On the mobile application, I contribute by implementing requested visual adjustm
       pt: "Full Stack Developer",
       en: "Full Stack Developer",
     },
-    period: { start: "2025-04", end: "2026-01" },
+    period: { start: "2025-04", end: "2026-02" },
     shortDescription: {
       pt: "Desenvolvimento fullstack de plataforma de agentes de IA personalizados com controle de uso e integrações externas.",
       en: "Full-stack development of a customizable AI agents platform with usage control and external integrations.",
@@ -270,7 +270,7 @@ The project required strong autonomy, adaptability, continuous learning, and the
       pt: "Back-End Developer",
       en: "Back-End Developer",
     },
-    period: { start: "2024-07", end: "2025-06" },
+    period: { start: "2024-08", end: "2025-07" },
     shortDescription: {
       pt: "Desenvolvimento backend e automações para múltiplos projetos, atuando na construção de APIs, modelagem de banco de dados e integrações com serviços externos.",
       en: "Backend development and automation across multiple projects, building APIs, designing databases, and integrating external services.",
@@ -368,7 +368,7 @@ The focus was to create a reliable backend foundation for complex queries, with 
       pt: "Back-End Developer (RPA)",
       en: "Back-End Developer (RPA)",
     },
-    period: { start: "2024-04", end: "2024-07" },
+    period: { start: "2024-05", end: "2024-08" },
     shortDescription: {
       pt: "Desenvolvimento de automações RPA para emissão de passagens aéreas e extração de dados.",
       en: "Development of RPA automations for airline ticket issuance and data extraction.",
