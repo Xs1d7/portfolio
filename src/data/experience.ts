@@ -18,6 +18,59 @@ export interface ExperienceEntry {
 
 export const experienceEntries: ExperienceEntry[] = [
   {
+    id: "prodia",
+    company: "Prodia",
+    role: {
+      pt: "Full Stack Developer (Projeto Pessoal)",
+      en: "Full Stack Developer (Personal Project)",
+    },
+    period: { start: "2026-05", end: null },
+    shortDescription: {
+      pt: "Plataforma em desenvolvimento para geração de imagens e vídeos de produtos com IA, com automação de catálogo e sistema de créditos.",
+      en: "In-progress AI platform for generating product images and videos, with catalog automation and credit-based system.",
+    },
+    fullDescription: {
+      pt: `Estou desenvolvendo o Prodia como um projeto pessoal focado na criação de conteúdo visual para produtos utilizando inteligência artificial.
+
+A plataforma permite transformar fotos simples em imagens profissionais e vídeos prontos para e-commerce e marketing.
+
+Principais pontos do projeto:
+
+- Geração de imagens e vídeos com IA
+- Sistema de créditos e planos com Stripe
+- Módulo de catálogo com edição visual de produtos
+- Suporte a contas multiusuário (enterprise)
+- Arquitetura escalável com separação de frontend, backend e serviços de IA
+
+O projeto demonstra minha capacidade de estruturar e desenvolver um produto completo, incluindo lógica de negócio, monetização e experiência do usuário.`,
+
+      en: `I am developing Prodia as a personal project focused on AI-powered visual content generation for products.
+
+The platform allows users to transform simple product photos into professional images and videos for e-commerce and marketing.
+
+Key aspects of the project:
+
+- AI-powered image and video generation
+- Credit-based system and subscription plans with Stripe
+- Catalog module with visual product editing
+- Multi-user (enterprise) support
+- Scalable architecture with separated frontend, backend, and AI services
+
+This project demonstrates my ability to design and build a complete product, including business logic, monetization, and user experience.`,
+    },
+    technologies: [
+      "Next.js",
+      "React",
+      "TypeScript",
+      "Supabase",
+      "Stripe",
+      "Fal.ai",
+      "AI Integrations",
+    ],
+    media: [],
+  },
+
+  {
     id: "criarch",
     company: "Criarch",
     role: {
