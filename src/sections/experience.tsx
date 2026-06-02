@@ -5,8 +5,20 @@ import { motion } from "framer-motion";
 import { useTranslation } from "@/components/language-provider";
 import { SectionHeading } from "@/components/section-heading";
 import { ExperienceDetail } from "@/components/experience-detail";
-import { experienceEntries, type ExperienceEntry } from "@/data/experience";
+import {
+  experienceEntries,
+  TYPE_BADGE,
+  type ExperienceEntry,
+  type ExperienceType,
+} from "@/data/experience";
 import type { Locale } from "@/components/language-provider";
+
+const FILTERS: Array<ExperienceType | "all"> = [
+  "all",
+  "personal",
+  "fulltime",
+  "freelance",
+];
 
 function formatPeriod(start: string, end: string | null, locale: Locale, presentLabel: string) {
   const fmt = (d: string) => {
@@ -22,10 +34,36 @@ function formatPeriod(start: string, end: string | null, locale: Locale, present
 export function Experience() {
   const { t, locale } = useTranslation();
   const [selected, setSelected] = useState<ExperienceEntry | null>(null);
+  const [filter, setFilter] = useState<ExperienceType | "all">("all");
+
+  const filtered =
+    filter === "all"
+      ? experienceEntries
+      : experienceEntries.filter((entry) => entry.type === filter);
+
+  const filterLabel = (key: ExperienceType | "all") =>
+    key === "all" ? t.experience.filterAll : t.experience.types[key];
 
   return (
     <section id="experience" className="scroll-mt-20 py-16 sm:py-24">
       <SectionHeading>{t.experience.title}</SectionHeading>
+
+      {/* Type filters */}
+      <div className="mb-2 flex flex-wrap gap-2">
+        {FILTERS.map((key) => (
+          <button
+            key={key}
+            onClick={() => setFilter(key)}
+            className={`rounded-full px-3.5 py-1.5 text-xs font-medium transition-colors ${
+              filter === key
+                ? "bg-accent text-white"
+                : "border border-border text-muted hover:border-accent/40 hover:text-foreground"
+            }`}
+          >
+            {filterLabel(key)}
+          </button>
+        ))}
+      </div>
 
       {/* Scroll container with fade gradients */}
       <div className="relative">
@@ -35,7 +73,7 @@ export function Experience() {
         {/* Scrollable list — shows ~3 items, rest via scroll */}
         <div className="scrollbar-hidden max-h-[520px] overflow-y-auto py-4 sm:max-h-[540px] sm:py-6">
           <div className="space-y-4">
-            {experienceEntries.map((entry, i) => (
+            {filtered.map((entry, i) => (
               <motion.button
                 key={entry.id}
                 initial={{ opacity: 0, y: 20 }}
@@ -82,7 +120,14 @@ export function Experience() {
                   </div>
 
                   {/* Period + indicators */}
-                  <div className="flex items-center gap-2 pl-[22px] sm:flex-col sm:items-end sm:pl-0">
+                  <div className="flex flex-wrap items-center gap-2 pl-[22px] sm:flex-col sm:items-end sm:pl-0">
+                    {/* Type badge */}
+                    <span
+                      className={`shrink-0 rounded-full px-2.5 py-0.5 text-xs font-semibold ${TYPE_BADGE[entry.type]}`}
+                    >
+                      {t.experience.types[entry.type]}
+                    </span>
+
                     <time className="shrink-0 text-xs text-muted sm:text-sm">
                       {formatPeriod(entry.period.start, entry.period.end, locale, t.experience.present)}
                     </time>

@@ -34,6 +34,12 @@
     "present": "Present",
     "overview": "About the project",
     "contribution": "My role",
+    "filterAll": "All",
+    "types": {
+      "personal": "Personal",
+      "fulltime": "Full-time",
+      "freelance": "Freelance"
+    },
     "technologies": "Technologies",
     "gallery": "Gallery",
     "visitSite": "Visit site",

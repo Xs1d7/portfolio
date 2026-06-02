@@ -33,6 +33,12 @@
     "present": "Atual",
     "overview": "Sobre o projeto",
     "contribution": "Minha atuação",
+    "filterAll": "Todos",
+    "types": {
+      "personal": "Pessoal",
+      "fulltime": "Full-time",
+      "freelance": "Freelance"
+    },
     "technologies": "Tecnologias",
     "gallery": "Galeria",
     "visitSite": "Visitar site",

@@ -4,7 +4,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import ReactMarkdown, { type Components } from "react-markdown";
 import { useTranslation } from "@/components/language-provider";
 import { MediaGallery } from "@/components/media-gallery";
-import type { ExperienceEntry } from "@/data/experience";
+import { TYPE_BADGE, type ExperienceEntry } from "@/data/experience";
 
 interface Props {
   entry: ExperienceEntry;
@@ -65,7 +65,14 @@ export function ExperienceDetail({ entry, onClose }: Props) {
 
           {/* Header */}
           <div className="mb-6">
-            <p className="text-sm font-medium text-accent">{entry.company}</p>
+            <div className="flex items-center gap-2">
+              <p className="text-sm font-medium text-accent">{entry.company}</p>
+              <span
+                className={`shrink-0 rounded-full px-2.5 py-0.5 text-xs font-semibold ${TYPE_BADGE[entry.type]}`}
+              >
+                {t.experience.types[entry.type]}
+              </span>
+            </div>
             <h3 className="mt-1 text-xl font-bold tracking-tight text-foreground sm:text-2xl">
               {entry.role[locale]}
             </h3>

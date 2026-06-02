@@ -5,8 +5,20 @@ export interface MediaItem {
   poster?: string;
 }
 
+export type ExperienceType = "personal" | "fulltime" | "freelance";
+
+export const TYPE_BADGE: Record<ExperienceType, string> = {
+  personal:
+    "bg-violet-500/10 text-violet-600 ring-1 ring-violet-500/20 dark:text-violet-400",
+  fulltime:
+    "bg-emerald-500/10 text-emerald-600 ring-1 ring-emerald-500/20 dark:text-emerald-400",
+  freelance:
+    "bg-amber-500/10 text-amber-600 ring-1 ring-amber-500/20 dark:text-amber-400",
+};
+
 export interface ExperienceEntry {
   id: string;
+  type: ExperienceType;
   company: string;
   role: { pt: string; en: string };
   period: { start: string; end: string | null };
@@ -21,6 +33,7 @@ export interface ExperienceEntry {
 export const experienceEntries: ExperienceEntry[] = [
   {
     id: "prodia",
+    type: "personal",
     company: "Prodia",
     role: {
       pt: "Full Stack Developer (Projeto Pessoal)",
@@ -74,6 +87,7 @@ This project demonstrates my ability to design and build a complete product, inc
 
   {
     id: "criarch",
+    type: "freelance",
     company: "Criarch",
     role: {
       pt: "Full Stack Developer",
@@ -144,6 +158,7 @@ My work spans both backend (APIs, integrations, processing logic) and frontend (
   },
   {
     id: "ondish-foods",
+    type: "fulltime",
     company: "Ondish Foods",
     role: {
       pt: "Frontend Developer",
@@ -210,6 +225,7 @@ I also built the platform's marketing landing page, responsible for presenting t
   },
   {
     id: "athena-ti",
+    type: "fulltime",
     company: "Athena Tecnologia da Informação",
     role: {
       pt: "Full Stack Developer",
@@ -289,6 +305,7 @@ The project required strong autonomy, adaptability, continuous learning, and the
   },
   {
     id: "software-precisao",
+    type: "fulltime",
     company: "Software Precisão",
     role: {
       pt: "Back-End Developer",
@@ -349,6 +366,7 @@ I also participated in technical meetings with clients and handled production is
   },
   {
     id: "andrinno",
+    type: "freelance",
     company: "Andrinno Software House",
     role: {
       pt: "Backend Developer",
@@ -387,6 +405,7 @@ The focus was to create a reliable backend foundation for complex queries, with 
   },
   {
     id: "devnology",
+    type: "fulltime",
     company: "Devnology",
     role: {
       pt: "Back-End Developer (RPA)",
