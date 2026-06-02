@@ -74,12 +74,35 @@ export function ExperienceDetail({ entry, onClose }: Props) {
             </p>
           </div>
 
-          {/* Description */}
-          <div className="mb-8 rounded-2xl border border-border/70 bg-foreground/[0.015] p-5 text-base shadow-sm dark:bg-white/[0.025] sm:p-6">
-            <div className="space-y-4">
-              <ReactMarkdown components={markdownComponents}>
-                {entry.fullDescription[locale]}
-              </ReactMarkdown>
+          {/* Overview — what the project is */}
+          {entry.overview && (
+            <div className="mb-6">
+              <h4 className="mb-3 text-sm font-semibold uppercase tracking-wider text-foreground">
+                {t.experience.overview}
+              </h4>
+              <div className="rounded-2xl border border-border/70 bg-foreground/[0.015] p-5 text-base shadow-sm dark:bg-white/[0.025] sm:p-6">
+                <div className="space-y-4">
+                  <ReactMarkdown components={markdownComponents}>
+                    {entry.overview[locale]}
+                  </ReactMarkdown>
+                </div>
+              </div>
+            </div>
+          )}
+
+          {/* Description — my work on it */}
+          <div className="mb-8">
+            {entry.overview && (
+              <h4 className="mb-3 text-sm font-semibold uppercase tracking-wider text-foreground">
+                {t.experience.contribution}
+              </h4>
+            )}
+            <div className="rounded-2xl border border-border/70 bg-foreground/[0.015] p-5 text-base shadow-sm dark:bg-white/[0.025] sm:p-6">
+              <div className="space-y-4">
+                <ReactMarkdown components={markdownComponents}>
+                  {entry.fullDescription[locale]}
+                </ReactMarkdown>
+              </div>
             </div>
           </div>
 
@@ -99,6 +122,23 @@ export function ExperienceDetail({ entry, onClose }: Props) {
               ))}
             </div>
           </div>
+
+          {/* Link */}
+          {entry.link && (
+            <div className="mb-8">
+              <a
+                href={entry.link}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 rounded-full bg-accent px-5 py-2.5 text-sm font-semibold text-white transition-opacity hover:opacity-90"
+              >
+                {t.experience.visitSite}
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M7 7h10v10" /><path d="M7 17 17 7" />
+                </svg>
+              </a>
+            </div>
+          )}
 
           {/* Gallery */}
           {entry.media.length > 0 && (

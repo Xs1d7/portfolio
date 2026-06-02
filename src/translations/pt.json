@@ -31,8 +31,11 @@
   "experience": {
     "title": "Experiência",
     "present": "Atual",
+    "overview": "Sobre o projeto",
+    "contribution": "Minha atuação",
     "technologies": "Tecnologias",
     "gallery": "Galeria",
+    "visitSite": "Visitar site",
     "scrollHint": "Role para ver mais experiências"
   },
   "skills": {

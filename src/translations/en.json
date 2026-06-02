@@ -32,8 +32,11 @@
   "experience": {
     "title": "Experience",
     "present": "Present",
+    "overview": "About the project",
+    "contribution": "My role",
     "technologies": "Technologies",
     "gallery": "Gallery",
+    "visitSite": "Visit site",
     "scrollHint": "Scroll to see more experiences"
   },
   "skills": {

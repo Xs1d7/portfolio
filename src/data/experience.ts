@@ -11,9 +11,11 @@ export interface ExperienceEntry {
   role: { pt: string; en: string };
   period: { start: string; end: string | null };
   shortDescription: { pt: string; en: string };
+  overview?: { pt: string; en: string };
   fullDescription: { pt: string; en: string };
   technologies: string[];
   media: MediaItem[];
+  link?: string;
 }
 
 export const experienceEntries: ExperienceEntry[] = [
@@ -77,10 +79,18 @@ This project demonstrates my ability to design and build a complete product, inc
       pt: "Full Stack Developer",
       en: "Full Stack Developer",
     },
-    period: { start: "2026-02", end: null },
+    period: { start: "2026-02", end: "2026-06" },
     shortDescription: {
-      pt: "Plataforma de geração de imagens e vídeos com IA, com sistema de créditos, automações e pipelines assíncronos.",
-      en: "AI-powered image and video generation platform with credit-based billing, automations, and asynchronous pipelines.",
+      pt: "Plataforma de IA para arquitetos que transforma fotos de projetos em renders realistas e vídeos cinematográficos, com sistema de créditos e pipelines assíncronos.",
+      en: "AI platform for architects that turns project photos into realistic renders and cinematic videos, with credit-based billing and asynchronous pipelines.",
+    },
+    overview: {
+      pt: `O CriArch é uma plataforma de inteligência artificial para arquitetos que transforma fotos reais de projetos — obras em andamento, maquetes físicas ou renders básicos — em renders profissionais e vídeos cinematográficos em minutos, sem necessidade de software de modelagem.
+
+A plataforma cobre todo o fluxo criativo de um escritório de arquitetura: renders realistas com modelos de difusão (com presets de iluminação e diferentes proporções), vídeos com movimentos de câmera profissionais (push in, travelling, drone shot, orbit) e um Studio com ferramentas de edição rápida como sky replacement, decoração de ambientes e upscale de imagens.`,
+      en: `CriArch is an AI platform for architects that turns real project photos — work in progress, physical models, or basic renders — into professional renders and cinematic videos in minutes, with no modeling software required.
+
+The platform covers the entire creative workflow of an architecture studio: realistic renders powered by diffusion models (with lighting presets and multiple aspect ratios), videos with professional camera movements (push in, travelling, drone shot, orbit), and a Studio with quick editing tools such as sky replacement, room decoration, and image upscaling.`,
     },
     fullDescription: {
       pt: `Atuo no desenvolvimento full stack da plataforma, sendo responsável pela arquitetura e implementação de funcionalidades voltadas à geração de conteúdo com IA.
@@ -130,6 +140,7 @@ My work spans both backend (APIs, integrations, processing logic) and frontend (
       "AI Integrations",
     ],
     media: [],
+    link: "https://criarch.ai/",
   },
   {
     id: "ondish-foods",
@@ -142,6 +153,14 @@ My work spans both backend (APIs, integrations, processing logic) and frontend (
     shortDescription: {
       pt: "Desenvolvimento de interfaces web e mobile para plataforma de menu digital com pagamentos integrados e gestão inteligente para restaurantes.",
       en: "Development of web and mobile interfaces for a digital menu platform with integrated payments and smart restaurant management.",
+    },
+    overview: {
+      pt: `A Ondish é uma plataforma que conecta restaurantes e clientes em Portugal, reunindo reservas, menu digital com QR Code, pedidos pelo celular e pagamento online em um só lugar. O cliente descobre restaurantes próximos, reserva mesa em segundos e, ao chegar, faz o scan do QR para pedir e pagar diretamente pelo telemóvel — sem filas.
+
+A solução atende tanto o lado B2C (clientes que querem comer fora sem espera) quanto o B2B (restaurantes que aumentam a rotação de mesas e substituem cadernos por gestão digital em tempo real), com aplicações web e mobile.`,
+      en: `Ondish is a platform connecting restaurants and diners in Portugal, bringing reservations, a QR-code digital menu, mobile ordering, and online payment together in one place. Customers discover nearby restaurants, book a table in seconds, and on arrival scan the QR code to order and pay straight from their phone — no queues.
+
+It serves both the B2C side (diners who want to eat out without waiting) and the B2B side (restaurants that increase table turnover and replace paper notebooks with real-time digital management), across web and mobile apps.`,
     },
     fullDescription: {
       pt: `Atuo exclusivamente no desenvolvimento frontend da plataforma, sendo responsável pela construção das interfaces web do painel administrativo e do portal do parceiro (restaurantes).
@@ -158,7 +177,9 @@ No portal do parceiro, construí as telas onde os restaurantes realizam seu cada
 
 Meu trabalho envolve a criação de componentes reutilizáveis, organização de layouts responsivos e evolução contínua das telas com melhorias de usabilidade, consistência visual e experiência do usuário.
 
-No aplicativo mobile, atuo realizando ajustes e melhorias visuais conforme demandas do produto, incluindo alterações de cores, tamanhos, imagens e refinamentos de interface para manter a consistência da experiência entre web e mobile.`,
+No aplicativo mobile, atuo realizando ajustes e melhorias visuais conforme demandas do produto, incluindo alterações de cores, tamanhos, imagens e refinamentos de interface para manter a consistência da experiência entre web e mobile.
+
+Também desenvolvi a landing page institucional da plataforma, responsável pela apresentação do produto ao público e pela captação de restaurantes e clientes.`,
       en: `I work exclusively on the frontend development of the platform, being responsible for building the web interfaces for the Admin Dashboard and the Partner Portal (restaurants).
 
 For the Admin Dashboard, I developed the interface used by administrators to approve restaurants, manage overall platform operations, and maintain a consolidated system overview.
@@ -173,7 +194,9 @@ For the Partner Portal, I built the interfaces where restaurants register and ma
 
 My work involves building reusable components, structuring responsive layouts, and continuously improving usability, visual consistency, and user experience.
 
-On the mobile application, I contribute by implementing requested visual adjustments and UI refinements, including updates to colors, spacing, sizing, images, and layout improvements to ensure consistency between web and mobile experiences.`,
+On the mobile application, I contribute by implementing requested visual adjustments and UI refinements, including updates to colors, spacing, sizing, images, and layout improvements to ensure consistency between web and mobile experiences.
+
+I also built the platform's marketing landing page, responsible for presenting the product to the public and driving acquisition of both restaurants and customers.`,
     },
     technologies: [
       "React",
@@ -183,6 +206,7 @@ On the mobile application, I contribute by implementing requested visual adjustm
       "Responsive Design",
     ],
     media: [],
+    link: "https://ondishfoods.pt/",
   },
   {
     id: "athena-ti",
