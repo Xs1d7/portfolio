@@ -92,17 +92,17 @@ export function Experience() {
                         {entry.role[locale]}
                       </h3>
                     </div>
-                    <p className="mt-1 pl-[22px] text-sm font-medium text-accent">
+                    <p className="mt-1 pl-5.5 text-sm font-medium text-accent">
                       {entry.company}
                     </p>
 
                     {/* Short description */}
-                    <p className="mt-2.5 pl-[22px] text-sm leading-relaxed text-muted">
+                    <p className="mt-2.5 pl-5.5 text-sm leading-relaxed text-muted">
                       {entry.shortDescription[locale]}
                     </p>
 
                     {/* Tech tags — first 4 */}
-                    <div className="mt-3 flex flex-wrap gap-1.5 pl-[22px]">
+                    <div className="mt-3 flex flex-wrap gap-1.5 pl-5.5">
                       {entry.technologies.slice(0, 4).map((tech) => (
                         <span
                           key={tech}
@@ -120,7 +120,7 @@ export function Experience() {
                   </div>
 
                   {/* Period + indicators */}
-                  <div className="flex flex-wrap items-center gap-2 pl-[22px] sm:flex-col sm:items-end sm:pl-0">
+                  <div className="flex flex-wrap items-center gap-2 pl-5.5 sm:flex-col sm:items-end sm:pl-0">
                     {/* Type badge */}
                     <span
                       className={`shrink-0 rounded-full px-2.5 py-0.5 text-xs font-semibold ${TYPE_BADGE[entry.type]}`}

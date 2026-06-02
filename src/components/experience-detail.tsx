@@ -39,7 +39,7 @@ export function ExperienceDetail({ entry, onClose }: Props) {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
-        className="fixed inset-0 z-[90] bg-black/60 backdrop-blur-sm"
+        className="fixed inset-0 z-90 bg-black/60 backdrop-blur-sm"
         onClick={onClose}
       />
 
@@ -49,7 +49,7 @@ export function ExperienceDetail({ entry, onClose }: Props) {
         animate={{ opacity: 1, x: 0 }}
         exit={{ opacity: 0, x: "100%" }}
         transition={{ type: "spring", damping: 30, stiffness: 300 }}
-        className="fixed bottom-0 right-0 top-0 z-[91] w-full overflow-y-auto bg-background shadow-2xl sm:w-[540px] lg:w-[600px]"
+        className="fixed bottom-0 right-0 top-0 z-91 w-full overflow-y-auto bg-background shadow-2xl sm:w-135 lg:w-150"
       >
         <div className="p-5 sm:p-8">
           {/* Close */}
@@ -87,7 +87,7 @@ export function ExperienceDetail({ entry, onClose }: Props) {
               <h4 className="mb-3 text-sm font-semibold uppercase tracking-wider text-foreground">
                 {t.experience.overview}
               </h4>
-              <div className="rounded-2xl border border-border/70 bg-foreground/[0.015] p-5 text-base shadow-sm dark:bg-white/[0.025] sm:p-6">
+              <div className="rounded-2xl border border-border/70 bg-foreground/1.5 p-5 text-base shadow-sm dark:bg-white/2.5 sm:p-6">
                 <div className="space-y-4">
                   <ReactMarkdown components={markdownComponents}>
                     {entry.overview[locale]}
@@ -104,7 +104,7 @@ export function ExperienceDetail({ entry, onClose }: Props) {
                 {t.experience.contribution}
               </h4>
             )}
-            <div className="rounded-2xl border border-border/70 bg-foreground/[0.015] p-5 text-base shadow-sm dark:bg-white/[0.025] sm:p-6">
+            <div className="rounded-2xl border border-border/70 bg-foreground/1.5 p-5 text-base shadow-sm dark:bg-white/2.5 sm:p-6">
               <div className="space-y-4">
                 <ReactMarkdown components={markdownComponents}>
                   {entry.fullDescription[locale]}
