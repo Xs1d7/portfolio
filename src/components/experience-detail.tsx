@@ -4,6 +4,8 @@ import { motion, AnimatePresence } from "framer-motion";
 import ReactMarkdown, { type Components } from "react-markdown";
 import { useTranslation } from "@/components/language-provider";
 import { MediaGallery } from "@/components/media-gallery";
+import { ExperienceTenures } from "@/components/experience-tenures";
+import { formatMonthRange } from "@/lib/tenure-duration";
 import {
   EMPLOYMENT_BADGE,
   TYPE_BADGE,
@@ -95,9 +97,21 @@ export function ExperienceDetail({ entry, onClose }: Props) {
               {entry.role[locale]}
             </h3>
             <p className="mt-1 text-sm text-muted">
-              {formatPeriod(entry.period.start, entry.period.end, locale, t.experience.present)}
+              {formatMonthRange(entry.period.start, entry.period.end, locale, t.experience.present)}
             </p>
+            {entry.tenures && entry.tenures.length > 0 && (
+              <p className="mt-2 text-xs text-muted">
+                {t.experience.careerPathHint.replace(
+                  "{count}",
+                  String(entry.tenures.length),
+                )}
+              </p>
+            )}
           </div>
+
+          {entry.tenures && entry.tenures.length > 0 && (
+            <ExperienceTenures tenures={entry.tenures} />
+          )}
 
           {/* Overview — what the project is */}
           {entry.overview && (
@@ -115,13 +129,24 @@ export function ExperienceDetail({ entry, onClose }: Props) {
             </div>
           )}
 
+          {entry.exitReason && (
+            <div className="mb-8">
+              <h4 className="mb-3 text-sm font-semibold uppercase tracking-wider text-foreground">
+                {t.experience.exitReason}
+              </h4>
+              <p className="rounded-2xl border border-amber-500/20 bg-amber-500/5 px-5 py-4 text-sm leading-relaxed text-muted">
+                {entry.exitReason[locale]}
+              </p>
+            </div>
+          )}
+
           {/* Description — my work on it */}
           <div className="mb-8">
-            {entry.overview && (
-              <h4 className="mb-3 text-sm font-semibold uppercase tracking-wider text-foreground">
-                {t.experience.contribution}
-              </h4>
-            )}
+            <h4 className="mb-3 text-sm font-semibold uppercase tracking-wider text-foreground">
+              {entry.tenures?.length
+                ? t.experience.contributionExtra
+                : t.experience.contribution}
+            </h4>
             <div className="rounded-2xl border border-border/70 bg-foreground/1.5 p-5 text-base shadow-sm dark:bg-white/2.5 sm:p-6">
               <div className="space-y-4">
                 <ReactMarkdown components={markdownComponents}>
@@ -151,9 +176,11 @@ export function ExperienceDetail({ entry, onClose }: Props) {
                           : "rounded-full bg-slate-500/15 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-slate-600 dark:text-slate-400"
                       }
                     >
-                      {client.relationship === "direct"
-                        ? t.experience.clientDirect
-                        : t.experience.clientIndirect}
+                      {entry.id === "prodia" && client.name === "Mãos Livres"
+                        ? t.experience.parentCompany
+                        : client.relationship === "direct"
+                          ? t.experience.clientDirect
+                          : t.experience.clientIndirect}
                     </span>
                   </span>
                 ))}
@@ -181,13 +208,20 @@ export function ExperienceDetail({ entry, onClose }: Props) {
           {/* Link */}
           {entry.link && (
             <div className="mb-8">
+              {entry.id === "prodia" && (
+                <p className="mb-3 text-sm text-muted">{t.experience.comingSoon}</p>
+              )}
               <a
                 href={entry.link}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 rounded-full bg-accent px-5 py-2.5 text-sm font-semibold text-white transition-opacity hover:opacity-90"
               >
-                {t.experience.visitSite}
+                {entry.id === "maos-livres"
+                  ? t.experience.visitHub
+                  : entry.id === "prodia"
+                    ? t.experience.visitParentSite
+                    : t.experience.visitSite}
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                   <path d="M7 7h10v10" /><path d="M7 17 17 7" />
                 </svg>
@@ -208,15 +242,4 @@ export function ExperienceDetail({ entry, onClose }: Props) {
       </motion.div>
     </AnimatePresence>
   );
-}
-
-function formatPeriod(start: string, end: string | null, locale: string, presentLabel: string) {
-  const fmt = (d: string) => {
-    const date = new Date(d.length === 7 ? d + "-01" : d + "-01-01");
-    return date.toLocaleDateString(locale === "pt" ? "pt-BR" : "en-US", {
-      month: "short",
-      year: "numeric",
-    });
-  };
-  return `${fmt(start)} — ${end ? fmt(end) : presentLabel}`;
 }

@@ -15,7 +15,7 @@
     "greeting": "Olá, eu sou",
     "name": "Jefferson",
     "role": "Tech Lead · Engenheiro de Software Sênior",
-    "description": "Arquiteto sistemas de backend de alta performance, agentes de IA e automações em escala — do Go e Rust ao Vue.js e React, com visão 360° de produto e engenharia.",
+    "description": "Arquiteto e lidero a tecnologia que tira o manual da operação — automação em escala, backends de alta performance em Go e Rust, agentes de IA e software sob medida, do diagnóstico ao deploy em produção.",
     "cta": "Entre em contato",
     "download": "Baixar CV"
   },
@@ -33,6 +33,13 @@
     "present": "Atual",
     "overview": "Sobre o projeto",
     "contribution": "Destaques e atuação",
+    "contributionExtra": "Contexto e destaques técnicos",
+    "exitReason": "Motivo da saída",
+    "careerPath": "Evolução de cargo por empresa",
+    "careerPathHint": "{count} etapas com tempo em cada cargo — veja abaixo",
+    "tenureSingular": "etapa de carreira",
+    "tenurePlural": "etapas de carreira",
+    "tenureListHint": "toque para ver períodos",
     "clients": "Empresas",
     "clientDirect": "Direto",
     "clientIndirect": "Indireto",
@@ -47,7 +54,20 @@
     "technologies": "Tecnologias",
     "gallery": "Galeria",
     "visitSite": "Visitar site",
-    "scrollHint": "Role para ver mais experiências"
+    "visitHub": "Visitar maoslivres.com",
+    "visitParentSite": "Hub de contato em maoslivres.com",
+    "parentCompany": "Empresa detentora",
+    "comingSoon": "O Prodia ainda não foi lançado — use o Hub de contato em maoslivres.com",
+    "scrollHint": "Role para ver mais experiências",
+    "viewModeLabel": "Modo de visualização",
+    "viewJourney": "Jornada",
+    "viewList": "Lista",
+    "journeyIntro": "Percorra minha trajetória desde a decisão de cursar tecnologia até cada experiência profissional — use as setas ou clique nos marcos.",
+    "journeyExplore": "Explorar esta etapa em detalhe",
+    "journeyPrev": "Anterior",
+    "journeyNext": "Próximo",
+    "journeyStep": "Etapa {current} de {total}",
+    "journeyHint": "Dica: use ← → no teclado para navegar"
   },
   "skills": {
     "title": "Skills Técnicas",
@@ -86,6 +106,52 @@
   },
   "meta": {
     "title": "Jefferson Alves | Portfolio",
-    "description": "Tech Lead e Engenheiro de Software Sênior — Backend, IA e Automação"
+    "description": "Tech Lead · Automação, backends de alta performance, agentes de IA e software sob medida"
+  },
+  "resumeExport": {
+    "toggleOpen": "Currículo PDF",
+    "toggleClose": "Ocultar opções",
+    "title": "Exportar currículo em PDF",
+    "subtitle": "Gera um PDF atualizado com os dados deste portfólio. Escolha o foco da vaga para destacar experiências e skills mais relevantes.",
+    "roleLabel": "Foco da vaga",
+    "techLabel": "Tecnologias (opcional)",
+    "download": "Baixar PDF",
+    "generating": "Gerando PDF…",
+    "error": "Não foi possível gerar o PDF. Tente novamente.",
+    "focusPrefix": "Versão",
+    "roles": {
+      "full": "Completo",
+      "fullstack": "Full-stack",
+      "backend": "Backend",
+      "frontend": "Frontend",
+      "rpa": "RPA / Automação",
+      "tech-lead": "Tech Lead",
+      "ai": "IA / LLM"
+    },
+    "techs": {
+      "python": "Python",
+      "go": "Go",
+      "rust": "Rust",
+      "node": "Node.js",
+      "dotnet": ".NET",
+      "vue": "Vue.js",
+      "react": "React",
+      "aws": "AWS",
+      "scraping": "Scraping"
+    },
+    "sections": {
+      "summary": "Resumo",
+      "skills": "Competências",
+      "experience": "Experiência",
+      "education": "Formação",
+      "courses": "Certificações",
+      "languages": "Idiomas",
+      "careerNarrative": "Trajetória de evolução",
+      "impact": "Impacto principal",
+      "evolution": "Roadmap de cargos",
+      "highlights": "Destaques técnicos",
+      "exitReason": "Motivo da saída",
+      "techStack": "Tecnologias"
+    }
   }
 }

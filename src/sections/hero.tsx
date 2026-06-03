@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { useTranslation } from "@/components/language-provider";
+import { ResumeExportPanel } from "@/components/resume-export-panel";
 
 const container = {
   hidden: {},
@@ -58,14 +59,15 @@ export function Hero() {
 
         <motion.div
           variants={item}
-          className="mt-8 flex flex-col gap-3 min-[380px]:flex-row sm:mt-10 sm:flex-wrap sm:gap-4"
+          className="mt-8 flex flex-col items-stretch gap-3 min-[380px]:flex-row min-[380px]:items-center sm:mt-10 sm:flex-wrap sm:gap-4"
         >
           <a
             href="#contact"
-            className="inline-flex h-11 items-center justify-center rounded-full bg-accent px-6 text-sm font-medium text-white transition-colors duration-200 hover:bg-accent-hover"
+            className="inline-flex h-11 items-center justify-center rounded-full border border-border px-6 text-sm font-medium text-foreground transition-colors hover:border-accent/40 hover:text-accent"
           >
             {t.hero.cta}
           </a>
+          <ResumeExportPanel />
         </motion.div>
       </motion.div>
     </section>

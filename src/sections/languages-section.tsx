@@ -41,6 +41,9 @@ export function Languages() {
             <p className="mt-1 text-sm font-medium text-accent">
               {t.languages[lang.level]}
             </p>
+            {lang.detail && (
+              <p className="mt-0.5 text-xs text-muted">{lang.detail[locale]}</p>
+            )}
 
             {/* Circular indicator */}
             <div className="mx-auto mt-4 flex items-center justify-center">
@@ -66,7 +69,11 @@ export function Languages() {
                   strokeDasharray={2 * Math.PI * 26}
                   initial={{ strokeDashoffset: 2 * Math.PI * 26 }}
                   whileInView={{
-                    strokeDashoffset: 2 * Math.PI * 26 * (1 - LEVEL_PERCENT[lang.level] / 100),
+                    strokeDashoffset:
+                      2 *
+                      Math.PI *
+                      26 *
+                      (1 - (lang.levelPercent ?? LEVEL_PERCENT[lang.level]) / 100),
                   }}
                   viewport={{ once: true }}
                   transition={{ duration: 1, delay: 0.3 + i * 0.15 }}
@@ -81,7 +88,7 @@ export function Languages() {
                   className="fill-foreground text-xs font-semibold"
                   style={{ fontSize: "12px" }}
                 >
-                  {LEVEL_PERCENT[lang.level]}%
+                  {lang.levelPercent ?? LEVEL_PERCENT[lang.level]}%
                 </text>
               </svg>
             </div>

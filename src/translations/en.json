@@ -15,7 +15,7 @@
     "greeting": "Hi, I'm",
     "name": "Jefferson",
     "role": "Tech Lead · Senior Software Engineer",
-    "description": "I architect high-performance backends, AI agents, and automation at scale — from Go and Rust to Vue.js and React, with a 360° product and engineering mindset.",
+    "description": "I architect and lead the technology that removes repetitive work from operations — automation at scale, high-performance Go and Rust backends, AI agents, and tailored software from diagnosis to production.",
     "cta": "Get in touch",
     "download": "Download CV"
   },
@@ -33,6 +33,13 @@
     "present": "Present",
     "overview": "About the project",
     "contribution": "Highlights & contribution",
+    "contributionExtra": "Context & technical highlights",
+    "exitReason": "Reason for leaving",
+    "careerPath": "Role progression by company",
+    "careerPathHint": "{count} stages with time in each role — see below",
+    "tenureSingular": "career stage",
+    "tenurePlural": "career stages",
+    "tenureListHint": "tap to view timelines",
     "clients": "Companies",
     "clientDirect": "Direct",
     "clientIndirect": "Indirect",
@@ -47,7 +54,20 @@
     "technologies": "Technologies",
     "gallery": "Gallery",
     "visitSite": "Visit site",
-    "scrollHint": "Scroll to see more experiences"
+    "visitHub": "Visit maoslivres.com",
+    "visitParentSite": "Contact Hub at maoslivres.com",
+    "parentCompany": "Parent company",
+    "comingSoon": "Prodia is not live yet — use the contact Hub at maoslivres.com",
+    "scrollHint": "Scroll to see more experiences",
+    "viewModeLabel": "View mode",
+    "viewJourney": "Journey",
+    "viewList": "List",
+    "journeyIntro": "Walk through my path from choosing a tech degree to each professional chapter — use the arrows or click the milestones.",
+    "journeyExplore": "Explore this chapter in detail",
+    "journeyPrev": "Previous",
+    "journeyNext": "Next",
+    "journeyStep": "Step {current} of {total}",
+    "journeyHint": "Tip: use ← → on your keyboard to navigate"
   },
   "skills": {
     "title": "Technical Skills",
@@ -86,6 +106,52 @@
   },
   "meta": {
     "title": "Jefferson Alves | Portfolio",
-    "description": "Tech Lead & Senior Software Engineer — Backend, AI & Automation"
+    "description": "Tech Lead · Automation, high-performance backends, AI agents & tailored software"
+  },
+  "resumeExport": {
+    "toggleOpen": "Resume PDF",
+    "toggleClose": "Hide options",
+    "title": "Export resume as PDF",
+    "subtitle": "Generates an up-to-date PDF from this portfolio data. Pick a job focus to highlight the most relevant experience and skills.",
+    "roleLabel": "Job focus",
+    "techLabel": "Technologies (optional)",
+    "download": "Download PDF",
+    "generating": "Generating PDF…",
+    "error": "Could not generate the PDF. Please try again.",
+    "focusPrefix": "Edition",
+    "roles": {
+      "full": "Full",
+      "fullstack": "Full-stack",
+      "backend": "Backend",
+      "frontend": "Frontend",
+      "rpa": "RPA / Automation",
+      "tech-lead": "Tech Lead",
+      "ai": "AI / LLM"
+    },
+    "techs": {
+      "python": "Python",
+      "go": "Go",
+      "rust": "Rust",
+      "node": "Node.js",
+      "dotnet": ".NET",
+      "vue": "Vue.js",
+      "react": "React",
+      "aws": "AWS",
+      "scraping": "Scraping"
+    },
+    "sections": {
+      "summary": "Summary",
+      "skills": "Skills",
+      "experience": "Experience",
+      "education": "Education",
+      "courses": "Certifications",
+      "languages": "Languages",
+      "careerNarrative": "Growth trajectory",
+      "impact": "Primary impact",
+      "evolution": "Role roadmap",
+      "highlights": "Technical highlights",
+      "exitReason": "Reason for leaving",
+      "techStack": "Technologies"
+    }
   }
 }

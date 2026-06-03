@@ -17,10 +17,10 @@ export const education: Education[] = [
       pt: "Tecnologia para Negócios: IA, Data Science e Big Data",
       en: "Business Technology: AI, Data Science and Big Data",
     },
-    period: { start: "2024-01", end: null },
+    period: { start: "2025-01", end: null },
     description: {
-      pt: "Formação executiva em inteligência artificial, ciência de dados e big data aplicados a negócios. Em andamento.",
-      en: "Executive program in artificial intelligence, data science, and big data applied to business. In progress.",
+      pt: "Formação executiva em inteligência artificial, ciência de dados e big data aplicados a negócios. Iniciado em 2025. Em andamento.",
+      en: "Executive program in artificial intelligence, data science, and big data applied to business. Started in 2025. In progress.",
     },
   },
   {
@@ -110,11 +110,24 @@ export interface Language {
   name: { pt: string; en: string };
   level: "native" | "fluent" | "intermediate" | "basic";
   flag: string;
+  /** Texto extra (ex.: faixa CEFR). */
+  detail?: { pt: string; en: string };
+  /** Barra de progresso na seção de idiomas (0–100). */
+  levelPercent?: number;
 }
 
 export const languages: Language[] = [
   { name: { pt: "Português", en: "Portuguese" }, level: "native", flag: "🇧🇷" },
-  { name: { pt: "Inglês", en: "English" }, level: "fluent", flag: "🇺🇸" },
+  {
+    name: { pt: "Inglês", en: "English" },
+    level: "intermediate",
+    flag: "🇺🇸",
+    detail: {
+      pt: "B2–C1 · converso bem, não fluente",
+      en: "B2–C1 · conversational, not fully fluent",
+    },
+    levelPercent: 72,
+  },
 ];
 
 export interface Social {
