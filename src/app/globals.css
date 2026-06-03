@@ -4,7 +4,7 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 /* ========================================
-   Design Tokens — Portfolio (Rosa)
+   Design Tokens — Portfolio (Azul)
    ======================================== */
 
 :root {
@@ -12,8 +12,8 @@
   --foreground: #0a0a0a;
   --muted: #737373;
   --border: #e5e5e5;
-  --accent: #e11d73;
-  --accent-hover: #be185d;
+  --accent: #1d4ed8;
+  --accent-hover: #1e40af;
 }
 
 .dark {
@@ -21,8 +21,8 @@
   --foreground: #fafafa;
   --muted: #a1a1aa;
   --border: #27272a;
-  --accent: #f472b6;
-  --accent-hover: #fb7ebb;
+  --accent: #3b82f6;
+  --accent-hover: #60a5fa;
 }
 
 @theme inline {

@@ -8,36 +8,35 @@ export interface Education {
 
 export const education: Education[] = [
   {
-    institution: "Unigranrio Afya",
+    institution: "PUCRS",
     degree: {
-      pt: "Tecnólogo",
-      en: "Associate Degree",
+      pt: "MBA",
+      en: "MBA",
+    },
+    field: {
+      pt: "Tecnologia para Negócios: IA, Data Science e Big Data",
+      en: "Business Technology: AI, Data Science and Big Data",
+    },
+    period: { start: "2024-01", end: null },
+    description: {
+      pt: "Formação executiva em inteligência artificial, ciência de dados e big data aplicados a negócios. Em andamento.",
+      en: "Executive program in artificial intelligence, data science, and big data applied to business. In progress.",
+    },
+  },
+  {
+    institution: "Universidade Estácio de Sá",
+    degree: {
+      pt: "Graduação",
+      en: "Bachelor's Degree",
     },
     field: {
       pt: "Análise e Desenvolvimento de Sistemas",
       en: "Systems Analysis and Development",
     },
-    period: { start: "2023-08", end: "2025-12" },
+    period: { start: "2018-01", end: "2022-12" },
     description: {
-      pt: "Formação focada em desenvolvimento de software, arquitetura de sistemas, banco de dados e práticas modernas de engenharia de software.",
-      en: "Program focused on software development, systems architecture, databases, and modern software engineering practices.",
-    },
-  },
-
-  {
-    institution: "Aulas Particulares de Inglês",
-    degree: {
-      pt: "Formação em Idioma",
-      en: "Language Studies",
-    },
-    field: {
-      pt: "Inglês (Nível B1)",
-      en: "English (B1 Level)",
-    },
-    period: { start: "2024-07", end: null },
-    description: {
-      pt: "Aulas particulares com foco no desenvolvimento da fluência, comunicação profissional e compreensão em contextos técnicos e cotidianos.",
-      en: "Private lessons focused on fluency development, professional communication, and comprehension in both technical and everyday contexts.",
+      pt: "Base em engenharia de software, arquitetura de sistemas, bancos de dados e desenvolvimento full-stack.",
+      en: "Foundation in software engineering, systems architecture, databases, and full-stack development.",
     },
   },
 ];
@@ -53,52 +52,12 @@ export interface Course {
 export const courses: Course[] = [
   {
     name: {
-      pt: "AWS S3 — Manipulação e Armazenamento de Objetos na Nuvem",
-      en: "AWS S3 — Object Storage and Management in the Cloud",
+      pt: "Professional Scrum Master (PSM I)",
+      en: "Professional Scrum Master (PSM I)",
     },
-    institution: "Alura",
+    institution: "Agile School",
     year: "2024",
-    hours: 10,
-  },
-
-  {
-    name: {
-      pt: "AWS EC2 — Alta Disponibilidade e Escalabilidade",
-      en: "AWS EC2 — High Availability and Scalability",
-    },
-    institution: "Alura",
-    year: "2024",
-    hours: 10,
-  },
-
-  {
-    name: {
-      pt: "Java e Spring Security — Protegendo Aplicações Web",
-      en: "Java and Spring Security — Securing Web Applications",
-    },
-    institution: "Alura",
-    year: "2024",
-    hours: 12,
-  },
-
-  {
-    name: {
-      pt: "Java — Lambdas, Streams e Spring Framework",
-      en: "Java — Lambdas, Streams and Spring Framework",
-    },
-    institution: "Alura",
-    year: "2024",
-    hours: 12,
-  },
-
-  {
-    name: {
-      pt: "Java — Aplicando Orientação a Objetos",
-      en: "Java — Applying Object-Oriented Programming",
-    },
-    institution: "Alura",
-    year: "2024",
-    hours: 10,
+    hours: 16,
   },
 ];
 
@@ -111,32 +70,33 @@ export interface Skill {
 }
 
 export const skills: Skill[] = [
-  // Frontend
-  { name: "React", level: 4, category: "frontend" },
-  { name: "Next.js", level: 3, category: "frontend" },
   { name: "TypeScript", level: 5, category: "frontend" },
-  { name: "Vue.js", level: 3, category: "frontend" },
-
+  { name: "React.js", level: 4, category: "frontend" },
+  { name: "Vue.js", level: 4, category: "frontend" },
+  { name: "Next.js", level: 4, category: "frontend" },
   { name: "JavaScript", level: 5, category: "frontend" },
   { name: "HTML & CSS", level: 5, category: "frontend" },
-  { name: "Tailwind CSS", level: 4, category: "frontend" },
-  // Backend
+
   { name: "Node.js", level: 5, category: "backend" },
-  { name: "REST APIs", level: 4, category: "backend" },
-  { name: "Convex", level: 3, category: "backend" },
-  { name: "Supabase", level: 3, category: "backend" },
-  { name: "Java", level: 2, category: "backend" },
+  { name: "Go", level: 4, category: "backend" },
+  { name: "Rust", level: 3, category: "backend" },
+  { name: "Python", level: 5, category: "backend" },
+  { name: "C# (.NET)", level: 4, category: "backend" },
+  { name: "NestJS", level: 4, category: "backend" },
+  { name: "Fastify", level: 4, category: "backend" },
+  { name: "REST APIs", level: 5, category: "backend" },
+  { name: "LLM & AI Agents", level: 4, category: "backend" },
 
-  // Tools
+  { name: "AWS", level: 4, category: "tools" },
+  { name: "Docker", level: 4, category: "tools" },
   { name: "Git & GitHub", level: 5, category: "tools" },
-  { name: "VS Code", level: 5, category: "tools" },
-  { name: "IntelliJ", level: 2, category: "tools" },
+  { name: "CI/CD", level: 4, category: "tools" },
+  { name: "Web Scraping & RPA", level: 5, category: "tools" },
 
-  // Database
-  { name: "PostgreSQL", level: 2, category: "database" },
+  { name: "PostgreSQL", level: 4, category: "database" },
   { name: "MySQL", level: 4, category: "database" },
-  { name: "Prisma", level: 3, category: "database" },
-  { name: "Sequelize", level: 3, category: "database" },
+  { name: "Redis", level: 4, category: "database" },
+  { name: "SQL Server", level: 3, category: "database" },
 ];
 
 export const skillCategories = [
@@ -146,8 +106,6 @@ export const skillCategories = [
   "database",
 ] as const;
 
-// ── Languages ────────────────────────────────────────────
-
 export interface Language {
   name: { pt: string; en: string };
   level: "native" | "fluent" | "intermediate" | "basic";
@@ -156,11 +114,8 @@ export interface Language {
 
 export const languages: Language[] = [
   { name: { pt: "Português", en: "Portuguese" }, level: "native", flag: "🇧🇷" },
-  { name: { pt: "Inglês", en: "English" }, level: "intermediate", flag: "🇺🇸" },
-  { name: { pt: "Espanhol", en: "Spanish" }, level: "basic", flag: "🇪🇸" },
+  { name: { pt: "Inglês", en: "English" }, level: "fluent", flag: "🇺🇸" },
 ];
-
-// ── Socials ──────────────────────────────────────────────
 
 export interface Social {
   name: string;
@@ -171,17 +126,19 @@ export interface Social {
 export const socials: Social[] = [
   {
     name: "GitHub",
-    url: "https://github.com/andressa-ricardo",
+    url: "https://github.com/Xs1d7",
     icon: "github",
   },
   {
     name: "LinkedIn",
-    url: "https://linkedin.com/in/andressa-ricardo",
+    url: "https://www.linkedin.com/in/jeffersonalves7/",
     icon: "linkedin",
   },
   {
     name: "Email",
-    url: "mailto:andressaricardo.developer@gmail.com",
+    url: "mailto:jeffersonalves.developer@gmail.com",
     icon: "email",
   },
 ];
+
+export const EMAIL_ADDRESS = "jeffersonalves.developer@gmail.com";

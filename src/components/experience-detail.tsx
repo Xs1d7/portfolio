@@ -4,7 +4,11 @@ import { motion, AnimatePresence } from "framer-motion";
 import ReactMarkdown, { type Components } from "react-markdown";
 import { useTranslation } from "@/components/language-provider";
 import { MediaGallery } from "@/components/media-gallery";
-import { TYPE_BADGE, type ExperienceEntry } from "@/data/experience";
+import {
+  EMPLOYMENT_BADGE,
+  TYPE_BADGE,
+  type ExperienceEntry,
+} from "@/data/experience";
 
 interface Props {
   entry: ExperienceEntry;
@@ -20,7 +24,7 @@ const markdownComponents: Components = {
   ),
   li: ({ children }) => (
     <li className="flex gap-3 leading-7 text-muted">
-      <span className="mt-3 h-1.5 w-1.5 shrink-0 rounded-full bg-accent shadow-[0_0_0_4px_rgba(225,29,115,0.10)] dark:shadow-[0_0_0_4px_rgba(244,114,182,0.12)]" />
+      <span className="mt-3 h-1.5 w-1.5 shrink-0 rounded-full bg-accent ring-4 ring-accent/10" />
       <span className="min-w-0">{children}</span>
     </li>
   ),
@@ -31,6 +35,13 @@ const markdownComponents: Components = {
 
 export function ExperienceDetail({ entry, onClose }: Props) {
   const { locale, t } = useTranslation();
+
+  const employmentLabel =
+    entry.employment === "clt"
+      ? t.experience.employmentClt
+      : entry.employment === "pj"
+        ? t.experience.employmentPj
+        : null;
 
   return (
     <AnimatePresence>
@@ -65,13 +76,20 @@ export function ExperienceDetail({ entry, onClose }: Props) {
 
           {/* Header */}
           <div className="mb-6">
-            <div className="flex items-center gap-2">
+            <div className="flex flex-wrap items-center gap-2">
               <p className="text-sm font-medium text-accent">{entry.company}</p>
               <span
                 className={`shrink-0 rounded-full px-2.5 py-0.5 text-xs font-semibold ${TYPE_BADGE[entry.type]}`}
               >
                 {t.experience.types[entry.type]}
               </span>
+              {entry.type === "fulltime" && entry.employment && employmentLabel && (
+                <span
+                  className={`shrink-0 rounded-full px-2.5 py-0.5 text-xs font-semibold ${EMPLOYMENT_BADGE[entry.employment]}`}
+                >
+                  {employmentLabel}
+                </span>
+              )}
             </div>
             <h3 className="mt-1 text-xl font-bold tracking-tight text-foreground sm:text-2xl">
               {entry.role[locale]}
@@ -112,6 +130,36 @@ export function ExperienceDetail({ entry, onClose }: Props) {
               </div>
             </div>
           </div>
+
+          {/* Clients */}
+          {entry.clients && entry.clients.length > 0 && (
+            <div className="mb-8">
+              <h4 className="mb-3 text-sm font-semibold uppercase tracking-wider text-foreground">
+                {t.experience.clients}
+              </h4>
+              <div className="flex flex-wrap gap-2">
+                {entry.clients.map((client) => (
+                  <span
+                    key={`${client.name}-${client.relationship}`}
+                    className="inline-flex items-center gap-2 rounded-full border border-border bg-foreground/2 px-3 py-1.5 text-xs font-medium text-foreground"
+                  >
+                    {client.name}
+                    <span
+                      className={
+                        client.relationship === "direct"
+                          ? "rounded-full bg-emerald-500/15 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-emerald-700 dark:text-emerald-400"
+                          : "rounded-full bg-slate-500/15 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-slate-600 dark:text-slate-400"
+                      }
+                    >
+                      {client.relationship === "direct"
+                        ? t.experience.clientDirect
+                        : t.experience.clientIndirect}
+                    </span>
+                  </span>
+                ))}
+              </div>
+            </div>
+          )}
 
           {/* Technologies */}
           <div className="mb-8">

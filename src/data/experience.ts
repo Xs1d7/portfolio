@@ -9,16 +9,32 @@ export type ExperienceType = "personal" | "fulltime" | "freelance";
 
 export const TYPE_BADGE: Record<ExperienceType, string> = {
   personal:
-    "bg-violet-500/10 text-violet-600 ring-1 ring-violet-500/20 dark:text-violet-400",
+    "bg-sky-500/10 text-sky-700 ring-1 ring-sky-500/20 dark:text-sky-400",
   fulltime:
     "bg-emerald-500/10 text-emerald-600 ring-1 ring-emerald-500/20 dark:text-emerald-400",
   freelance:
     "bg-amber-500/10 text-amber-600 ring-1 ring-amber-500/20 dark:text-amber-400",
 };
 
+export type EmploymentContract = "clt" | "pj";
+
+export const EMPLOYMENT_BADGE: Record<EmploymentContract, string> = {
+  clt: "bg-blue-500/10 text-blue-700 ring-1 ring-blue-500/20 dark:text-blue-400",
+  pj: "bg-indigo-500/10 text-indigo-700 ring-1 ring-indigo-500/20 dark:text-indigo-400",
+};
+
+export type ClientRelationship = "direct" | "indirect";
+
+export interface ExperienceClient {
+  name: string;
+  relationship: ClientRelationship;
+}
+
 export interface ExperienceEntry {
   id: string;
   type: ExperienceType;
+  /** Contrato de trabalho — apenas para vagas full-time */
+  employment?: EmploymentContract;
   company: string;
   role: { pt: string; en: string };
   period: { start: string; end: string | null };
@@ -26,342 +42,230 @@ export interface ExperienceEntry {
   overview?: { pt: string; en: string };
   fullDescription: { pt: string; en: string };
   technologies: string[];
+  clients?: ExperienceClient[];
   media: MediaItem[];
   link?: string;
 }
 
 export const experienceEntries: ExperienceEntry[] = [
   {
+    id: "pop-plus",
+    type: "fulltime",
+    employment: "pj",
+    company: "POP+",
+    role: {
+      pt: "Engenheiro Full-Stack Sênior",
+      en: "Senior Full-Stack Engineer",
+    },
+    period: { start: "2026-02", end: "2026-05" },
+    shortDescription: {
+      pt: "Modernização e evolução de um WMS legado de larga escala, com entregas full-stack em Vue.js e C# (.NET).",
+      en: "Modernization and evolution of a large-scale legacy WMS, with full-stack delivery in Vue.js and C# (.NET).",
+    },
+    fullDescription: {
+      pt: `Atuei na manutenção crítica e evolução de funcionalidades em um sistema WMS (Warehouse Management System) legado complexo, com módulos de vendas, marketing, autenticação e controle de estoque.
+
+Principais destaques:
+
+- **Modernização de sistema legado:** evolução de funcionalidades em ambiente de alta complexidade e escala
+- **Entrega full-stack:** interfaces responsivas em Vue.js e regras de negócio seguras em C# (.NET) no backend
+- **APIs REST:** integração e manutenção de serviços para suporte operacional do WMS`,
+      en: `I worked on critical maintenance and feature evolution for a complex legacy Warehouse Management System (WMS), covering sales, marketing, authentication, and inventory control modules.
+
+Key highlights:
+
+- **Legacy system modernization:** feature evolution in a high-complexity, large-scale environment
+- **Full-stack delivery:** responsive Vue.js interfaces and secure business rules in C# (.NET) on the backend
+- **REST APIs:** integration and maintenance of services supporting WMS operations`,
+    },
+    technologies: ["C# (.NET)", "Vue.js", "SQL Server", "REST APIs"],
+    clients: [{ name: "POP+", relationship: "direct" }],
+    media: [],
+  },
+  {
     id: "prodia",
     type: "personal",
     company: "Prodia",
     role: {
-      pt: "Full Stack Developer (Projeto Pessoal)",
-      en: "Full Stack Developer (Personal Project)",
+      pt: "Cofundador & Arquiteto Principal de IA",
+      en: "Co-founder & Lead AI Architect",
     },
-    period: { start: "2026-05", end: null },
+    period: { start: "2025-06", end: null },
     shortDescription: {
-      pt: "Plataforma em desenvolvimento para geração de imagens e vídeos de produtos com IA, com automação de catálogo e sistema de créditos.",
-      en: "In-progress AI platform for generating product images and videos, with catalog automation and credit-based system.",
+      pt: "SaaS de IA em pré-lançamento para automatizar criação e otimização de anúncios de e-commerce com pipelines generativos e backend escalável.",
+      en: "Pre-launch AI SaaS to automate creation and optimization of e-commerce product ads with generative pipelines and scalable backend.",
     },
     fullDescription: {
-      pt: `Estou desenvolvendo o Prodia como um projeto pessoal focado na criação de conteúdo visual para produtos utilizando inteligência artificial.
+      pt: `Cofundei e arquitetei o Prodia, uma aplicação SaaS de alta escala focada em automatizar a criação e otimização de anúncios de vendas com alto índice de conversão para lojistas corporativos.
 
-A plataforma permite transformar fotos simples em imagens profissionais e vídeos prontos para e-commerce e marketing.
+Principais destaques:
 
-Principais pontos do projeto:
+- **Pipelines de IA generativa:** geração de textos para anúncios com LLMs e engenharia de prompt em larga escala
+- **Visão de produto:** arquitetura pensada para multiplicar ativos de vendas com baixo custo operacional
+- **Backend resiliente:** infraestrutura preparada para alto volume de geração de texto e dados
+- **Stack:** Go, Node.js, Python, OpenAI API, bancos vetoriais e AWS`,
+      en: `I co-founded and architected Prodia, a high-scale AI SaaS application focused on automating creation and optimization of high-conversion sales ads for corporate e-commerce merchants.
 
-- Geração de imagens e vídeos com IA
-- Sistema de créditos e planos com Stripe
-- Módulo de catálogo com edição visual de produtos
-- Suporte a contas multiusuário (enterprise)
-- Arquitetura escalável com separação de frontend, backend e serviços de IA
+Key highlights:
 
-O projeto demonstra minha capacidade de estruturar e desenvolver um produto completo, incluindo lógica de negócio, monetização e experiência do usuário.`,
-
-      en: `I am developing Prodia as a personal project focused on AI-powered visual content generation for products.
-
-The platform allows users to transform simple product photos into professional images and videos for e-commerce and marketing.
-
-Key aspects of the project:
-
-- AI-powered image and video generation
-- Credit-based system and subscription plans with Stripe
-- Catalog module with visual product editing
-- Multi-user (enterprise) support
-- Scalable architecture with separated frontend, backend, and AI services
-
-This project demonstrates my ability to design and build a complete product, including business logic, monetization, and user experience.`,
+- **Generative AI pipelines:** ad copy generation with LLMs and prompt engineering at scale
+- **Product vision:** architecture designed to multiply sales assets with minimal operational cost
+- **Resilient backend:** infrastructure built for high-volume text and data generation
+- **Stack:** Go, Node.js, Python, OpenAI API, vector databases, and AWS`,
     },
     technologies: [
-      "Next.js",
-      "React",
-      "TypeScript",
-      "Supabase",
-      "Stripe",
-      "Fal.ai",
-      "AI Integrations",
-    ],
-    media: [],
-  },
-
-  {
-    id: "criarch",
-    type: "freelance",
-    company: "Criarch",
-    role: {
-      pt: "Full Stack Developer",
-      en: "Full Stack Developer",
-    },
-    period: { start: "2026-02", end: "2026-06" },
-    shortDescription: {
-      pt: "Plataforma de IA para arquitetos que transforma fotos de projetos em renders realistas e vídeos cinematográficos, com sistema de créditos e pipelines assíncronos.",
-      en: "AI platform for architects that turns project photos into realistic renders and cinematic videos, with credit-based billing and asynchronous pipelines.",
-    },
-    overview: {
-      pt: `O CriArch é uma plataforma de inteligência artificial para arquitetos que transforma fotos reais de projetos — obras em andamento, maquetes físicas ou renders básicos — em renders profissionais e vídeos cinematográficos em minutos, sem necessidade de software de modelagem.
-
-A plataforma cobre todo o fluxo criativo de um escritório de arquitetura: renders realistas com modelos de difusão (com presets de iluminação e diferentes proporções), vídeos com movimentos de câmera profissionais (push in, travelling, drone shot, orbit) e um Studio com ferramentas de edição rápida como sky replacement, decoração de ambientes e upscale de imagens.`,
-      en: `CriArch is an AI platform for architects that turns real project photos — work in progress, physical models, or basic renders — into professional renders and cinematic videos in minutes, with no modeling software required.
-
-The platform covers the entire creative workflow of an architecture studio: realistic renders powered by diffusion models (with lighting presets and multiple aspect ratios), videos with professional camera movements (push in, travelling, drone shot, orbit), and a Studio with quick editing tools such as sky replacement, room decoration, and image upscaling.`,
-    },
-    fullDescription: {
-      pt: `Atuo no desenvolvimento full stack da plataforma, sendo responsável pela arquitetura e implementação de funcionalidades voltadas à geração de conteúdo com IA.
-
-Desenvolvi fluxos completos para criação de imagens, vídeos e composições finais, utilizando pipelines assíncronos com processamento em etapas (render, vídeo e concatenação).
-
-A plataforma inclui:
-
-- Sistema de créditos e billing por uso
-- Integração com provedores de IA (imagem e vídeo) via fal.ai
-- Processamento assíncrono com filas e eventos
-- Armazenamento e gerenciamento de mídia
-- Painel administrativo com controle de features, planos e prompts de IA
-
-Utilizo Convex no backend para gerenciamento de dados, autenticação e lógica serverless em tempo real.
-
-Também participei da modelagem de banco de dados e definição da arquitetura para suportar escalabilidade e evolução contínua do produto.
-
-Meu trabalho envolve tanto backend (APIs, integrações, lógica de processamento) quanto frontend (React), criando interfaces intuitivas para fluxos complexos de geração de conteúdo.`,
-      en: `I work on the full stack development of the platform, being responsible for designing and implementing features focused on AI content generation.
-
-I built complete workflows for generating images, videos, and final compositions using asynchronous pipelines with multi-step processing (render, video, and concatenation).
-
-The platform includes:
-
-- Credit-based billing system
-- Integration with AI providers (image and video) via fal.ai
-- Asynchronous processing with queues and event-driven workflows
-- Media storage and management
-- Admin dashboard for feature control, plans, and AI prompt management
-
-I use Convex as the backend for real-time data management, authentication, and serverless logic.
-
-I also contributed to database modeling and system architecture to support scalability and continuous product evolution.
-
-My work spans both backend (APIs, integrations, processing logic) and frontend (React), building intuitive interfaces for complex content generation workflows.`,
-    },
-    technologies: [
-      "React",
-      "TypeScript",
-      "Convex",
+      "Go",
       "Node.js",
-      "Stripe",
-      "Inngest",
-      "Cloudflare R2",
-      "fal.ai",
-      "AI Integrations",
+      "Python",
+      "OpenAI API",
+      "Vector Databases",
+      "AWS",
+      "LLM Orchestration",
     ],
     media: [],
-    link: "https://criarch.ai/",
   },
   {
-    id: "ondish-foods",
+    id: "devnology-lead",
     type: "fulltime",
-    company: "Ondish Foods",
+    employment: "pj",
+    company: "Devnology",
     role: {
-      pt: "Frontend Developer",
-      en: "Frontend Developer",
+      pt: "Tech Lead / Engenheiro de Automação Avançada",
+      en: "Tech Lead / Advanced Automation Engineer",
     },
-    period: { start: "2025-11", end: null },
+    period: { start: "2025-03", end: "2026-03" },
     shortDescription: {
-      pt: "Desenvolvimento de interfaces web e mobile para plataforma de menu digital com pagamentos integrados e gestão inteligente para restaurantes.",
-      en: "Development of web and mobile interfaces for a digital menu platform with integrated payments and smart restaurant management.",
-    },
-    overview: {
-      pt: `A Ondish é uma plataforma que conecta restaurantes e clientes em Portugal, reunindo reservas, menu digital com QR Code, pedidos pelo celular e pagamento online em um só lugar. O cliente descobre restaurantes próximos, reserva mesa em segundos e, ao chegar, faz o scan do QR para pedir e pagar diretamente pelo telemóvel — sem filas.
-
-A solução atende tanto o lado B2C (clientes que querem comer fora sem espera) quanto o B2B (restaurantes que aumentam a rotação de mesas e substituem cadernos por gestão digital em tempo real), com aplicações web e mobile.`,
-      en: `Ondish is a platform connecting restaurants and diners in Portugal, bringing reservations, a QR-code digital menu, mobile ordering, and online payment together in one place. Customers discover nearby restaurants, book a table in seconds, and on arrival scan the QR code to order and pay straight from their phone — no queues.
-
-It serves both the B2C side (diners who want to eat out without waiting) and the B2B side (restaurants that increase table turnover and replace paper notebooks with real-time digital management), across web and mobile apps.`,
+      pt: "Liderança técnica de squads e motores de scraping em Go/Rust com engenharia reversa para contornar Akamai, Cloudflare e CAPTCHA.",
+      en: "Technical leadership of squads and Go/Rust scraping engines with reverse engineering to bypass Akamai, Cloudflare, and CAPTCHA.",
     },
     fullDescription: {
-      pt: `Atuo exclusivamente no desenvolvimento frontend da plataforma, sendo responsável pela construção das interfaces web do painel administrativo e do portal do parceiro (restaurantes).
+      pt: `Retornei à Devnology para liderar squads técnicas e a arquitetura de projetos de elite em extração de dados e engenharia reversa.
 
-No painel administrativo, desenvolvi a interface utilizada pelos administradores para aprovação de restaurantes, gestão geral da plataforma e visualização consolidada das operações.
+Principais destaques:
 
-No portal do parceiro, construí as telas onde os restaurantes realizam seu cadastro e gerenciam todas as informações do estabelecimento, incluindo:
+- **Liderança técnica:** definição de arquitetura, padrões e qualidade em squads de engenharia
+- **Engenharia reversa avançada:** motores em Go e Rust otimizados para contornar Akamai, Cloudflare e CAPTCHA
+- **Alta performance:** migração de legados para linguagens compiladas com latência ultra-baixa e máxima concorrência
+- **Operação em escala:** pipelines sob volumes massivos de dados com uso eficiente de CPU e recursos`,
+      en: `I returned to Devnology to lead technical squads and architecture for elite data extraction and reverse-engineering projects.
 
-- Cadastro e edição de dados do restaurante
-- Gestão de mesas, pratos e bebidas
-- Cadastro de funcionários
-- Visualização e gerenciamento de pedidos (aceitar, recusar e acompanhar status)
-- Acesso a relatórios semanais
+Key highlights:
 
-Meu trabalho envolve a criação de componentes reutilizáveis, organização de layouts responsivos e evolução contínua das telas com melhorias de usabilidade, consistência visual e experiência do usuário.
-
-No aplicativo mobile, atuo realizando ajustes e melhorias visuais conforme demandas do produto, incluindo alterações de cores, tamanhos, imagens e refinamentos de interface para manter a consistência da experiência entre web e mobile.
-
-Também desenvolvi a landing page institucional da plataforma, responsável pela apresentação do produto ao público e pela captação de restaurantes e clientes.`,
-      en: `I work exclusively on the frontend development of the platform, being responsible for building the web interfaces for the Admin Dashboard and the Partner Portal (restaurants).
-
-For the Admin Dashboard, I developed the interface used by administrators to approve restaurants, manage overall platform operations, and maintain a consolidated system overview.
-
-For the Partner Portal, I built the interfaces where restaurants register and manage all their business information, including:
-
-- Restaurant profile management
-- Tables, menu items, and drinks management
-- Staff registration
-- Order management (accept, reject, and track status)
-- Weekly reports and performance insights
-
-My work involves building reusable components, structuring responsive layouts, and continuously improving usability, visual consistency, and user experience.
-
-On the mobile application, I contribute by implementing requested visual adjustments and UI refinements, including updates to colors, spacing, sizing, images, and layout improvements to ensure consistency between web and mobile experiences.
-
-I also built the platform's marketing landing page, responsible for presenting the product to the public and driving acquisition of both restaurants and customers.`,
+- **Technical leadership:** architecture, standards, and quality across engineering squads
+- **Advanced reverse engineering:** Go and Rust engines optimized to bypass Akamai, Cloudflare, and CAPTCHA
+- **High performance:** migration of legacy systems to compiled languages for ultra-low latency and maximum concurrency
+- **Scale operations:** pipelines under massive data volumes with efficient CPU and resource utilization`,
     },
     technologies: [
-      "React",
-      "React Native",
-      "TypeScript",
-      "UI/UX",
-      "Responsive Design",
+      "Go",
+      "Rust",
+      "Python",
+      "Puppeteer",
+      "Playwright",
+      "Reverse Engineering",
+      "AWS",
+      "Docker",
+    ],
+    clients: [
+      { name: "Devnology", relationship: "direct" },
+      { name: "123 Milhas", relationship: "indirect" },
+      { name: "MaxMilhas", relationship: "indirect" },
     ],
     media: [],
-    link: "https://ondishfoods.pt/",
   },
   {
-    id: "athena-ti",
-    type: "fulltime",
-    company: "Athena Tecnologia da Informação",
+    id: "maos-livres",
+    type: "personal",
+    company: "Mãos Livres",
     role: {
-      pt: "Full Stack Developer",
-      en: "Full Stack Developer",
+      pt: "Fundador & Tech Lead",
+      en: "Founder & Tech Lead",
     },
-    period: { start: "2025-04", end: "2026-02" },
+    period: { start: "2024-01", end: null },
     shortDescription: {
-      pt: "Desenvolvimento fullstack de plataforma de agentes de IA personalizados com controle de uso e integrações externas.",
-      en: "Full-stack development of a customizable AI agents platform with usage control and external integrations.",
+      pt: "Agência e hub digital de automação: ERP ATTUS, motor de frete multicanal e gestão preditiva de estoque integrada ao Tiny ERP.",
+      en: "Automation agency and digital hub: ATTUS ERP, multichannel freight engine, and predictive inventory synced with Tiny ERP.",
     },
     fullDescription: {
-      pt: `Assumi o projeto a partir de uma base inicial e fui responsável por estruturar e desenvolver praticamente toda a evolução da plataforma.
+      pt: `Fundei a Mãos Livres como agência especializada em eliminar gargalos operacionais manuais para clientes corporativos por meio de arquitetura personalizada.
 
-Inicialmente, recebi a orientação de seguir o design existente e realizar pequenos ajustes, porém o produto passou por três reformulações completas de interface ao longo do desenvolvimento, exigindo reconstruções significativas e adaptação constante às novas diretrizes visuais, todas implementadas por mim de forma independente.
+Principais destaques:
 
-Atuei no desenvolvimento fullstack utilizando NestJS no backend, Prisma como ORM e MySQL como banco de dados, estruturando serviços, regras de negócio e modelagem de dados.
+- **ERP ATTUS:** microsserviços híbridos com NestJS, PHP, PostgreSQL e AWS (EC2 / S3)
+- **Motor de frete:** cálculo multicanal com APIs do Mercado Livre, AWS e Google Cloud, com filas e rate-limiting rigoroso
+- **Gestão preditiva de estoque:** conciliação em tempo real com Tiny ERP e alertas de reabastecimento baseados em histórico de vendas
+- **Consultoria:** automação estratégica para escalar margens e eficiência operacional`,
+      en: `I founded Mãos Livres as an agency focused on eliminating manual operational bottlenecks for corporate clients through custom architecture.
 
-Implementei recursos essenciais para controle, autenticação e uso da plataforma:
+Key highlights:
 
-- Controle diário e mensal de consumo por plano
-- Sistema de monitoramento e agregação de tokens
-- Autenticação baseada em permissões
-- Lógica de consumo e controle de uso para múltiplos provedores de IA
-
-Fui responsável por estudar e implementar toda a integração com a Stripe, desenvolvendo o fluxo completo de pagamentos e assinaturas: criação de planos, cobrança recorrente automática, cancelamento, alteração de plano e gestão de clientes.
-
-Também integrei múltiplos provedores de IA, estruturando a lógica de consumo e controle de uso da plataforma.
-
-O projeto exigiu alta capacidade de adaptação, aprendizado contínuo e autonomia técnica para transformar requisitos em uma solução escalável e funcional.`,
-      en: `I took over the project from an initial foundation and became responsible for building and evolving most of the platform.
-
-Initially, I was asked to follow the existing design and apply minor adjustments, but the product went through three complete UI redesigns during development, requiring significant rebuilds and continuous adaptation, all implemented independently by me.
-
-I worked as a full-stack developer using NestJS for the backend, Prisma as ORM, and MySQL as the database, structuring services, business logic, and data modeling.
-
-I implemented essential features for platform control, authentication, and usage:
-
-- Daily and monthly usage control per subscription plan
-- Token monitoring and aggregation systems
-- Role-based authentication
-- Consumption logic and usage control for multiple AI providers
-
-I independently learned and implemented the full Stripe integration, building the complete subscription workflow: plan creation, recurring billing, plan upgrades and downgrades, cancellation flows, and customer management.
-
-I also integrated multiple AI providers, designing the consumption logic and usage control mechanisms for the platform.
-
-The project required strong autonomy, adaptability, continuous learning, and the ability to translate evolving requirements into a scalable and reliable solution.`,
+- **ATTUS ERP:** hybrid microservices with NestJS, PHP, PostgreSQL, and AWS (EC2 / S3)
+- **Freight engine:** multichannel calculation with Mercado Livre and AWS APIs, Google Cloud, queues, and strict rate limiting
+- **Predictive inventory:** real-time reconciliation with Tiny ERP and replenishment alerts based on sales history
+- **Consulting:** strategic automation to scale margins and operational efficiency`,
     },
     technologies: [
       "NestJS",
-      "React",
       "TypeScript",
-      "Prisma",
-      "Stripe API",
-      "OpenAI",
-      "Claude",
-      "Gemini",
-      "REST APIs",
+      "PHP",
+      "PostgreSQL",
+      "AWS",
+      "Google Cloud",
+      "Mercado Livre API",
+      "Tiny ERP",
     ],
-    media: [
-      {
-        type: "video",
-        src: "/media/projects/hubbia_2.mp4",
-        alt: "Hubbia platform demo",
-      },
-      {
-        type: "video",
-        src: "/media/projects/hubbia_3.mp4",
-        alt: "Hubbia platform demo",
-      },
-      {
-        type: "video",
-        src: "/media/projects/hubbia_4.mp4",
-        alt: "Hubbia platform demo",
-      },
-    ],
+    media: [],
   },
   {
-    id: "software-precisao",
+    id: "gomind",
     type: "fulltime",
-    company: "Software Precisão",
+    employment: "pj",
+    company: "Gomind",
     role: {
-      pt: "Back-End Developer",
-      en: "Back-End Developer",
+      pt: "Tech Lead / Engenheiro de Software Sênior",
+      en: "Tech Lead / Senior Software Engineer",
     },
-    period: { start: "2024-08", end: "2025-07" },
+    period: { start: "2023-10", end: "2025-01" },
     shortDescription: {
-      pt: "Desenvolvimento backend e automações para múltiplos projetos, atuando na construção de APIs, modelagem de banco de dados e integrações com serviços externos.",
-      en: "Backend development and automation across multiple projects, building APIs, designing databases, and integrating external services.",
+      pt: "Trajetória contínua na Gomind (antes Grupo Domini): orquestrador AWS, agente de vendas com IA, promoção a Tech Lead e automação SAP após transferência interna.",
+      en: "Continuous journey at Gomind (formerly Grupo Domini): AWS orchestrator, AI sales agent, promotion to Tech Lead, and SAP automation after an internal transfer.",
     },
     fullDescription: {
-      pt: `Atuei como desenvolvedora backend utilizando Node.js com TypeScript, sendo responsável pela implementação de APIs, regras de negócio e modelagem de banco de dados em diferentes projetos.
+      pt: `Iniciei no Grupo Domini (posteriormente integrado à trajetória Gomind), fui promovido a Tech Lead em seis meses e, após transferência estratégica, assumi a liderança da equipe de backend e automação na Gomind.
 
-Trabalhei no backend do Ondish Foods, além de participar do desenvolvimento de sistemas para uma funerária e uma plataforma para corretores.
+Principais destaques:
 
-No projeto voltado para corretores, fui responsável por toda a estrutura backend, desde a escrita do código até a criação e modelagem do banco de dados. Também implementei a integração de pagamentos utilizando a API do Asaas, desenvolvendo fluxos de cobrança e gerenciamento financeiro.
+- **Orquestrador AWS:** Lambda, EventBridge, API Gateway, SQS e EC2 para agendamento de bots, com redução drástica de custos de infraestrutura
+- **Agente de vendas com IA:** WhatsApp integrado a LLMs e sistemas internos para automatizar conversões
+- **Liderança de squad:** code reviews, mentoria e decisões arquiteturais em operações de alto volume
+- **Automação SAP:** workers integrados ao ERP SAP para fluxos financeiros e logísticos de clientes corporativos
+- **Performance:** redução de latência em processamento pesado em segundo plano e menos erros operacionais manuais`,
+      en: `I started at Grupo Domini (later part of the Gomind journey), was promoted to Tech Lead within six months, and after a strategic transfer took over backend and automation team leadership at Gomind.
 
-Em outro projeto com proposta semelhante a um aplicativo de transporte, utilizei o Amazon Location Service para implementação de funcionalidades relacionadas à geolocalização e mapeamento.
+Key highlights:
 
-Além disso, atuei em frentes de infraestrutura, automação e manutenção:
-
-- MySQL e Sequelize
-- Automação de pipelines CI/CD
-- Monitoramento e manutenção de servidores
-- Automações internas com Python e Selenium
-
-Também participei de reuniões técnicas com clientes e atuei na resolução de problemas em produção, garantindo estabilidade e continuidade dos sistemas.`,
-      en: `I worked as a backend developer using Node.js with TypeScript, being responsible for implementing APIs, business logic, and database modeling across multiple projects.
-
-I contributed to the backend of Ondish Foods and also worked on systems for a funeral services company and a platform for brokers.
-
-In the brokers platform project, I was fully responsible for the backend structure, from writing the code to designing and creating the database. I also implemented payment integration using the Asaas API, building billing flows and financial management logic.
-
-In another project similar to a ride-hailing application, I used Amazon Location Service to implement geolocation and mapping functionalities.
-
-Additionally, I worked across infrastructure, automation, and maintenance:
-
-- MySQL and Sequelize
-- CI/CD pipeline automation
-- Server monitoring and maintenance
-- Internal automation tools using Python and Selenium
-
-I also participated in technical meetings with clients and handled production issue resolution, ensuring system stability and reliability.`,
+- **AWS orchestrator:** Lambda, EventBridge, API Gateway, SQS, and EC2 for bot scheduling with major infrastructure cost reduction
+- **AI sales agent:** WhatsApp integrated with LLMs and internal systems to automate conversions
+- **Squad leadership:** code reviews, mentoring, and architectural decisions for high-volume operations
+- **SAP automation:** workers integrated with SAP ERP for corporate financial and logistics flows
+- **Performance:** lower latency for heavy background processing and fewer manual operational errors`,
     },
     technologies: [
       "Node.js",
       "TypeScript",
-      "MySQL",
-      "Sequelize",
-      "AWS",
-      "Amazon Location Service",
       "Python",
-      "Selenium",
-      "CI/CD",
-      "Asaas API",
+      "AWS Lambda",
+      "SQS",
+      "EventBridge",
+      "API Gateway",
+      "Docker",
+      "Redis",
+      "PostgreSQL",
+      "SAP Integration",
+      "SQL Server",
+      "LLM Integrations",
     ],
+    clients: [{ name: "Gomind", relationship: "direct" }],
     media: [],
   },
   {
@@ -369,83 +273,122 @@ I also participated in technical meetings with clients and handled production is
     type: "freelance",
     company: "Andrinno Software House",
     role: {
-      pt: "Backend Developer",
-      en: "Backend Developer",
+      pt: "Engenheiro de Backend Sênior",
+      en: "Senior Backend Engineer",
     },
-    period: { start: "2024-08", end: "2024-10" },
+    period: { start: "2024-03", end: "2024-10" },
     shortDescription: {
-      pt: "Desenvolvimento de sistema de busca e comparação de passagens aéreas integrado a APIs de parceiros.",
-      en: "Development of a flight search and comparison system integrated with partner APIs.",
+      pt: "APIs RESTful escaláveis, microsserviços de alta concorrência e tuning de PostgreSQL e Redis.",
+      en: "Scalable REST APIs, high-concurrency microservices, and PostgreSQL and Redis performance tuning.",
     },
     fullDescription: {
-      pt: `Desenvolvi um sistema robusto de busca de passagens aéreas integrando APIs como Travellink Wooba e Tk Milhas, permitindo comparação entre diferentes programas de fidelidade.
+      pt: `Construí e mantive APIs RESTful escaláveis e microsserviços preparados para altos volumes de requisições concorrentes.
 
-O foco foi criar uma base backend confiável para consultas complexas, com atenção a:
+Principais destaques:
 
-- Integrações estáveis com APIs de parceiros
-- Processamento eficiente de dados
-- Comparação entre diferentes programas de fidelidade
-- Respostas rápidas para buscas com múltiplas variáveis`,
-      en: `I developed a robust flight search system integrating partner APIs such as Travellink Wooba and Tk Milhas, enabling comparison across different loyalty programs.
+- **APIs e microsserviços:** arquitetura backend para cargas concorrentes elevadas
+- **Bancos de dados:** modelagem relacional e não relacional com tuning de queries e indexação
+- **Baixa latência:** otimização de respostas em cenários de alto throughput`,
+      en: `I built and maintained scalable RESTful APIs and microservices designed for high concurrent request volumes.
 
-The focus was to create a reliable backend foundation for complex queries, with attention to:
+Key highlights:
 
-- Stable integrations with partner APIs
-- Efficient data processing
-- Comparison across different loyalty programs
-- Fast responses for searches with multiple variables`,
+- **APIs and microservices:** backend architecture for heavy concurrent loads
+- **Databases:** relational and non-relational modeling with query and indexing tuning
+- **Low latency:** response optimization under high-throughput scenarios`,
     },
     technologies: [
       "Node.js",
-      "API Integration",
-      "REST",
-      "Backend Architecture",
+      "TypeScript",
+      "Fastify",
+      "Docker",
+      "PostgreSQL",
+      "Redis",
+    ],
+    clients: [{ name: "Andrinno Software House", relationship: "direct" }],
+    media: [],
+  },
+  {
+    id: "devnology-scraping",
+    type: "fulltime",
+    employment: "pj",
+    company: "Devnology",
+    role: {
+      pt: "Especialista em Scraping de Dados e Automação",
+      en: "Data Scraping & Automation Specialist",
+    },
+    period: { start: "2021-01", end: "2023-10" },
+    shortDescription: {
+      pt: "Web scrapers resilientes em larga escala, pipelines de dados e contorno de detecção de bots para clientes corporativos do setor de viagens.",
+      en: "Large-scale resilient web scrapers, data pipelines, and bot-detection bypass for corporate travel-sector clients.",
+    },
+    fullDescription: {
+      pt: `Especializei-me na construção de scrapers velozes e pipelines de dados para grandes clientes corporativos, com regras estritas de performance e resiliência.
+
+Principais destaques:
+
+- **Extração em larga escala:** coleta massiva de dados sob alta concorrência
+- **Contorno de bots:** engenharia reversa em barreiras de frontend e rede (anti-bot avançado)
+- **Automação:** Puppeteer, Selenium e scripts Python/JavaScript em produção
+- **Cloud:** deploy e operação com AWS`,
+      en: `I specialized in building fast scrapers and data pipelines for large corporate clients, with strict performance and resilience requirements.
+
+Key highlights:
+
+- **Large-scale extraction:** massive data collection under high concurrency
+- **Bot bypass:** reverse engineering of frontend and network barriers (advanced anti-bot)
+- **Automation:** Puppeteer, Selenium, and Python/JavaScript scripts in production
+- **Cloud:** deployment and operations on AWS`,
+    },
+    technologies: [
+      "Python",
+      "JavaScript",
+      "Puppeteer",
+      "Selenium",
+      "Web Scraping",
+      "AWS",
+    ],
+    clients: [
+      { name: "Devnology", relationship: "direct" },
+      { name: "123 Milhas", relationship: "indirect" },
+      { name: "MaxMilhas", relationship: "indirect" },
     ],
     media: [],
   },
   {
-    id: "devnology",
+    id: "bbr-barrarey",
     type: "fulltime",
-    company: "Devnology",
+    employment: "clt",
+    company: "BBR / Barrarey",
     role: {
-      pt: "Back-End Developer (RPA)",
-      en: "Back-End Developer (RPA)",
+      pt: "Desenvolvedor de Software Júnior (Desenvolvedor Único)",
+      en: "Junior Software Developer (Sole Developer)",
     },
-    period: { start: "2024-05", end: "2024-08" },
+    period: { start: "2019-07", end: "2021-01" },
     shortDescription: {
-      pt: "Desenvolvimento de automações RPA para emissão de passagens aéreas e extração de dados.",
-      en: "Development of RPA automations for airline ticket issuance and data extraction.",
+      pt: "Único desenvolvedor da empresa: e-commerce, automação Bling ERP em Python e transição do frontend para React.js.",
+      en: "Company's sole developer: e-commerce, Bling ERP automation in Python, and frontend transition to React.js.",
     },
     fullDescription: {
-      pt: `Contribuí para soluções de automação de processos robóticos (RPA) para emissão de passagens das principais companhias aéreas do Brasil, incluindo LATAM, utilizadas pela MaxMilhas.
+      pt: `Atuei como o único desenvolvedor, com responsabilidade ponta a ponta sobre produtos digitais, manutenção e deploy.
 
-Desenvolvi e mantive automações voltadas a processos críticos de operação, incluindo:
+Principais destaques:
 
-- Extração de dados de contas
-- Criação de queries MySQL
-- Correção de bugs
-- Refatoração de sistemas existentes
+- **Autonomia total:** gestão completa do ciclo de desenvolvimento
+- **Automação Bling ERP:** scripts Python para sincronização em tempo real e otimização operacional
+- **Web e e-commerce:** sites institucionais em PHP e evolução para React.js
+- **Banco de dados:** modelagem e operação com MySQL`,
+      en: `I worked as the sole developer with end-to-end ownership of digital products, maintenance, and deployment.
 
-O trabalho foi realizado utilizando Node.js, Python e TypeScript, com foco em estabilidade, manutenção e melhoria contínua das automações.`,
-      en: `I contributed to robotic process automation (RPA) solutions for airline ticket issuance for major Brazilian airlines, including LATAM, used by MaxMilhas.
+Key highlights:
 
-I built and maintained automations for critical operational processes, including:
-
-- Account data extraction
-- MySQL query creation
-- Bug fixes
-- Refactoring existing systems
-
-The work was done using Node.js, Python, and TypeScript, with a focus on stability, maintainability, and continuous improvement of the automations.`,
+- **Full autonomy:** complete ownership of the development lifecycle
+- **Bling ERP automation:** Python scripts for real-time sync and operational optimization
+- **Web and e-commerce:** institutional sites in PHP and evolution toward React.js
+- **Database:** modeling and operations with MySQL`,
     },
-    technologies: [
-      "Node.js",
-      "Python",
-      "TypeScript",
-      "RPA",
-      "MySQL",
-      "GitLab CI/CD",
-    ],
+    technologies: ["Python", "PHP", "React.js", "JavaScript", "Bling ERP", "MySQL"],
+    clients: [{ name: "BBR / Barrarey", relationship: "direct" }],
     media: [],
   },
 ];

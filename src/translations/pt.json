@@ -1,6 +1,6 @@
 {
   "header": {
-    "name": "Andressa Ricardo"
+    "name": "Jefferson Alves"
   },
   "nav": {
     "about": "Sobre",
@@ -13,32 +13,37 @@
   },
   "hero": {
     "greeting": "Olá, eu sou",
-    "name": "Andressa",
-    "role": "Desenvolvedora Fullstack",
-  "description": "Criando soluções digitais modernas com foco em qualidade, eficiência e experiências intuitivas que conectam pessoas e tecnologia.",
+    "name": "Jefferson",
+    "role": "Tech Lead · Engenheiro de Software Sênior",
+    "description": "Arquiteto sistemas de backend de alta performance, agentes de IA e automações em escala — do Go e Rust ao Vue.js e React, com visão 360° de produto e engenharia.",
     "cta": "Entre em contato",
     "download": "Baixar CV"
   },
   "about": {
     "title": "Sobre mim",
-     "p1": "Desenvolvedora de software com experiência em construção de aplicações web e mobile, utilizando React, Next.js, TypeScript e Node.js. Já atuei no desenvolvimento de plataformas completas, incluindo integrações com pagamentos, autenticação, IA e serviços em nuvem.",
-  "p2": "Tenho foco em criar soluções bem estruturadas, escaláveis e com boa experiência de uso, participando desde a concepção até a entrega do produto.",
+    "p1": "Tech Lead e Engenheiro de Software Sênior com histórico em microsserviços nativos em nuvem, integração de agentes de IA, web scraping de alta performance e liderança de squads ágeis.",
+    "p2": "Atuo do backend compilado de baixa latência (Go, Rust) ao frontend moderno (Vue.js, React), passando por ERPs corporativos, orquestração AWS e LLMs que impulsionam conversão e eficiência operacional.",
     "location": "Rio de Janeiro, Brasil",
-    "available": "Disponível para projetos e trabalhos",
+    "available": "Disponível para projetos e oportunidades",
     "skillsTitle": "Habilidades",
-    "photoAlt": "Foto de Andressa"
+    "photoAlt": "Foto de Jefferson Alves"
   },
   "experience": {
     "title": "Experiência",
     "present": "Atual",
     "overview": "Sobre o projeto",
-    "contribution": "Minha atuação",
+    "contribution": "Destaques e atuação",
+    "clients": "Empresas",
+    "clientDirect": "Direto",
+    "clientIndirect": "Indireto",
     "filterAll": "Todos",
     "types": {
       "personal": "Pessoal",
       "fulltime": "Full-time",
       "freelance": "Freelance"
     },
+    "employmentClt": "CLT",
+    "employmentPj": "PJ",
     "technologies": "Tecnologias",
     "gallery": "Galeria",
     "visitSite": "Visitar site",
@@ -49,7 +54,7 @@
     "categories": {
       "frontend": "Frontend",
       "backend": "Backend",
-      "tools": "Ferramentas",
+      "tools": "Ferramentas & Cloud",
       "database": "Database"
     }
   },
@@ -69,7 +74,7 @@
   },
   "contact": {
     "title": "Contato",
-    "subtitle": "Tem um projeto em mente? Vamos conversar.",
+    "subtitle": "Tem um projeto ou vaga em mente? Vamos conversar.",
     "email": "Email",
     "linkedin": "LinkedIn",
     "github": "GitHub",
@@ -80,7 +85,7 @@
     "rights": "Todos os direitos reservados."
   },
   "meta": {
-    "title": "Andressa | Portfolio",
-    "description": "Desenvolvedora de Software"
+    "title": "Jefferson Alves | Portfolio",
+    "description": "Tech Lead e Engenheiro de Software Sênior — Backend, IA e Automação"
   }
 }

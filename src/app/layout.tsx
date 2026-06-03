@@ -17,31 +17,34 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Andressa | Portfolio",
+  title: "Jefferson Alves | Portfolio",
   description:
-    "Desenvolvedora Frontend — Portfolio profissional. React, Next.js, TypeScript.",
+    "Tech Lead e Engenheiro de Software Sênior — Backend, IA, automação e microsserviços em nuvem.",
   keywords: [
-    "frontend developer",
-    "react",
-    "next.js",
-    "typescript",
+    "tech lead",
+    "software engineer",
+    "backend",
+    "go",
+    "rust",
+    "node.js",
+    "ai agents",
     "portfolio",
-    "desenvolvedora frontend",
+    "engenheiro de software",
   ],
-  authors: [{ name: "Andressa" }],
+  authors: [{ name: "Jefferson Alves" }],
   openGraph: {
-    title: "Andressa | Portfolio",
+    title: "Jefferson Alves | Portfolio",
     description:
-      "Desenvolvedora Frontend — Portfolio profissional. React, Next.js, TypeScript.",
+      "Tech Lead e Engenheiro de Software Sênior — Backend, IA, automação e microsserviços em nuvem.",
     type: "website",
     locale: "pt_BR",
     alternateLocale: "en_US",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Andressa | Portfolio",
+    title: "Jefferson Alves | Portfolio",
     description:
-      "Desenvolvedora Frontend — Portfolio profissional. React, Next.js, TypeScript.",
+      "Tech Lead e Engenheiro de Software Sênior — Backend, IA, automação e microsserviços em nuvem.",
   },
   robots: {
     index: true,

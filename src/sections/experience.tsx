@@ -7,6 +7,7 @@ import { SectionHeading } from "@/components/section-heading";
 import { ExperienceDetail } from "@/components/experience-detail";
 import {
   experienceEntries,
+  EMPLOYMENT_BADGE,
   TYPE_BADGE,
   type ExperienceEntry,
   type ExperienceType,
@@ -43,6 +44,9 @@ export function Experience() {
 
   const filterLabel = (key: ExperienceType | "all") =>
     key === "all" ? t.experience.filterAll : t.experience.types[key];
+
+  const employmentLabel = (contract: NonNullable<ExperienceEntry["employment"]>) =>
+    contract === "clt" ? t.experience.employmentClt : t.experience.employmentPj;
 
   return (
     <section id="experience" className="scroll-mt-20 py-16 sm:py-24">
@@ -101,6 +105,24 @@ export function Experience() {
                       {entry.shortDescription[locale]}
                     </p>
 
+                    {/* Clients preview */}
+                    {entry.clients && entry.clients.length > 0 && (
+                      <div className="mt-2.5 flex flex-wrap gap-1.5 pl-5.5">
+                        {entry.clients.slice(0, 3).map((client) => (
+                          <span
+                            key={`${client.name}-${client.relationship}`}
+                            className="rounded-full border border-border px-2.5 py-0.5 text-[11px] font-medium text-muted"
+                          >
+                            {client.name}
+                            <span className="text-foreground/40"> · </span>
+                            {client.relationship === "direct"
+                              ? t.experience.clientDirect
+                              : t.experience.clientIndirect}
+                          </span>
+                        ))}
+                      </div>
+                    )}
+
                     {/* Tech tags — first 4 */}
                     <div className="mt-3 flex flex-wrap gap-1.5 pl-5.5">
                       {entry.technologies.slice(0, 4).map((tech) => (
@@ -121,12 +143,21 @@ export function Experience() {
 
                   {/* Period + indicators */}
                   <div className="flex flex-wrap items-center gap-2 pl-5.5 sm:flex-col sm:items-end sm:pl-0">
-                    {/* Type badge */}
-                    <span
-                      className={`shrink-0 rounded-full px-2.5 py-0.5 text-xs font-semibold ${TYPE_BADGE[entry.type]}`}
-                    >
-                      {t.experience.types[entry.type]}
-                    </span>
+                    <div className="flex flex-wrap items-center justify-end gap-1.5">
+                      {/* Type badge */}
+                      <span
+                        className={`shrink-0 rounded-full px-2.5 py-0.5 text-xs font-semibold ${TYPE_BADGE[entry.type]}`}
+                      >
+                        {t.experience.types[entry.type]}
+                      </span>
+                      {entry.type === "fulltime" && entry.employment && (
+                        <span
+                          className={`shrink-0 rounded-full px-2.5 py-0.5 text-xs font-semibold ${EMPLOYMENT_BADGE[entry.employment]}`}
+                        >
+                          {employmentLabel(entry.employment)}
+                        </span>
+                      )}
+                    </div>
 
                     <time className="shrink-0 text-xs text-muted sm:text-sm">
                       {formatPeriod(entry.period.start, entry.period.end, locale, t.experience.present)}

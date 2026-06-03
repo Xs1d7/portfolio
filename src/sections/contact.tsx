@@ -4,7 +4,7 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { useTranslation } from "@/components/language-provider";
 import { SectionHeading } from "@/components/section-heading";
-import { socials } from "@/data/resume";
+import { EMAIL_ADDRESS, socials } from "@/data/resume";
 
 const ICONS: Record<string, React.ReactNode> = {
   email: (
@@ -27,8 +27,6 @@ const ICONS: Record<string, React.ReactNode> = {
     </svg>
   ),
 };
-
-const EMAIL_ADDRESS = "andressaricardo.developer@gmail.com";
 
 export function Contact() {
   const { t } = useTranslation();

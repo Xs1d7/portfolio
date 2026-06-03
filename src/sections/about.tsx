@@ -28,11 +28,11 @@ export function About() {
             {/* Decorative dot */}
             <div className="absolute -right-2 -top-2 h-4 w-4 rounded-full bg-accent" />
             <Image
-              src="/andressa_picture.jpeg"
+              src="/profile-placeholder.svg"
               alt={t.about.photoAlt}
               width={280}
               height={280}
-              className="relative aspect-square w-full rounded-2xl object-cover"
+              className="relative aspect-square w-full rounded-2xl object-cover bg-foreground/5"
               priority
             />
           </div>
