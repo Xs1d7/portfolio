@@ -16,7 +16,7 @@ const styles = StyleSheet.create({
     lineHeight: 1.4,
   },
   header: {
-    marginBottom: 12,
+    marginBottom: 10,
     borderBottomWidth: 2,
     borderBottomColor: "#1d4ed8",
     paddingBottom: 8,
@@ -54,25 +54,46 @@ const styles = StyleSheet.create({
   summary: {
     fontSize: 9.5,
     color: "#404040",
-    marginBottom: 3,
+    marginBottom: 4,
   },
   narrative: {
-    fontSize: 9,
+    fontSize: 8.5,
     color: "#1d4ed8",
     backgroundColor: "#eff6ff",
-    padding: 8,
+    padding: 7,
     borderRadius: 4,
+    marginTop: 3,
+    marginBottom: 2,
+  },
+  strengthRow: {
+    flexDirection: "row",
+    flexWrap: "wrap",
+    gap: 4,
     marginTop: 4,
+    marginBottom: 2,
+  },
+  strengthPill: {
+    backgroundColor: "#1d4ed8",
+    color: "#ffffff",
+    paddingHorizontal: 7,
+    paddingVertical: 3,
+    borderRadius: 4,
+    fontSize: 7.5,
+    fontFamily: "Helvetica-Bold",
+  },
+  pillarBlock: {
+    marginBottom: 5,
+  },
+  pillarLabel: {
+    fontSize: 8,
+    fontFamily: "Helvetica-Bold",
+    color: "#404040",
     marginBottom: 2,
   },
   skillRow: {
     flexDirection: "row",
     flexWrap: "wrap",
     gap: 4,
-    marginBottom: 3,
-  },
-  skillSection: {
-    marginBottom: 6,
   },
   skillPill: {
     backgroundColor: "#eff6ff",
@@ -83,13 +104,10 @@ const styles = StyleSheet.create({
     fontSize: 7.5,
   },
   expBlock: {
-    marginBottom: 9,
-    paddingBottom: 8,
+    marginBottom: 8,
+    paddingBottom: 7,
     borderBottomWidth: 1,
     borderBottomColor: "#e5e5e5",
-  },
-  expInner: {
-    marginTop: 2,
   },
   expHeader: {
     flexDirection: "row",
@@ -106,12 +124,17 @@ const styles = StyleSheet.create({
     fontSize: 8,
     color: "#525252",
     textAlign: "right",
-    maxWidth: "42%",
+    maxWidth: "44%",
   },
   expRole: {
     fontSize: 8.5,
     color: "#1d4ed8",
-    marginBottom: 4,
+    marginBottom: 3,
+  },
+  expDuration: {
+    fontSize: 7.5,
+    color: "#737373",
+    marginBottom: 3,
   },
   subLabel: {
     fontSize: 7.5,
@@ -123,37 +146,15 @@ const styles = StyleSheet.create({
     letterSpacing: 0.3,
   },
   impactText: {
-    fontSize: 9,
+    fontSize: 8.5,
     color: "#262626",
-    fontFamily: "Helvetica-Bold",
     marginBottom: 2,
   },
   bullet: {
-    fontSize: 8.5,
+    fontSize: 8,
     color: "#404040",
     marginLeft: 6,
     marginBottom: 1.5,
-  },
-  evolutionStep: {
-    marginLeft: 6,
-    marginBottom: 3,
-    paddingLeft: 6,
-    borderLeftWidth: 2,
-    borderLeftColor: "#93c5fd",
-  },
-  evolutionTitle: {
-    fontSize: 8.5,
-    fontFamily: "Helvetica-Bold",
-    color: "#262626",
-  },
-  evolutionMeta: {
-    fontSize: 7.5,
-    color: "#737373",
-    marginBottom: 1,
-  },
-  evolutionHighlight: {
-    fontSize: 8,
-    color: "#404040",
   },
   exitBox: {
     marginTop: 3,
@@ -170,7 +171,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     flexWrap: "wrap",
     gap: 3,
-    marginTop: 3,
+    marginTop: 2,
   },
   techPill: {
     fontSize: 7,
@@ -179,6 +180,18 @@ const styles = StyleSheet.create({
     paddingHorizontal: 4,
     paddingVertical: 2,
     borderRadius: 3,
+  },
+  freelanceBlock: {
+    marginBottom: 7,
+    paddingBottom: 6,
+    borderBottomWidth: 1,
+    borderBottomColor: "#f0f0f0",
+  },
+  freelanceDuration: {
+    fontSize: 7.5,
+    color: "#b45309",
+    fontFamily: "Helvetica-Bold",
+    marginBottom: 2,
   },
   eduBlock: {
     marginBottom: 5,
@@ -197,17 +210,19 @@ export interface ResumePdfLabels {
   name: string;
   sections: {
     summary: string;
+    coreStrengths: string;
     skills: string;
     experience: string;
+    freelances: string;
     education: string;
     courses: string;
     languages: string;
     careerNarrative: string;
     impact: string;
-    evolution: string;
     highlights: string;
     exitReason: string;
     techStack: string;
+    productionTime: string;
   };
 }
 
@@ -216,12 +231,70 @@ interface Props {
   labels: ResumePdfLabels;
 }
 
+function ExperienceBlock({
+  exp,
+  labels,
+  showTypeBadge = true,
+}: {
+  exp: ResumePdfPayload["experiences"][number];
+  labels: ResumePdfLabels;
+  showTypeBadge?: boolean;
+}) {
+  return (
+    <View style={styles.expBlock}>
+      <View style={styles.expHeader}>
+        <Text style={styles.expCompany}>{exp.company}</Text>
+        <Text style={styles.expPeriod}>{exp.period}</Text>
+      </View>
+      <Text style={styles.expRole}>
+        {exp.role}
+        {exp.employmentLabel ? ` · ${exp.employmentLabel}` : ""}
+        {showTypeBadge ? ` · ${exp.typeLabel}` : ""}
+      </Text>
+      <Text style={styles.expDuration}>{exp.duration}</Text>
+
+      <Text style={styles.subLabel}>{labels.sections.impact}</Text>
+      <Text style={styles.impactText}>{exp.impact}</Text>
+
+      {exp.highlights.length > 0 && (
+        <>
+          <Text style={styles.subLabel}>{labels.sections.highlights}</Text>
+          {exp.highlights.map((line, i) => (
+            <Text key={i} style={styles.bullet}>
+              • {line.replace(/^•\s*/, "")}
+            </Text>
+          ))}
+        </>
+      )}
+
+      {exp.exitReason && (
+        <>
+          <Text style={styles.subLabel}>{labels.sections.exitReason}</Text>
+          <View style={styles.exitBox}>
+            <Text style={styles.exitText}>{exp.exitReason}</Text>
+          </View>
+        </>
+      )}
+
+      {exp.technologies.length > 0 && (
+        <>
+          <Text style={styles.subLabel}>{labels.sections.techStack}</Text>
+          <View style={styles.techRow}>
+            {exp.technologies.map((tech) => (
+              <Text key={tech} style={styles.techPill}>
+                {tech}
+              </Text>
+            ))}
+          </View>
+        </>
+      )}
+    </View>
+  );
+}
+
 export function ResumePdfDocument({ data, labels }: Props) {
   return (
-    <Document
-      title={`${labels.name} — CV`}
-      author={labels.name}
-    >
+    <Document title={`${labels.name} — CV`} author={labels.name}>
       <Page size="A4" style={styles.page} wrap>
         <View style={styles.header}>
           <Text style={styles.name}>{labels.name}</Text>
@@ -230,105 +303,94 @@ export function ResumePdfDocument({ data, labels }: Props) {
           <Text style={styles.contactRow}>{data.contact.linkedin}</Text>
           <Text style={styles.contactRow}>{data.contact.github}</Text>
           <Text style={styles.contactRow}>{data.contact.location}</Text>
-          <Text style={styles.focusBadge}>{data.focusLabel}</Text>
+          {data.focusLabel && (
+            <Text style={styles.focusBadge}>{data.focusLabel}</Text>
+          )}
         </View>
 
         <Text style={styles.sectionTitle}>{labels.sections.summary}</Text>
         <Text style={styles.summary}>{data.summary}</Text>
-        <Text style={styles.subLabel}>{labels.sections.careerNarrative}</Text>
-        <Text style={styles.narrative}>{data.careerNarrative}</Text>
 
-        {data.skills.length > 0 && (
-          <View style={styles.skillSection} wrap={false}>
-            <Text style={styles.sectionTitle}>{labels.sections.skills}</Text>
-            <View style={styles.skillRow}>
-              {data.skills.map((skill) => (
-                <Text key={skill.name} style={styles.skillPill}>
-                  {skill.name}
+        {data.coreStrengths.length > 0 && (
+          <>
+            <Text style={styles.subLabel}>{labels.sections.coreStrengths}</Text>
+            <View style={styles.strengthRow}>
+              {data.coreStrengths.map((s) => (
+                <Text key={s} style={styles.strengthPill}>
+                  {s}
                 </Text>
               ))}
             </View>
+          </>
+        )}
+
+        <Text style={styles.subLabel}>{labels.sections.careerNarrative}</Text>
+        <Text style={styles.narrative}>{data.careerNarrative}</Text>
+
+        {data.skillPillars.length > 0 && (
+          <View>
+            <Text style={styles.sectionTitle}>{labels.sections.skills}</Text>
+            {data.skillPillars.map((pillar) => (
+              <View key={pillar.key} style={styles.pillarBlock}>
+                <Text style={styles.pillarLabel}>{pillar.label}</Text>
+                <View style={styles.skillRow}>
+                  {pillar.skills.map((skill) => (
+                    <Text key={skill} style={styles.skillPill}>
+                      {skill}
+                    </Text>
+                  ))}
+                </View>
+              </View>
+            ))}
           </View>
         )}
 
         {data.experiences.length > 0 && (
           <>
-            <Text style={styles.sectionTitle}>{labels.sections.experience}</Text>
+            <Text style={styles.sectionTitle}>
+              {labels.sections.experience}
+            </Text>
             {data.experiences.map((exp) => (
-              <View
-                key={`${exp.company}-${exp.period}-${exp.role}`}
-                style={styles.expBlock}
-                wrap={false}
-              >
+              <ExperienceBlock
+                key={exp.id}
+                exp={exp}
+                labels={labels}
+              />
+            ))}
+          </>
+        )}
+
+        {data.freelanceProjects.length > 0 && (
+          <>
+            <Text style={styles.sectionTitle}>
+              {labels.sections.freelances}
+            </Text>
+            {data.freelanceProjects.map((project) => (
+              <View key={project.id} style={styles.freelanceBlock}>
                 <View style={styles.expHeader}>
-                  <Text style={styles.expCompany}>{exp.company}</Text>
-                  <Text style={styles.expPeriod}>{exp.period}</Text>
+                  <Text style={styles.expCompany}>{project.company}</Text>
                 </View>
-                <View style={styles.expInner}>
-                  <Text style={styles.expRole}>
-                    {exp.role}
-                    {exp.employmentLabel ? ` · ${exp.employmentLabel}` : ""}
-                    {" · "}
-                    {exp.typeLabel}
-                  </Text>
-
-                  <Text style={styles.subLabel}>{labels.sections.impact}</Text>
-                  <Text style={styles.impactText}>{exp.impact}</Text>
-
-                  {exp.evolution.length > 0 && (
-                    <>
-                      <Text style={styles.subLabel}>{labels.sections.evolution}</Text>
-                      {exp.evolution.map((step) => (
-                        <View key={step.step} style={styles.evolutionStep} wrap={false}>
-                          <Text style={styles.evolutionTitle}>
-                            {step.step}. {step.role}
-                          </Text>
-                          <Text style={styles.evolutionMeta}>
-                            {step.period} ({step.duration})
-                          </Text>
-                          {step.highlight ? (
-                            <Text style={styles.evolutionHighlight}>
-                              {step.highlight}
-                            </Text>
-                          ) : null}
-                        </View>
-                      ))}
-                    </>
-                  )}
-
-                  {exp.highlights.length > 0 && (
-                    <>
-                      <Text style={styles.subLabel}>{labels.sections.highlights}</Text>
-                      {exp.highlights.map((line, i) => (
-                        <Text key={i} style={styles.bullet}>
-                          • {line.replace(/^•\s*/, "")}
-                        </Text>
-                      ))}
-                    </>
-                  )}
-
-                  {exp.exitReason && (
-                    <>
-                      <Text style={styles.subLabel}>{labels.sections.exitReason}</Text>
-                      <View style={styles.exitBox}>
-                        <Text style={styles.exitText}>{exp.exitReason}</Text>
-                      </View>
-                    </>
-                  )}
-
-                  {exp.technologies.length > 0 && (
-                    <>
-                      <Text style={styles.subLabel}>{labels.sections.techStack}</Text>
-                      <View style={styles.techRow}>
-                        {exp.technologies.map((tech) => (
-                          <Text key={tech} style={styles.techPill}>
-                            {tech}
-                          </Text>
-                        ))}
-                      </View>
-                    </>
-                  )}
-                </View>
+                <Text style={styles.expRole}>{project.role}</Text>
+                <Text style={styles.freelanceDuration}>
+                  {labels.sections.productionTime}: {project.productionDuration}
+                </Text>
+                <Text style={styles.subLabel}>{labels.sections.impact}</Text>
+                <Text style={styles.impactText}>{project.impact}</Text>
+                {project.highlights.length > 0 &&
+                  project.highlights.map((line, i) => (
+                    <Text key={i} style={styles.bullet}>
+                      • {line.replace(/^•\s*/, "")}
+                    </Text>
+                  ))}
+                {project.technologies.length > 0 && (
+                  <View style={styles.techRow}>
+                    {project.technologies.map((tech) => (
+                      <Text key={tech} style={styles.techPill}>
+                        {tech}
+                      </Text>
+                    ))}
+                  </View>
+                )}
               </View>
             ))}
           </>

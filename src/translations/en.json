@@ -21,13 +21,11 @@
     "download": "Download CV"
   },
   "about": {
-    "title": "About me",
     "p1": "Tech Lead and Senior Software Engineer with a track record in cloud-native microservices, AI agent integration, high-performance web scraping, and agile squad leadership.",
     "p2": "I work from low-latency compiled backends (Go, Rust) to modern frontends (Vue.js, React), including corporate ERPs, AWS orchestration, and LLMs that drive conversion and operational efficiency.",
     "location": "Rio de Janeiro, Brazil",
     "available": "Available for projects and opportunities",
-    "skillsTitle": "Skills",
-    "photoAlt": "Photo of Jefferson Alves"
+    "skillsTitle": "Skills"
   },
   "experience": {
     "title": "Experience",
@@ -119,9 +117,10 @@
     "toggleOpen": "Resume PDF",
     "toggleClose": "Hide options",
     "title": "Export resume as PDF",
-    "subtitle": "Generates an up-to-date PDF from this portfolio data. Pick a job focus to highlight the most relevant experience and skills.",
+    "subtitle": "Generates a PDF with career history (one block per role), freelance projects, and skills in automation, full-stack, and AI/data. Full version includes freelances by default.",
     "roleLabel": "Job focus",
     "techLabel": "Technologies (optional)",
+    "includeFreelances": "Include freelance projects",
     "download": "Download PDF",
     "generating": "Generating PDF…",
     "error": "Could not generate the PDF. Please try again.",
@@ -148,17 +147,26 @@
     },
     "sections": {
       "summary": "Summary",
+      "coreStrengths": "Core strengths",
       "skills": "Skills",
-      "experience": "Experience",
+      "experience": "Professional experience",
+      "freelances": "Freelance projects",
       "education": "Education",
       "courses": "Certifications",
       "languages": "Languages",
-      "careerNarrative": "Growth trajectory",
-      "impact": "Primary impact",
-      "evolution": "Role roadmap",
-      "highlights": "Technical highlights",
+      "careerNarrative": "Career path",
+      "impact": "Impact",
+      "highlights": "Highlights",
       "exitReason": "Reason for leaving",
-      "techStack": "Technologies"
+      "techStack": "Technologies",
+      "productionTime": "Production time"
+    },
+    "skillPillars": {
+      "fullstack": "Full-stack",
+      "automation": "Automation & RPA",
+      "aiData": "AI & Data",
+      "infra": "Infra & Databases",
+      "other": "Other"
     }
   }
 }

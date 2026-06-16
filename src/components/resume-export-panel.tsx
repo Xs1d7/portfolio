@@ -16,6 +16,7 @@ export function ResumeExportPanel() {
   const [open, setOpen] = useState(false);
   const [roleFocus, setRoleFocus] = useState<RoleFocus>("full");
   const [techFocus, setTechFocus] = useState<TechFocus[]>([]);
+  const [includeFreelances, setIncludeFreelances] = useState(true);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -34,22 +35,29 @@ export function ResumeExportPanel() {
         import("@/components/resume-pdf-document"),
       ]);
 
-      const data = buildResumePdfPayload(locale, roleFocus, techFocus, {
-        present: t.experience.present,
-        types: t.experience.types,
-        employment: {
-          clt: t.experience.employmentClt,
-          pj: t.experience.employmentPj,
+      const data = buildResumePdfPayload(
+        locale,
+        roleFocus,
+        techFocus,
+        {
+          present: t.experience.present,
+          types: t.experience.types,
+          employment: {
+            clt: t.experience.employmentClt,
+            pj: t.experience.employmentPj,
+          },
+          languageLevels: {
+            native: t.languages.native,
+            fluent: t.languages.fluent,
+            intermediate: t.languages.intermediate,
+            basic: t.languages.basic,
+          },
+          location: t.about.location,
+          focusPrefix: t.resumeExport.focusPrefix,
+          skillPillars: t.resumeExport.skillPillars,
         },
-        languageLevels: {
-          native: t.languages.native,
-          fluent: t.languages.fluent,
-          intermediate: t.languages.intermediate,
-          basic: t.languages.basic,
-        },
-        location: t.about.location,
-        focusPrefix: t.resumeExport.focusPrefix,
-      });
+        { includeFreelances },
+      );
 
       const labels = {
         name: t.header.name,
@@ -140,7 +148,10 @@ export function ResumeExportPanel() {
                 <button
                   key={key}
                   type="button"
-                  onClick={() => setRoleFocus(key)}
+                  onClick={() => {
+                    setRoleFocus(key);
+                    if (key === "full") setIncludeFreelances(true);
+                  }}
                   className={`rounded-full px-3 py-1.5 text-xs font-medium transition-colors ${
                     roleFocus === key
                       ? "bg-accent text-white"
@@ -174,6 +185,18 @@ export function ResumeExportPanel() {
               ))}
             </div>
           </div>
+
+          <label className="mt-4 flex cursor-pointer items-center gap-2.5">
+            <input
+              type="checkbox"
+              checked={includeFreelances}
+              onChange={(e) => setIncludeFreelances(e.target.checked)}
+              className="h-4 w-4 rounded border-border text-accent focus:ring-accent"
+            />
+            <span className="text-xs text-muted">
+              {t.resumeExport.includeFreelances}
+            </span>
+          </label>
 
           <button
             type="button"
@@ -209,7 +232,9 @@ export function ResumeExportPanel() {
           </button>
 
           {error && (
-            <p className="mt-2 text-xs text-red-600 dark:text-red-400">{error}</p>
+            <p className="mt-2 text-xs text-red-600 dark:text-red-400">
+              {error}
+            </p>
           )}
         </div>
       )}

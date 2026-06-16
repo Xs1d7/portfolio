@@ -21,13 +21,11 @@
     "download": "Baixar CV"
   },
   "about": {
-    "title": "Sobre mim",
     "p1": "Tech Lead e Engenheiro de Software Sênior com histórico em microsserviços nativos em nuvem, integração de agentes de IA, web scraping de alta performance e liderança de squads ágeis.",
     "p2": "Atuo do backend compilado de baixa latência (Go, Rust) ao frontend moderno (Vue.js, React), passando por ERPs corporativos, orquestração AWS e LLMs que impulsionam conversão e eficiência operacional.",
     "location": "Rio de Janeiro, Brasil",
     "available": "Disponível para projetos e oportunidades",
-    "skillsTitle": "Habilidades",
-    "photoAlt": "Foto de Jefferson Alves"
+    "skillsTitle": "Habilidades"
   },
   "experience": {
     "title": "Experiência",
@@ -119,9 +117,10 @@
     "toggleOpen": "Currículo PDF",
     "toggleClose": "Ocultar opções",
     "title": "Exportar currículo em PDF",
-    "subtitle": "Gera um PDF atualizado com os dados deste portfólio. Escolha o foco da vaga para destacar experiências e skills mais relevantes.",
+    "subtitle": "Gera um PDF com carreira (um bloco por cargo), projetos freelance e competências em automação, full-stack e IA/dados. Na versão Completa, os freelas entram por padrão.",
     "roleLabel": "Foco da vaga",
     "techLabel": "Tecnologias (opcional)",
+    "includeFreelances": "Incluir projetos freelance",
     "download": "Baixar PDF",
     "generating": "Gerando PDF…",
     "error": "Não foi possível gerar o PDF. Tente novamente.",
@@ -148,17 +147,26 @@
     },
     "sections": {
       "summary": "Resumo",
+      "coreStrengths": "Principais forças",
       "skills": "Competências",
-      "experience": "Experiência",
+      "experience": "Experiência profissional",
+      "freelances": "Projetos freelance",
       "education": "Formação",
       "courses": "Certificações",
       "languages": "Idiomas",
-      "careerNarrative": "Trajetória de evolução",
-      "impact": "Impacto principal",
-      "evolution": "Roadmap de cargos",
-      "highlights": "Destaques técnicos",
+      "careerNarrative": "Trajetória",
+      "impact": "Impacto",
+      "highlights": "Destaques",
       "exitReason": "Motivo da saída",
-      "techStack": "Tecnologias"
+      "techStack": "Tecnologias",
+      "productionTime": "Tempo de produção"
+    },
+    "skillPillars": {
+      "fullstack": "Full-stack",
+      "automation": "Automação & RPA",
+      "aiData": "IA & Dados",
+      "infra": "Infra & Banco de dados",
+      "other": "Outras"
     }
   }
 }

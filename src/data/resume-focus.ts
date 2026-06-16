@@ -1,5 +1,6 @@
 import {
-  experienceEntries,
+  getFreelanceEntries,
+  getJourneyEntries,
   type ExperienceEntry,
 } from "@/data/experience";
 import {
@@ -11,6 +12,10 @@ import {
   type Skill,
 } from "@/data/resume";
 import type { Locale } from "@/components/language-provider";
+import {
+  expandExperienceSteps,
+  sortExperienceSteps,
+} from "@/lib/experience-steps";
 import {
   formatMonthRange,
   formatTenureDuration,
@@ -92,11 +97,41 @@ export const EXPERIENCE_FOCUS_TAGS: Record<string, (RoleFocus | TechFocus)[]> = 
   "bbr-toys": ["fullstack", "frontend", "backend"],
 };
 
+type SkillPillarKey = "fullstack" | "automation" | "aiData" | "infra" | "other";
+
+const SKILL_PILLAR_MAP: Record<string, SkillPillarKey> = {
+  TypeScript: "fullstack",
+  "React.js": "fullstack",
+  "Vue.js": "fullstack",
+  "Next.js": "fullstack",
+  JavaScript: "fullstack",
+  "HTML & CSS": "fullstack",
+  "Node.js": "fullstack",
+  NestJS: "fullstack",
+  Fastify: "fullstack",
+  "C# (.NET)": "fullstack",
+  "REST APIs": "fullstack",
+  Python: "automation",
+  "Web Scraping & RPA": "automation",
+  "LLM & AI Agents": "aiData",
+  Go: "infra",
+  Rust: "infra",
+  AWS: "infra",
+  Docker: "infra",
+  "Git & GitHub": "infra",
+  "CI/CD": "infra",
+  PostgreSQL: "infra",
+  MySQL: "infra",
+  Redis: "infra",
+  "SQL Server": "infra",
+};
+
 const ROLE_PROFILE: Record<
   RoleFocus,
   {
     headline: { pt: string; en: string };
     summary: { pt: string; en: string };
+    coreStrengths: { pt: string[]; en: string[] };
     skillCategories: Skill["category"][];
   }
 > = {
@@ -106,8 +141,12 @@ const ROLE_PROFILE: Record<
       en: "Tech Lead · Senior Software Engineer",
     },
     summary: {
-      pt: "Tech Lead e Engenheiro Sênior com visão 360°: backend de alta performance (Go, Rust, Node, Python), frontend moderno, RPA, scraping em escala, agentes de IA e arquitetura em nuvem (AWS).",
-      en: "Tech Lead and Senior Engineer with a 360° view: high-performance backends (Go, Rust, Node, Python), modern frontends, RPA, large-scale scraping, AI agents, and cloud architecture (AWS).",
+      pt: "Tech Lead e Engenheiro Sênior especializado em automação de processos e software sob medida. Atuação full-stack, análise de dados e IA aplicada (LLMs, agentes), com backends de alta performance (Go, Rust, Python, Node) e cloud AWS. MBA em IA, Data Science e Big Data (PUCRS, em andamento).",
+      en: "Tech Lead and Senior Engineer specialized in process automation and tailored software. Full-stack delivery, applied data analysis and AI (LLMs, agents), with high-performance backends (Go, Rust, Python, Node) and AWS cloud. MBA in AI, Data Science and Big Data (PUCRS, in progress).",
+    },
+    coreStrengths: {
+      pt: ["Automação & RPA", "Full-stack", "IA & Dados", "Cloud AWS"],
+      en: ["Automation & RPA", "Full-stack", "AI & Data", "AWS Cloud"],
     },
     skillCategories: ["frontend", "backend", "tools", "database"],
   },
@@ -117,8 +156,12 @@ const ROLE_PROFILE: Record<
       en: "Senior Full-Stack Engineer",
     },
     summary: {
-      pt: "Entrega ponta a ponta com Vue.js, React, C# (.NET), Node.js e TypeScript — do frontend responsivo a APIs e microsserviços escaláveis.",
-      en: "End-to-end delivery with Vue.js, React, C# (.NET), Node.js, and TypeScript — from responsive frontends to scalable APIs and microservices.",
+      pt: "Entrega ponta a ponta com Vue.js, React, C# (.NET), Node.js e TypeScript — do frontend responsivo a APIs e microsserviços escaláveis, com base sólida em automação e integrações.",
+      en: "End-to-end delivery with Vue.js, React, C# (.NET), Node.js, and TypeScript — from responsive frontends to scalable APIs and microservices, with a strong automation and integration background.",
+    },
+    coreStrengths: {
+      pt: ["Full-stack", "APIs & integrações", "Automação", "Cloud AWS"],
+      en: ["Full-stack", "APIs & integrations", "Automation", "AWS Cloud"],
     },
     skillCategories: ["frontend", "backend", "database", "tools"],
   },
@@ -131,6 +174,10 @@ const ROLE_PROFILE: Record<
       pt: "Especialista em interfaces modernas com Vue.js, React, Next.js e TypeScript — foco em UX, performance e integração com APIs.",
       en: "Specialist in modern interfaces with Vue.js, React, Next.js, and TypeScript — focused on UX, performance, and API integration.",
     },
+    coreStrengths: {
+      pt: ["Frontend moderno", "TypeScript", "Performance", "Integração APIs"],
+      en: ["Modern frontend", "TypeScript", "Performance", "API integration"],
+    },
     skillCategories: ["frontend", "tools"],
   },
   backend: {
@@ -142,6 +189,10 @@ const ROLE_PROFILE: Record<
       pt: "Backend de alta performance com Go, Rust, Node.js, Python e NestJS — microsserviços, APIs REST, filas, bancos relacionais e arquitetura em AWS.",
       en: "High-performance backends with Go, Rust, Node.js, Python, and NestJS — microservices, REST APIs, queues, relational databases, and AWS architecture.",
     },
+    coreStrengths: {
+      pt: ["Backends compilados", "APIs & microsserviços", "Alta escala", "AWS"],
+      en: ["Compiled backends", "APIs & microservices", "High scale", "AWS"],
+    },
     skillCategories: ["backend", "database", "tools"],
   },
   rpa: {
@@ -150,8 +201,12 @@ const ROLE_PROFILE: Record<
       en: "Senior Automation & RPA Engineer",
     },
     summary: {
-      pt: "Automação avançada, web scraping em larga escala, engenharia reversa (anti-bot), integração SAP e orquestração de processos críticos em produção.",
-      en: "Advanced automation, large-scale web scraping, reverse engineering (anti-bot), SAP integration, and orchestration of critical production processes.",
+      pt: "Especialista em automação avançada — web scraping em larga escala, engenharia reversa (anti-bot), RPA, integração SAP e orquestração de processos críticos em produção. Diferencial construído ao longo da carreira em CLT, PJ e projetos freelance.",
+      en: "Specialist in advanced automation — large-scale web scraping, reverse engineering (anti-bot), RPA, SAP integration, and orchestration of critical production processes. Core strength built across full-time roles and freelance projects.",
+    },
+    coreStrengths: {
+      pt: ["Automação & RPA", "Scraping em escala", "Integrações", "Produção crítica"],
+      en: ["Automation & RPA", "Large-scale scraping", "Integrations", "Mission-critical"],
     },
     skillCategories: ["backend", "tools"],
   },
@@ -164,16 +219,24 @@ const ROLE_PROFILE: Record<
       pt: "Liderança técnica de squads, arquitetura de sistemas, code reviews e entrega de soluções escaláveis em ambientes de alto volume e alta criticidade.",
       en: "Technical squad leadership, systems architecture, code reviews, and delivery of scalable solutions in high-volume, mission-critical environments.",
     },
+    coreStrengths: {
+      pt: ["Liderança técnica", "Arquitetura", "Squads ágeis", "Entrega em escala"],
+      en: ["Technical leadership", "Architecture", "Agile squads", "Scale delivery"],
+    },
     skillCategories: ["backend", "tools", "database"],
   },
   ai: {
     headline: {
-      pt: "Engenheiro de Software · IA & Agentes",
-      en: "Software Engineer · AI & Agents",
+      pt: "Engenheiro de Software · IA, Dados & Agentes",
+      en: "Software Engineer · AI, Data & Agents",
     },
     summary: {
-      pt: "Arquitetura de agentes de IA, orquestração de LLMs, pipelines generativos e produtos SaaS com foco em conversão e automação inteligente.",
-      en: "AI agent architecture, LLM orchestration, generative pipelines, and SaaS products focused on conversion and intelligent automation.",
+      pt: "Arquitetura de agentes de IA, orquestração de LLMs, pipelines generativos e análise de dados aplicada — produtos SaaS e automação inteligente com foco em conversão e eficiência operacional. MBA PUCRS em IA, Data Science e Big Data.",
+      en: "AI agent architecture, LLM orchestration, generative pipelines, and applied data analysis — SaaS products and intelligent automation focused on conversion and operational efficiency. PUCRS MBA in AI, Data Science and Big Data.",
+    },
+    coreStrengths: {
+      pt: ["IA & LLMs", "Análise de dados", "Agentes", "Automação inteligente"],
+      en: ["AI & LLMs", "Data analysis", "Agents", "Intelligent automation"],
     },
     skillCategories: ["backend", "tools"],
   },
@@ -221,8 +284,7 @@ export function experienceMatchesFocus(
     (roleFocus === "rpa" && tags.includes("scraping"));
 
   const techOk =
-    techFocus.length === 0 ||
-    techFocus.some((t) => tags.includes(t));
+    techFocus.length === 0 || techFocus.some((t) => tags.includes(t));
 
   return roleOk && techOk;
 }
@@ -236,8 +298,7 @@ export function skillMatchesFocus(
 
   const techTags = SKILL_TECH_TAGS[skill.name] ?? [];
   const techOk =
-    techFocus.length === 0 ||
-    techFocus.some((t) => techTags.includes(t));
+    techFocus.length === 0 || techFocus.some((t) => techTags.includes(t));
 
   if (techFocus.length > 0) return techOk;
 
@@ -245,42 +306,52 @@ export function skillMatchesFocus(
   return profile.skillCategories.includes(skill.category);
 }
 
-export interface PdfEvolutionStep {
-  step: number;
-  role: string;
+export interface PdfExperienceItem {
+  id: string;
   company: string;
+  role: string;
   period: string;
   duration: string;
-  highlight: string;
-}
-
-export interface PdfExperienceItem {
-  company: string;
-  role: string;
-  period: string;
   typeLabel: string;
   employmentLabel?: string;
   impact: string;
-  evolution: PdfEvolutionStep[];
   highlights: string[];
   exitReason?: string;
   technologies: string[];
+}
+
+export interface PdfFreelanceItem {
+  id: string;
+  company: string;
+  role: string;
+  productionDuration: string;
+  impact: string;
+  highlights: string[];
+  technologies: string[];
+}
+
+export interface SkillPillarGroup {
+  key: SkillPillarKey;
+  label: string;
+  skills: string[];
 }
 
 export interface ResumePdfPayload {
   locale: Locale;
   headline: string;
   summary: string;
+  coreStrengths: string[];
   careerNarrative: string;
-  focusLabel: string;
+  focusLabel: string | null;
   contact: {
     email: string;
     linkedin: string;
     github: string;
     location: string;
   };
-  skills: { name: string; level: number }[];
+  skillPillars: SkillPillarGroup[];
   experiences: PdfExperienceItem[];
+  freelanceProjects: PdfFreelanceItem[];
   education: { institution: string; degree: string; field: string; period: string }[];
   courses: { name: string; institution: string; year: string }[];
   languages: { name: string; level: string }[];
@@ -295,65 +366,112 @@ function bulletsFromDescription(text: string, max: number): string[] {
     .slice(0, max);
 }
 
-function buildEvolution(
-  entry: ExperienceEntry,
-  locale: Locale,
-  presentLabel: string,
-): PdfEvolutionStep[] {
-  if (!entry.tenures?.length) return [];
+function buildCareerNarrative(stepCount: number, locale: Locale): string {
+  if (locale === "pt") {
+    return `${stepCount} etapas de carreira documentadas — evolução de Aprendiz a Tech Lead, com automação, full-stack, dados/IA e entrega em produção em escala.`;
+  }
+  return `${stepCount} documented career stages — from Apprentice to Tech Lead, with automation, full-stack, data/AI, and production delivery at scale.`;
+}
 
-  return entry.tenures.map((t, index) => ({
-    step: index + 1,
-    role: t.role[locale],
-    company: t.company,
+function buildSkillPillars(
+  filteredSkills: Skill[],
+  pillarLabels: Record<SkillPillarKey, string>,
+): SkillPillarGroup[] {
+  const buckets: Record<SkillPillarKey, string[]> = {
+    fullstack: [],
+    automation: [],
+    aiData: [],
+    infra: [],
+    other: [],
+  };
+
+  for (const skill of filteredSkills) {
+    const pillar = SKILL_PILLAR_MAP[skill.name] ?? "other";
+    buckets[pillar].push(skill.name);
+  }
+
+  const order: SkillPillarKey[] = [
+    "fullstack",
+    "automation",
+    "aiData",
+    "infra",
+    "other",
+  ];
+
+  return order
+    .filter((key) => buckets[key].length > 0)
+    .map((key) => ({
+      key,
+      label: pillarLabels[key],
+      skills: buckets[key],
+    }));
+}
+
+function stepToPdfExperience(
+  step: ReturnType<typeof expandExperienceSteps>[number],
+  locale: Locale,
+  labels: {
+    present: string;
+    types: Record<ExperienceEntry["type"], string>;
+    employment: { clt: string; pj: string };
+  },
+): PdfExperienceItem {
+  const { entry } = step;
+  const isLastTenure =
+    step.tenureIndex != null && entry.tenures
+      ? step.tenureIndex === entry.tenures.length - 1
+      : true;
+
+  const impact = stripMarkdown(step.summary[locale]);
+  const highlights = bulletsFromDescription(entry.fullDescription[locale], 3);
+
+  return {
+    id: step.id,
+    company: step.company,
+    role: step.role[locale],
     period: formatMonthRange(
-      t.period.start,
-      t.period.end,
+      step.period.start,
+      step.period.end,
       locale,
-      presentLabel,
+      labels.present,
     ),
     duration: formatTenureDuration(
-      t.period.start,
-      t.period.end,
+      step.period.start,
+      step.period.end,
       locale,
-      presentLabel,
+      labels.present,
     ),
-    highlight: t.highlight ? stripMarkdown(t.highlight[locale]) : "",
-  }));
+    typeLabel: labels.types[entry.type],
+    employmentLabel:
+      entry.type === "fulltime" && entry.employment
+        ? labels.employment[entry.employment]
+        : undefined,
+    impact,
+    highlights: highlights.length > 0 ? highlights : [],
+    exitReason:
+      isLastTenure && entry.exitReason
+        ? entry.exitReason[locale]
+        : undefined,
+    technologies: entry.technologies.slice(0, 8),
+  };
 }
 
-function buildHighlights(entry: ExperienceEntry, locale: Locale): string[] {
-  const lines: string[] = [];
-
-  lines.push(...bulletsFromDescription(entry.fullDescription[locale], 5));
-
-  if (lines.length === 0) {
-    lines.push(stripMarkdown(entry.shortDescription[locale]));
-  }
-
-  const seen = new Set<string>();
-  return lines.filter((line) => {
-    if (seen.has(line)) return false;
-    seen.add(line);
-    return true;
-  }).slice(0, 5);
-}
-
-function buildCareerNarrative(
-  entries: ExperienceEntry[],
+function freelanceToPdfItem(
+  entry: ExperienceEntry,
   locale: Locale,
-): string {
-  const withTenures = entries.filter((e) => (e.tenures?.length ?? 0) > 0);
-  const roleSteps = withTenures.reduce(
-    (acc, e) => acc + (e.tenures?.length ?? 0),
-    0,
-  );
-  const promotions = withTenures.length;
-
-  if (locale === "pt") {
-    return `Trajetória com evolução contínua: ${roleSteps} etapas de cargo documentadas em ${promotions} empresas, com promoções por impacto técnico, liderança progressiva e stack ampliado (Python → Node/Go/Rust → IA e cloud AWS).`;
-  }
-  return `Career path with continuous growth: ${roleSteps} documented role stages across ${promotions} companies, with promotions driven by technical impact, progressive leadership, and an expanding stack (Python → Node/Go/Rust → AI and AWS cloud).`;
+): PdfFreelanceItem {
+  return {
+    id: entry.id,
+    company: entry.company,
+    role: entry.role[locale],
+    productionDuration:
+      entry.productionDuration?.[locale] ?? "—",
+    impact:
+      entry.recruiterImpact?.[locale] ??
+      stripMarkdown(entry.shortDescription[locale]),
+    highlights: bulletsFromDescription(entry.fullDescription[locale], 3),
+    technologies: entry.technologies.slice(0, 6),
+  };
 }
 
 export function buildResumePdfPayload(
@@ -367,34 +485,46 @@ export function buildResumePdfPayload(
     languageLevels: Record<string, string>;
     location: string;
     focusPrefix: string;
+    skillPillars: Record<SkillPillarKey, string>;
   },
+  options?: { includeFreelances?: boolean },
 ): ResumePdfPayload {
   const profile = ROLE_PROFILE[roleFocus];
+  const includeFreelances = options?.includeFreelances ?? roleFocus === "full";
 
-  const filteredExperiences = experienceEntries
-    .filter(
-      (e) =>
-        e.type !== "freelance" &&
-        e.period &&
+  const careerSteps = sortExperienceSteps(
+    expandExperienceSteps(
+      getJourneyEntries().filter((e) =>
         experienceMatchesFocus(e, roleFocus, techFocus),
-    )
-    .sort((a, b) =>
-      (b.period?.start ?? "").localeCompare(a.period?.start ?? ""),
-    );
+      ),
+    ),
+    "desc",
+  );
 
   const filteredSkills = skills
     .filter((s) => skillMatchesFocus(s, roleFocus, techFocus))
     .sort((a, b) => b.level - a.level);
 
+  const freelanceProjects =
+    includeFreelances
+      ? getFreelanceEntries()
+          .filter((e) => experienceMatchesFocus(e, roleFocus, techFocus))
+          .map((e) => freelanceToPdfItem(e, locale))
+      : [];
+
   const techPart =
     techFocus.length > 0 ? ` + ${techFocus.join(", ")}` : "";
-  const focusLabel = `${labels.focusPrefix}: ${roleFocus}${techPart}`;
+  const focusLabel =
+    roleFocus === "full" && techFocus.length === 0
+      ? null
+      : `${labels.focusPrefix}: ${roleFocus}${techPart}`;
 
   return {
     locale,
     headline: profile.headline[locale],
     summary: profile.summary[locale],
-    careerNarrative: buildCareerNarrative(filteredExperiences, locale),
+    coreStrengths: profile.coreStrengths[locale],
+    careerNarrative: buildCareerNarrative(careerSteps.length, locale),
     focusLabel,
     contact: {
       email: EMAIL_ADDRESS,
@@ -402,34 +532,21 @@ export function buildResumePdfPayload(
       github: "github.com/Xs1d7",
       location: labels.location,
     },
-    skills: filteredSkills.map((s) => ({ name: s.name, level: s.level })),
-    experiences: filteredExperiences.map((entry) => ({
-      company: entry.company,
-      role: entry.role[locale],
-      period: formatMonthRange(
-        entry.period!.start,
-        entry.period!.end,
-        locale,
-        labels.present,
-      ),
-      typeLabel: labels.types[entry.type],
-      employmentLabel:
-        entry.type === "fulltime" && entry.employment
-          ? labels.employment[entry.employment]
-          : undefined,
-      impact:
-        entry.recruiterImpact?.[locale] ??
-        stripMarkdown(entry.shortDescription[locale]),
-      evolution: buildEvolution(entry, locale, labels.present),
-      highlights: buildHighlights(entry, locale),
-      exitReason: entry.exitReason?.[locale],
-      technologies: entry.technologies,
-    })),
+    skillPillars: buildSkillPillars(filteredSkills, labels.skillPillars),
+    experiences: careerSteps.map((step) =>
+      stepToPdfExperience(step, locale, labels),
+    ),
+    freelanceProjects,
     education: education.map((e) => ({
       institution: e.institution,
       degree: e.degree[locale],
       field: e.field[locale],
-      period: formatMonthRange(e.period.start, e.period.end, locale, labels.present),
+      period: formatMonthRange(
+        e.period.start,
+        e.period.end,
+        locale,
+        labels.present,
+      ),
     })),
     courses: courses.map((c) => ({
       name: c.name[locale],
