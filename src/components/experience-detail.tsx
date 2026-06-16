@@ -1,8 +1,10 @@
 "use client";
 
+import { useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import ReactMarkdown, { type Components } from "react-markdown";
 import { useTranslation } from "@/components/language-provider";
+import { usePanelMascot } from "@/contexts/panel-mascot-context";
 import { MediaGallery } from "@/components/media-gallery";
 import { formatMonthRange, formatTenureDuration } from "@/lib/tenure-duration";
 import {
@@ -37,6 +39,16 @@ const markdownComponents: Components = {
 
 export function ExperienceDetail({ entry, tenureIndex = null, onClose }: Props) {
   const { locale, t } = useTranslation();
+  const { notifyPanelOpen, notifyPanelClose } = usePanelMascot();
+
+  useEffect(() => {
+    notifyPanelOpen();
+  }, [notifyPanelOpen]);
+
+  const handleClose = () => {
+    notifyPanelClose();
+    onClose();
+  };
 
   const tenure =
     tenureIndex != null && entry.tenures?.[tenureIndex]
@@ -102,7 +114,7 @@ export function ExperienceDetail({ entry, tenureIndex = null, onClose }: Props) 
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
         className="fixed inset-0 z-90 bg-black/60 backdrop-blur-sm"
-        onClick={onClose}
+        onClick={handleClose}
       />
 
       <motion.div
@@ -110,12 +122,12 @@ export function ExperienceDetail({ entry, tenureIndex = null, onClose }: Props) 
         initial={{ opacity: 0, x: "100%" }}
         animate={{ opacity: 1, x: 0 }}
         exit={{ opacity: 0, x: "100%" }}
-        transition={{ type: "spring", damping: 30, stiffness: 300 }}
+        transition={{ duration: 2.6, ease: [0.22, 0.03, 0.26, 1] }}
         className="fixed bottom-0 right-0 top-0 z-91 w-full overflow-y-auto bg-background shadow-2xl sm:w-135 lg:w-150"
       >
         <div className="p-5 sm:p-8">
           <button
-            onClick={onClose}
+            onClick={handleClose}
             className="mb-6 flex h-9 w-9 items-center justify-center rounded-full border border-border text-foreground transition-colors hover:bg-accent/10"
             aria-label="Fechar"
           >

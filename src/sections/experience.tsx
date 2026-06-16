@@ -1,16 +1,20 @@
 "use client";
 
-import { useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { useTranslation } from "@/components/language-provider";
 import { SectionHeading } from "@/components/section-heading";
 import { ExperienceDetail } from "@/components/experience-detail";
 import { ExperienceJourney } from "@/components/experience-journey";
 import { ExperienceList } from "@/components/experience-list";
+import { getCareerMilestones } from "@/data/career-journey";
 import {
   getCareerEntries,
   type ExperienceSelection,
   type ExperienceType,
 } from "@/data/experience";
+import { useMediaCapabilities } from "@/hooks/use-media-capabilities";
+import { useScrollMilestone } from "@/hooks/use-scroll-milestone";
+import { useParticleBackground } from "@/contexts/particle-background-context";
 
 type ViewMode = "list" | "journey";
 
@@ -20,11 +24,39 @@ const CAREER_FILTERS: Array<ExperienceType | "all"> = [
   "fulltime",
 ];
 
+const SCROLL_VH_PER_MILESTONE = 75;
+
 export function Experience() {
   const { t } = useTranslation();
   const [selected, setSelected] = useState<ExperienceSelection | null>(null);
   const [filter, setFilter] = useState<ExperienceType | "all">("all");
   const [view, setView] = useState<ViewMode>("journey");
+  const scrollContainerRef = useRef<HTMLDivElement>(null);
+  const [overrideUntil, setOverrideUntil] = useState(0);
+
+  const milestones = useMemo(() => getCareerMilestones(), []);
+  const { registerExperienceJourney } = useParticleBackground();
+  const { isMobile, prefersReducedMotion } = useMediaCapabilities();
+  const scrollEnabled =
+    view === "journey" && !isMobile && !prefersReducedMotion;
+
+  const { activeIndex: scrollIndex, setActiveIndex: setScrollIndex } =
+    useScrollMilestone({
+      containerRef: scrollContainerRef,
+      count: milestones.length,
+      enabled: scrollEnabled,
+    });
+
+  useEffect(() => {
+    if (!overrideUntil) return;
+    const remaining = overrideUntil - Date.now();
+    if (remaining <= 0) {
+      setOverrideUntil(0);
+      return;
+    }
+    const timer = window.setTimeout(() => setOverrideUntil(0), remaining);
+    return () => window.clearTimeout(timer);
+  }, [overrideUntil]);
 
   const careerEntries = getCareerEntries();
   const filtered =
@@ -36,6 +68,24 @@ export function Experience() {
     key === "all" ? t.experience.filterAll : t.experience.types[key];
 
   const openDetail = (selection: ExperienceSelection) => setSelected(selection);
+
+  const markUserOverride = useCallback(() => {
+    setOverrideUntil(Date.now() + 1500);
+  }, []);
+
+  const resolvedScrollIndex =
+    scrollEnabled && overrideUntil <= Date.now() ? scrollIndex : undefined;
+
+  const journeyContainerRef = useCallback(
+    (el: HTMLDivElement | null) => {
+      scrollContainerRef.current = el;
+      registerExperienceJourney(
+        scrollEnabled ? el : null,
+        milestones.length,
+      );
+    },
+    [scrollEnabled, milestones.length, registerExperienceJourney],
+  );
 
   return (
     <section id="experience" className="scroll-mt-20 py-16 sm:py-24">
@@ -87,7 +137,30 @@ export function Experience() {
       </div>
 
       {view === "journey" ? (
-        <ExperienceJourney onOpenDetail={openDetail} />
+        <div
+          ref={journeyContainerRef}
+          style={
+            scrollEnabled
+              ? { height: `${milestones.length * SCROLL_VH_PER_MILESTONE}vh` }
+              : undefined
+          }
+        >
+          <div
+            className={
+              scrollEnabled ? "sticky top-20 space-y-6" : "space-y-6"
+            }
+          >
+            <ExperienceJourney
+              onOpenDetail={openDetail}
+              scrollActiveIndex={resolvedScrollIndex}
+              scrollEnabled={scrollEnabled}
+              onUserNavigate={(index) => {
+                markUserOverride();
+                setScrollIndex(index);
+              }}
+            />
+          </div>
+        </div>
       ) : (
         <>
           <ExperienceList entries={filtered} onSelect={openDetail} />

@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { LanguageToggle } from "@/components/language-toggle";
+import { ScrollProgress } from "@/components/scroll-progress";
 import { useTranslation } from "@/components/language-provider";
 
 const NAV_ITEMS = [
@@ -21,7 +22,9 @@ export function Header() {
   const [open, setOpen] = useState(false);
 
   return (
-    <header className="sticky top-0 z-50 border-b border-border/50 bg-background/80 backdrop-blur-md">
+    <>
+      <ScrollProgress />
+      <header className="sticky top-0 z-50 border-b border-border/50 bg-background/80 backdrop-blur-md">
       <div className="mx-auto flex w-full max-w-5xl items-center justify-between gap-3 px-5 py-3 sm:px-6 sm:py-4 lg:px-8">
         {/* Logo */}
         <a
@@ -88,5 +91,6 @@ export function Header() {
         </nav>
       )}
     </header>
+    </>
   );
 }

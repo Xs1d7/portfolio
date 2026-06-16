@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import { useMemo } from "react";
 import { useTranslation } from "@/components/language-provider";
 import {
@@ -26,6 +26,14 @@ function stripMarkdown(text: string): string {
 
 export function ExperienceList({ entries, onSelect }: Props) {
   const { t, locale } = useTranslation();
+  const prefersReducedMotion = useReducedMotion();
+  const cardMotion = prefersReducedMotion
+    ? {}
+    : {
+        whileHover: { y: -3 },
+        whileTap: { scale: 0.99 },
+        transition: { type: "spring" as const, stiffness: 400, damping: 25 },
+      };
 
   const steps = useMemo(
     () => sortExperienceSteps(expandExperienceSteps(entries), "desc"),
@@ -58,6 +66,7 @@ export function ExperienceList({ entries, onSelect }: Props) {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-40px" }}
                 transition={{ duration: 0.4, delay: Math.min(i * 0.05, 0.4) }}
+                {...cardMotion}
                 onClick={() => onSelect({ entry, tenureIndex: step.tenureIndex })}
                 className="group w-full rounded-2xl border border-border p-4 text-left transition-all duration-200 hover:border-accent/40 hover:shadow-lg hover:shadow-accent/5 sm:p-5"
               >

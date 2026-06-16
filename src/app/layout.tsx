@@ -2,8 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import { ThemeProvider } from "@/components/theme-provider";
 import { LanguageProvider } from "@/components/language-provider";
-import { Header } from "@/components/header";
-import { Footer } from "@/components/footer";
+import { SiteShell } from "@/components/site-shell";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -84,13 +83,7 @@ export default function RootLayout({
       >
         <ThemeProvider>
           <LanguageProvider>
-            <Header />
-            <div className="mx-auto w-full max-w-5xl px-5 sm:px-6 lg:px-8">
-              {children}
-            </div>
-            <div className="mx-auto w-full max-w-5xl px-5 sm:px-6 lg:px-8">
-              <Footer />
-            </div>
+            <SiteShell>{children}</SiteShell>
           </LanguageProvider>
         </ThemeProvider>
       </body>

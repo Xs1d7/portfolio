@@ -67,7 +67,7 @@
     "journeyPrev": "Previous",
     "journeyNext": "Next",
     "journeyStep": "Step {current} of {total}",
-    "journeyHint": "Tip: use ← → on your keyboard to navigate"
+    "journeyHint": "Scroll to move through the timeline, or use ← → on your keyboard"
   },
   "freelances": {
     "title": "Freelance",

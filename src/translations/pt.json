@@ -67,7 +67,7 @@
     "journeyPrev": "Anterior",
     "journeyNext": "Próximo",
     "journeyStep": "Etapa {current} de {total}",
-    "journeyHint": "Dica: use ← → no teclado para navegar"
+    "journeyHint": "Role para avançar na linha do tempo, ou use ← → no teclado"
   },
   "freelances": {
     "title": "Freelances",

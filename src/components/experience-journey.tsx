@@ -37,43 +37,68 @@ function stripMarkdown(text: string): string {
 
 interface Props {
   onOpenDetail: (selection: ExperienceSelection) => void;
+  scrollActiveIndex?: number;
+  scrollEnabled?: boolean;
+  onUserNavigate?: (index: number) => void;
 }
 
-export function ExperienceJourney({ onOpenDetail }: Props) {
+export function ExperienceJourney({
+  onOpenDetail,
+  scrollActiveIndex,
+  scrollEnabled = false,
+  onUserNavigate,
+}: Props) {
   const { t, locale } = useTranslation();
   const prefersReducedMotion = useReducedMotion();
   const milestones = useMemo(() => getCareerMilestones(), []);
   const [activeIndex, setActiveIndex] = useState(0);
 
-  const active = milestones[activeIndex];
+  const displayIndex =
+    scrollEnabled &&
+    scrollActiveIndex !== undefined &&
+    scrollActiveIndex >= 0
+      ? scrollActiveIndex
+      : activeIndex;
+
+  const active = milestones[displayIndex];
   const linkedEntry = active.experienceId
     ? getExperienceById(active.experienceId)
     : undefined;
 
   const go = useCallback(
     (index: number) => {
-      setActiveIndex(Math.max(0, Math.min(milestones.length - 1, index)));
+      const next = Math.max(0, Math.min(milestones.length - 1, index));
+      setActiveIndex(next);
+      onUserNavigate?.(next);
     },
-    [milestones.length],
+    [milestones.length, onUserNavigate],
   );
 
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
       if (e.key === "ArrowRight" || e.key === "ArrowDown") {
         e.preventDefault();
-        go(activeIndex + 1);
+        go(displayIndex + 1);
       }
       if (e.key === "ArrowLeft" || e.key === "ArrowUp") {
         e.preventDefault();
-        go(activeIndex - 1);
+        go(displayIndex - 1);
       }
     };
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
-  }, [activeIndex, go]);
+  }, [displayIndex, go]);
 
   const progress =
-    milestones.length > 1 ? (activeIndex / (milestones.length - 1)) * 100 : 0;
+    milestones.length > 1 ? (displayIndex / (milestones.length - 1)) * 100 : 0;
+
+  const openLinkedDetail = useCallback(() => {
+    if (!linkedEntry || !active.experienceId) return;
+    onOpenDetail({
+      entry: linkedEntry,
+      tenureIndex: active.tenureIndex ?? null,
+    });
+  }, [linkedEntry, active.experienceId, active.tenureIndex, onOpenDetail]);
 
   return (
     <div className="space-y-6">
@@ -104,24 +129,25 @@ export function ExperienceJourney({ onOpenDetail }: Props) {
               type="button"
               onClick={() => go(i)}
               aria-label={`${m.yearLabel} — ${m.title[locale]}`}
-              aria-current={i === activeIndex ? "step" : undefined}
+              aria-current={i === displayIndex ? "step" : undefined}
               className="group flex flex-1 flex-col items-center gap-1.5 focus-visible:outline-none"
             >
               <motion.span
                 animate={{
-                  scale: i === activeIndex ? 1.15 : 1,
-                  opacity: i === activeIndex ? 1 : i < activeIndex ? 0.85 : 0.45,
+                  scale: i === displayIndex ? 1.15 : 1,
+                  opacity:
+                    i === displayIndex ? 1 : i < displayIndex ? 0.85 : 0.45,
                 }}
                 transition={{ duration: 0.25 }}
                 className={`h-3 w-3 rounded-full ring-2 ${KIND_DOT[m.kind]} ${KIND_RING[m.kind]} transition-shadow ${
-                  i === activeIndex
+                  i === displayIndex
                     ? "shadow-[0_0_0_6px] shadow-accent/15"
                     : "group-hover:opacity-80"
                 }`}
               />
               <span
                 className={`hidden max-w-[4.5rem] text-center text-[10px] leading-tight font-medium sm:block ${
-                  i === activeIndex ? "text-accent" : "text-muted"
+                  i === displayIndex ? "text-accent" : "text-muted"
                 }`}
               >
                 {m.period
@@ -147,7 +173,24 @@ export function ExperienceJourney({ onOpenDetail }: Props) {
             animate={{ opacity: 1, y: 0 }}
             exit={prefersReducedMotion ? undefined : { opacity: 0, y: -12 }}
             transition={{ duration: 0.35, ease: "easeOut" }}
-            className="rounded-2xl border border-border bg-linear-to-br from-accent/3 via-transparent to-transparent p-5 shadow-sm sm:p-8"
+            role={linkedEntry ? "button" : undefined}
+            tabIndex={linkedEntry ? 0 : undefined}
+            onClick={linkedEntry ? openLinkedDetail : undefined}
+            onKeyDown={
+              linkedEntry
+                ? (e) => {
+                    if (e.key === "Enter" || e.key === " ") {
+                      e.preventDefault();
+                      openLinkedDetail();
+                    }
+                  }
+                : undefined
+            }
+            className={`rounded-2xl border border-border bg-linear-to-br from-accent/3 via-transparent to-transparent p-5 shadow-sm sm:p-8${
+              linkedEntry
+                ? " cursor-pointer transition-colors hover:border-accent/30 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/40"
+                : ""
+            }`}
           >
             <div className="flex flex-wrap items-start justify-between gap-3">
               <div>
@@ -212,12 +255,7 @@ export function ExperienceJourney({ onOpenDetail }: Props) {
               <motion.button
                 type="button"
                 whileHover={prefersReducedMotion ? undefined : { x: 4 }}
-                onClick={() =>
-                  onOpenDetail({
-                    entry: linkedEntry,
-                    tenureIndex: active.tenureIndex ?? null,
-                  })
-                }
+                onClick={openLinkedDetail}
                 className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-accent transition-colors hover:text-accent-hover"
               >
                 {t.experience.journeyExplore}
@@ -244,22 +282,22 @@ export function ExperienceJourney({ onOpenDetail }: Props) {
       <div className="flex items-center justify-between gap-4">
         <NavButton
           direction="prev"
-          disabled={activeIndex === 0}
+          disabled={displayIndex === 0}
           label={t.experience.journeyPrev}
-          onClick={() => go(activeIndex - 1)}
+          onClick={() => go(displayIndex - 1)}
         />
 
         <p className="text-center text-xs text-muted">
           {t.experience.journeyStep
-            .replace("{current}", String(activeIndex + 1))
+            .replace("{current}", String(displayIndex + 1))
             .replace("{total}", String(milestones.length))}
         </p>
 
         <NavButton
           direction="next"
-          disabled={activeIndex === milestones.length - 1}
+          disabled={displayIndex === milestones.length - 1}
           label={t.experience.journeyNext}
-          onClick={() => go(activeIndex + 1)}
+          onClick={() => go(displayIndex + 1)}
         />
       </div>
 

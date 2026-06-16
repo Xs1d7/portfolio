@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import { useTranslation } from "@/components/language-provider";
 import { TYPE_BADGE, type ExperienceEntry, type ExperienceSelection } from "@/data/experience";
 
@@ -15,6 +15,14 @@ function stripMarkdown(text: string): string {
 
 export function ExperienceFreelanceList({ entries, onSelect }: Props) {
   const { t, locale } = useTranslation();
+  const prefersReducedMotion = useReducedMotion();
+  const cardMotion = prefersReducedMotion
+    ? {}
+    : {
+        whileHover: { y: -3 },
+        whileTap: { scale: 0.99 },
+        transition: { type: "spring" as const, stiffness: 400, damping: 25 },
+      };
 
   return (
     <div className="grid gap-3 sm:grid-cols-2">
@@ -30,6 +38,7 @@ export function ExperienceFreelanceList({ entries, onSelect }: Props) {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-40px" }}
             transition={{ duration: 0.35, delay: Math.min(i * 0.04, 0.3) }}
+            {...cardMotion}
             onClick={() => onSelect({ entry, tenureIndex: null })}
             className="group flex h-full flex-col rounded-2xl border border-border p-4 text-left transition-all duration-200 hover:border-amber-500/40 hover:shadow-lg hover:shadow-amber-500/5 sm:p-5"
           >
