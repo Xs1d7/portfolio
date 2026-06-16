@@ -76,7 +76,11 @@ export const EXPERIENCE_FOCUS_TAGS: Record<string, (RoleFocus | TechFocus)[]> = 
   ],
   gomind: ["backend", "rpa", "tech-lead", "node", "python", "aws"],
   "grupo-domini-freelance": ["ai", "backend", "rpa", "node", "tech-lead"],
-  andrinno: ["backend", "node", "fullstack"],
+  andrinno: ["backend", "rpa", "scraping", "python", "node", "tech-lead"],
+  "attus-bloom": ["backend", "node", "fullstack"],
+  "beleza-tal": ["ai", "python", "backend"],
+  contmais: ["frontend", "fullstack"],
+  "barrarey-freelance": ["backend", "rpa", "python", "fullstack"],
   "devnology-scraping": [
     "backend",
     "rpa",
@@ -85,7 +89,7 @@ export const EXPERIENCE_FOCUS_TAGS: Record<string, (RoleFocus | TechFocus)[]> = 
     "node",
     "aws",
   ],
-  "bbr-barrarey": ["fullstack", "frontend", "backend", "python", "react"],
+  "bbr-toys": ["fullstack", "frontend", "backend"],
 };
 
 const ROLE_PROFILE: Record<
@@ -368,8 +372,15 @@ export function buildResumePdfPayload(
   const profile = ROLE_PROFILE[roleFocus];
 
   const filteredExperiences = experienceEntries
-    .filter((e) => experienceMatchesFocus(e, roleFocus, techFocus))
-    .sort((a, b) => b.period.start.localeCompare(a.period.start));
+    .filter(
+      (e) =>
+        e.type !== "freelance" &&
+        e.period &&
+        experienceMatchesFocus(e, roleFocus, techFocus),
+    )
+    .sort((a, b) =>
+      (b.period?.start ?? "").localeCompare(a.period?.start ?? ""),
+    );
 
   const filteredSkills = skills
     .filter((s) => skillMatchesFocus(s, roleFocus, techFocus))
@@ -396,8 +407,8 @@ export function buildResumePdfPayload(
       company: entry.company,
       role: entry.role[locale],
       period: formatMonthRange(
-        entry.period.start,
-        entry.period.end,
+        entry.period!.start,
+        entry.period!.end,
         locale,
         labels.present,
       ),

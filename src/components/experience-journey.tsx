@@ -13,7 +13,7 @@ import {
   type JourneyMilestone,
   type JourneyMilestoneKind,
 } from "@/data/career-journey";
-import { TYPE_BADGE, type ExperienceEntry } from "@/data/experience";
+import { TYPE_BADGE, type ExperienceSelection } from "@/data/experience";
 import {
   formatMonthRange,
   formatMonthRangeCompact,
@@ -31,8 +31,12 @@ const KIND_DOT: Record<JourneyMilestoneKind, string> = {
   experience: "bg-accent",
 };
 
+function stripMarkdown(text: string): string {
+  return text.replace(/\*\*(.*?)\*\*/g, "$1").replace(/\[(.*?)\]\(.*?\)/g, "$1");
+}
+
 interface Props {
-  onOpenDetail: (entry: ExperienceEntry) => void;
+  onOpenDetail: (selection: ExperienceSelection) => void;
 }
 
 export function ExperienceJourney({ onOpenDetail }: Props) {
@@ -178,7 +182,7 @@ export function ExperienceJourney({ onOpenDetail }: Props) {
             </div>
 
             <p className="mt-5 text-base leading-relaxed text-muted sm:text-lg">
-              {active.story[locale]}
+              {stripMarkdown(active.story[locale])}
             </p>
 
             {active.technologies.length > 0 && (
@@ -208,7 +212,12 @@ export function ExperienceJourney({ onOpenDetail }: Props) {
               <motion.button
                 type="button"
                 whileHover={prefersReducedMotion ? undefined : { x: 4 }}
-                onClick={() => onOpenDetail(linkedEntry)}
+                onClick={() =>
+                  onOpenDetail({
+                    entry: linkedEntry,
+                    tenureIndex: active.tenureIndex ?? null,
+                  })
+                }
                 className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-accent transition-colors hover:text-accent-hover"
               >
                 {t.experience.journeyExplore}

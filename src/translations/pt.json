@@ -5,6 +5,7 @@
   "nav": {
     "about": "Sobre",
     "experience": "Experiência",
+    "freelances": "Freelances",
     "skills": "Skills",
     "education": "Educação",
     "courses": "Cursos",
@@ -39,7 +40,8 @@
     "careerPathHint": "{count} etapas com tempo em cada cargo — veja abaixo",
     "tenureSingular": "etapa de carreira",
     "tenurePlural": "etapas de carreira",
-    "tenureListHint": "toque para ver períodos",
+    "tenureDuration": "Tempo no cargo: {duration}",
+    "tenureListHint": "toque para ver o contexto completo",
     "clients": "Empresas",
     "clientDirect": "Direto",
     "clientIndirect": "Indireto",
@@ -62,12 +64,17 @@
     "viewModeLabel": "Modo de visualização",
     "viewJourney": "Jornada",
     "viewList": "Lista",
-    "journeyIntro": "Percorra minha trajetória desde a decisão de cursar tecnologia até cada experiência profissional — use as setas ou clique nos marcos.",
+    "journeyIntro": "Cada marco é um cargo com seu período — percorra a evolução da carreira principal (CLT, PJ e projetos pessoais).",
     "journeyExplore": "Explorar esta etapa em detalhe",
     "journeyPrev": "Anterior",
     "journeyNext": "Próximo",
     "journeyStep": "Etapa {current} de {total}",
     "journeyHint": "Dica: use ← → no teclado para navegar"
+  },
+  "freelances": {
+    "title": "Freelances",
+    "subtitle": "Projetos pontuais por cliente — tempo de produção, sem datas de calendário.",
+    "productionTime": "Tempo de produção"
   },
   "skills": {
     "title": "Skills Técnicas",

@@ -7,39 +7,40 @@ import { ExperienceDetail } from "@/components/experience-detail";
 import { ExperienceJourney } from "@/components/experience-journey";
 import { ExperienceList } from "@/components/experience-list";
 import {
-  experienceEntries,
-  type ExperienceEntry,
+  getCareerEntries,
+  type ExperienceSelection,
   type ExperienceType,
 } from "@/data/experience";
 
 type ViewMode = "list" | "journey";
 
-const FILTERS: Array<ExperienceType | "all"> = [
+const CAREER_FILTERS: Array<ExperienceType | "all"> = [
   "all",
   "personal",
   "fulltime",
-  "freelance",
 ];
 
 export function Experience() {
   const { t } = useTranslation();
-  const [selected, setSelected] = useState<ExperienceEntry | null>(null);
+  const [selected, setSelected] = useState<ExperienceSelection | null>(null);
   const [filter, setFilter] = useState<ExperienceType | "all">("all");
   const [view, setView] = useState<ViewMode>("journey");
 
+  const careerEntries = getCareerEntries();
   const filtered =
     filter === "all"
-      ? experienceEntries
-      : experienceEntries.filter((entry) => entry.type === filter);
+      ? careerEntries
+      : careerEntries.filter((entry) => entry.type === filter);
 
   const filterLabel = (key: ExperienceType | "all") =>
     key === "all" ? t.experience.filterAll : t.experience.types[key];
+
+  const openDetail = (selection: ExperienceSelection) => setSelected(selection);
 
   return (
     <section id="experience" className="scroll-mt-20 py-16 sm:py-24">
       <SectionHeading>{t.experience.title}</SectionHeading>
 
-      {/* View mode toggle */}
       <div className="mb-6 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
         <div
           className="inline-flex rounded-full border border-border p-1"
@@ -68,7 +69,7 @@ export function Experience() {
 
         {view === "list" && (
           <div className="flex flex-wrap gap-2">
-            {FILTERS.map((key) => (
+            {CAREER_FILTERS.map((key) => (
               <button
                 key={key}
                 onClick={() => setFilter(key)}
@@ -86,10 +87,10 @@ export function Experience() {
       </div>
 
       {view === "journey" ? (
-        <ExperienceJourney onOpenDetail={setSelected} />
+        <ExperienceJourney onOpenDetail={openDetail} />
       ) : (
         <>
-          <ExperienceList entries={filtered} onSelect={setSelected} />
+          <ExperienceList entries={filtered} onSelect={openDetail} />
           <p className="mt-3 text-center text-xs text-muted">
             {t.experience.scrollHint}
           </p>
@@ -98,7 +99,8 @@ export function Experience() {
 
       {selected && (
         <ExperienceDetail
-          entry={selected}
+          entry={selected.entry}
+          tenureIndex={selected.tenureIndex}
           onClose={() => setSelected(null)}
         />
       )}

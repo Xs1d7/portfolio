@@ -33,10 +33,10 @@ export const education: Education[] = [
       pt: "Análise e Desenvolvimento de Sistemas",
       en: "Systems Analysis and Development",
     },
-    period: { start: "2018-01", end: "2022-12" },
+    period: { start: "2021-01", end: "2022-12" },
     description: {
-      pt: "Base em engenharia de software, arquitetura de sistemas, bancos de dados e desenvolvimento full-stack.",
-      en: "Foundation in software engineering, systems architecture, databases, and full-stack development.",
+      pt: "Base em engenharia de software, arquitetura de sistemas, bancos de dados e desenvolvimento full-stack. Iniciado em 2021.",
+      en: "Foundation in software engineering, systems architecture, databases, and full-stack development. Started in 2021.",
     },
   },
 ];

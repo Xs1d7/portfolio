@@ -45,7 +45,8 @@ export interface ExperienceEntry {
   employment?: EmploymentContract;
   company: string;
   role: { pt: string; en: string };
-  period: { start: string; end: string | null };
+  /** Período de calendário — carreira CLT/PJ/pessoal. Freelances não usam. */
+  period?: { start: string; end: string | null };
   shortDescription: { pt: string; en: string };
   overview?: { pt: string; en: string };
   fullDescription: { pt: string; en: string };
@@ -59,6 +60,42 @@ export interface ExperienceEntry {
   clients?: ExperienceClient[];
   media: MediaItem[];
   link?: string;
+  /** Freelance: tempo de produção do projeto (sem datas de calendário na UI). */
+  productionDuration?: { pt: string; en: string };
+  /** Ordem de exibição na seção Freelances (menor = primeiro). */
+  freelanceOrder?: number;
+  /** Exibir na Jornada (default: true para carreira; false para freelas e Prodia). */
+  includeInJourney?: boolean;
+}
+
+export interface ExperienceSelection {
+  entry: ExperienceEntry;
+  tenureIndex: number | null;
+}
+
+export function getCareerEntries(): ExperienceEntry[] {
+  return experienceEntries.filter((e) => e.type !== "freelance");
+}
+
+export function getFreelanceEntries(): ExperienceEntry[] {
+  return experienceEntries
+    .filter(
+      (e) => e.type === "freelance" && e.id !== "grupo-domini-freelance",
+    )
+    .sort(
+      (a, b) =>
+        (a.freelanceOrder ?? 99) - (b.freelanceOrder ?? 99) ||
+        a.id.localeCompare(b.id),
+    );
+}
+
+export function getJourneyEntries(): ExperienceEntry[] {
+  return experienceEntries.filter(
+    (e) =>
+      e.type !== "freelance" &&
+      e.includeInJourney !== false &&
+      !e.id.endsWith("-freelance"),
+  );
 }
 
 export const experienceEntries: ExperienceEntry[] = [
@@ -66,24 +103,35 @@ export const experienceEntries: ExperienceEntry[] = [
     id: "maos-livres",
     type: "personal",
     company: "Mãos Livres",
+    period: { start: "2026-04", end: null },
     role: {
-      pt: "Fundador & Tech Lead",
-      en: "Founder & Tech Lead",
+      pt: "Proprietário",
+      en: "Owner",
     },
-    period: { start: "2026-03", end: null },
+    tenures: [
+      {
+        company: "Mãos Livres",
+        role: { pt: "Proprietário", en: "Owner" },
+        period: { start: "2026-04", end: null },
+        highlight: {
+          pt: "Fundação do projeto solo em abril/2026 — automação, software e produtos sob medida para outras empresas, com diagnóstico gratuito em até 48h em maoslivres.com.",
+          en: "Founded the solo venture in April 2026 — custom automation, software, and products for other companies, with a free 48-hour diagnosis at maoslivres.com.",
+        },
+      },
+    ],
     recruiterImpact: {
       pt: "Empresa de automação e software sob medida: assumo a tecnologia de outras empresas para eliminar trabalho repetitivo e acelerar a operação.",
       en: "Custom automation and software company: I own the technology side for other businesses to remove repetitive work and speed up operations.",
     },
     shortDescription: {
-      pt: "Automação, software e produtos — tecnologia sob medida para tirar o repetitivo da operação de outras empresas (desde mar/2026).",
-      en: "Automation, software, and products — tailored technology to take repetitive work off other companies' operations (since Mar 2026).",
+      pt: "Automação, software e produtos — tecnologia sob medida para tirar o repetitivo da operação de outras empresas (desde abr/2026).",
+      en: "Automation, software, and products — tailored technology to take repetitive work off other companies' operations (since Apr 2026).",
     },
     overview: {
-      pt: `Fundei a **Mãos Livres** em **março de 2026** — **automação, software e produtos** para empresas que precisam de tecnologia sem montar um time interno.
+      pt: `Fundei a **Mãos Livres** em **abril de 2026** — **automação, software e produtos** para empresas que precisam de tecnologia sem montar um time interno.
 
 **Tecnologia sob medida** para tirar o repetitivo da sua operação. No **[maoslivres.com](https://maoslivres.com)** a empresa recebe o desafio do cliente e, em **até 48h**, retorna com **diagnóstico gratuito** e próximos passos — automação, software ou produto, conforme o que fizer sentido.`,
-      en: `I founded **Mãos Livres** in **March 2026** — **automation, software, and products** for companies that need technology without building an in-house team.
+      en: `I founded **Mãos Livres** in **April 2026** — **automation, software, and products** for companies that need technology without building an in-house team.
 
 **Tailored technology** to remove repetitive work from your operation. At **[maoslivres.com](https://maoslivres.com)** clients share their challenge and receive a **free diagnosis within 48 hours** with next steps — automation, software, or product, whichever fits best.`,
     },
@@ -131,22 +179,37 @@ export const experienceEntries: ExperienceEntry[] = [
   {
     id: "prodia",
     type: "personal",
+    includeInJourney: false,
     company: "Prodia",
     role: {
       pt: "Cofundador do Produto & Arquiteto Principal de IA",
       en: "Product Co-founder & Lead AI Architect",
     },
-    period: { start: "2026-04", end: null },
+    period: { start: "2026-05", end: null },
+    tenures: [
+      {
+        company: "Prodia",
+        role: {
+          pt: "Cofundador do Produto & Arquiteto Principal de IA",
+          en: "Product Co-founder & Lead AI Architect",
+        },
+        period: { start: "2026-05", end: null },
+        highlight: {
+          pt: "Início em maio/2026, logo após a Mãos Livres — arquitetura do SaaS de anúncios com IA generativa (produto ainda em lançamento).",
+          en: "Started in May 2026, right after Mãos Livres — architecture of the AI ads SaaS (product not launched yet).",
+        },
+      },
+    ],
     shortDescription: {
-      pt: "Produto do portfólio (abr/2026) — SaaS de anúncios com IA, iniciado logo após a Mãos Livres (mar/2026); em desenvolvimento.",
-      en: "Portfolio product (Apr 2026) — AI ads SaaS, started right after Mãos Livres (Mar 2026); in development.",
+      pt: "Produto do portfólio (mai/2026) — SaaS de anúncios com IA, iniciado logo após a Mãos Livres (abr/2026); em desenvolvimento.",
+      en: "Portfolio product (May 2026) — AI ads SaaS, started right after Mãos Livres (Apr 2026); in development.",
     },
     overview: {
-      pt: `O **Prodia** é um **produto independente** do portfólio da Mãos Livres: SaaS de **criação e otimização de anúncios** com IA generativa, **iniciado em abril de 2026** — um mês após a fundação da empresa (março). O produto **ainda não foi lançado**; dúvidas e parcerias pelo **Hub de contato** em **[maoslivres.com](https://maoslivres.com)**.`,
-      en: `**Prodia** is a **standalone product** in the Mãos Livres portfolio: a SaaS for **creating and optimizing ads** with generative AI, **started in April 2026** — one month after the company was founded (March). The product **has not launched yet**; inquiries and partnerships via the **contact Hub** at **[maoslivres.com](https://maoslivres.com)**.`,
+      pt: `O **Prodia** é um **produto independente** do portfólio da Mãos Livres: SaaS de **criação e otimização de anúncios** com IA generativa, **iniciado em maio de 2026** — logo após a fundação da empresa (abril). O produto **ainda não foi lançado**; dúvidas e parcerias pelo **Hub de contato** em **[maoslivres.com](https://maoslivres.com)**.`,
+      en: `**Prodia** is a **standalone product** in the Mãos Livres portfolio: a SaaS for **creating and optimizing ads** with generative AI, **started in May 2026** — right after the company was founded (April). The product **has not launched yet**; inquiries and partnerships via the **contact Hub** at **[maoslivres.com](https://maoslivres.com)**.`,
     },
     fullDescription: {
-      pt: `Arquitetei e cofundei o **Prodia** em **abril de 2026**, logo após criar a **Mãos Livres** — produto de anúncios separado das entregas de consultoria e automação da empresa.
+      pt: `Arquitetei e cofundei o **Prodia** em **maio de 2026**, logo após criar a **Mãos Livres** — produto de anúncios separado das entregas de consultoria e automação da empresa.
 
 Principais destaques:
 
@@ -154,7 +217,7 @@ Principais destaques:
 - **Pipelines de IA generativa:** LLMs e engenharia de prompt em larga escala
 - **Backend escalável:** preparado para alto volume de geração de conteúdo
 - **Stack:** Go, Node.js, Python, OpenAI API, bancos vetoriais e AWS`,
-      en: `I architected and co-founded **Prodia** in **April 2026**, right after launching **Mãos Livres** — an ads product separate from the company's consulting and automation work.
+      en: `I architected and co-founded **Prodia** in **May 2026**, right after launching **Mãos Livres** — an ads product separate from the company's consulting and automation work.
 
 Key highlights:
 
@@ -178,33 +241,52 @@ Key highlights:
   },
   {
     id: "pop-plus",
-    type: "fulltime",
-    employment: "pj",
+    type: "freelance",
+    includeInJourney: false,
+    freelanceOrder: 2,
     company: "POP+",
     role: {
-      pt: "Engenheiro Full-Stack Sênior",
-      en: "Senior Full-Stack Engineer",
+      pt: "Engenheiro Full-Stack · Manutenção de Legado",
+      en: "Full-Stack Engineer · Legacy Maintenance",
     },
-    period: { start: "2026-02", end: "2026-05" },
+    productionDuration: { pt: "3 meses", en: "3 months" },
+    recruiterImpact: {
+      pt: "Freelance de 3 meses em WMS legado — manutenção crítica nos módulos financeiro, comercial, marketing e estoque.",
+      en: "3-month freelance on a legacy WMS — critical maintenance across finance, sales, marketing, and inventory modules.",
+    },
     shortDescription: {
-      pt: "Modernização e evolução de um WMS legado de larga escala, com entregas full-stack em Vue.js e C# (.NET).",
-      en: "Modernization and evolution of a large-scale legacy WMS, with full-stack delivery in Vue.js and C# (.NET).",
+      pt: "Manutenção em sistema legado de larga escala — módulos financeiro, comercial, marketing e estoque (Vue.js e C# .NET).",
+      en: "Maintenance on a large-scale legacy system — finance, sales, marketing, and inventory modules (Vue.js and C# .NET).",
     },
     fullDescription: {
-      pt: `Atuei na manutenção crítica e evolução de funcionalidades em um sistema WMS (Warehouse Management System) legado complexo, com módulos de vendas, marketing, autenticação e controle de estoque.
+      pt: `Projeto freelance de **3 meses** na **POP+** — **manutenção e evolução** de um WMS legado que cobre toda a operação do negócio.
 
-Principais destaques:
+**Módulos atendidos**
 
-- **Modernização de sistema legado:** evolução de funcionalidades em ambiente de alta complexidade e escala
-- **Entrega full-stack:** interfaces responsivas em Vue.js e regras de negócio seguras em C# (.NET) no backend
-- **APIs REST:** integração e manutenção de serviços para suporte operacional do WMS`,
-      en: `I worked on critical maintenance and feature evolution for a complex legacy Warehouse Management System (WMS), covering sales, marketing, authentication, and inventory control modules.
+- **Financeiro:** rotinas contábeis, conciliações e relatórios críticos em produção
+- **Comercial:** fluxos de vendas, precificação e integrações com canais
+- **Marketing:** campanhas, promoções e regras de negócio no back-office
+- **Estoque:** controle de inventário, movimentações e sincronização operacional
 
-Key highlights:
+**Entregas**
 
-- **Legacy system modernization:** feature evolution in a high-complexity, large-scale environment
-- **Full-stack delivery:** responsive Vue.js interfaces and secure business rules in C# (.NET) on the backend
-- **REST APIs:** integration and maintenance of services supporting WMS operations`,
+- Correções e evoluções full-stack em **Vue.js** (front) e **C# (.NET)** (back)
+- Manutenção de **APIs REST** e **SQL Server** sem interromper a operação
+- Estabilização de funcionalidades legadas em ambiente de alta criticidade`,
+      en: `A **3-month freelance** project at **POP+** — **maintenance and evolution** of a legacy WMS spanning the entire business operation.
+
+**Modules covered**
+
+- **Finance:** accounting routines, reconciliations, and critical production reports
+- **Sales:** sales flows, pricing, and channel integrations
+- **Marketing:** campaigns, promotions, and back-office business rules
+- **Inventory:** stock control, movements, and operational synchronization
+
+**Deliverables**
+
+- Full-stack fixes and enhancements in **Vue.js** (front) and **C# (.NET)** (back)
+- **REST API** and **SQL Server** maintenance without disrupting operations
+- Legacy feature stabilization in a mission-critical environment`,
     },
     technologies: ["C# (.NET)", "Vue.js", "SQL Server", "REST APIs"],
     clients: [{ name: "POP+", relationship: "direct" }],
@@ -216,14 +298,29 @@ Key highlights:
     employment: "pj",
     company: "Devnology",
     role: {
-      pt: "Tech Lead / Engenheiro de Automação Avançada",
-      en: "Tech Lead / Advanced Automation Engineer",
+      pt: "Líder Técnico",
+      en: "Tech Lead",
     },
-    period: { start: "2025-03", end: "2026-03" },
+    period: { start: "2025-01", end: "2026-03" },
+    recruiterImpact: {
+      pt: "Segunda passagem na Devnology (jan/2025–mar/2026): liderança técnica de squads em extração de dados, Go/Rust e engenharia reversa em escala.",
+      en: "Second stint at Devnology (Jan 2025–Mar 2026): technical leadership of data-extraction squads, Go/Rust, and reverse engineering at scale.",
+    },
     shortDescription: {
-      pt: "Liderança técnica de squads e motores de scraping em Go/Rust com engenharia reversa para contornar Akamai, Cloudflare e CAPTCHA.",
-      en: "Technical leadership of squads and Go/Rust scraping engines with reverse engineering to bypass Akamai, Cloudflare, and CAPTCHA.",
+      pt: "Volta à Devnology como Líder Técnico (jan/2025–mar/2026) — squads, Go/Rust e engenharia reversa em escala.",
+      en: "Return to Devnology as Tech Lead (Jan 2025–Mar 2026) — squads, Go/Rust, and reverse engineering at scale.",
     },
+    tenures: [
+      {
+        company: "Devnology",
+        role: { pt: "Líder Técnico", en: "Tech Lead" },
+        period: { start: "2025-01", end: "2026-03" },
+        highlight: {
+          pt: "Recontratado após a Gomind para liderar squads de extração de dados — motores em Go/Rust, contorno de Akamai/Cloudflare e migração de legados para performance extrema.",
+          en: "Rehired after Gomind to lead data-extraction squads — Go/Rust engines, Akamai/Cloudflare bypass, and legacy migrations for extreme performance.",
+        },
+      },
+    ],
     fullDescription: {
       pt: `Retornei à Devnology para liderar squads técnicas e a arquitetura de projetos de elite em extração de dados e engenharia reversa.
 
@@ -265,50 +362,50 @@ Key highlights:
     employment: "pj",
     company: "Gomind",
     role: {
-      pt: "Dev Pleno RPA → Sênior · Tech Lead",
-      en: "Mid-Level RPA Dev → Senior · Tech Lead",
+      pt: "Líder Técnico",
+      en: "Tech Lead",
     },
-    period: { start: "2023-10", end: "2025-01" },
+    period: { start: "2023-11", end: "2025-01" },
     recruiterImpact: {
-      pt: "Três evoluções na Gomind (out/2023–jan/2025): Pleno RPA com atuação no MIA (automação contábil), Sênior e Tech Lead do subgrupo Baker Hughes — RPA e automação SAP em produção.",
-      en: "Three progressions at Gomind (Oct 2023–Jan 2025): Mid-Level RPA on MIA (accounting automation), Senior, and Tech Lead of the Baker Hughes subgroup — production RPA and SAP automation.",
+      pt: "Três evoluções na Gomind (nov/2023–jan/2025): Pleno RPA no MIA (automação contábil), Fullstack Sênior e Líder Técnico — RPA, SAP e automação em produção.",
+      en: "Three progressions at Gomind (Nov 2023–Jan 2025): Mid-Level RPA on MIA (accounting automation), Senior Full-Stack, and Tech Lead — RPA, SAP, and production automation.",
     },
     shortDescription: {
-      pt: "Três etapas na Gomind (out/2023–jan/2025): Pleno RPA, Sênior e Tech Lead — produto MIA (automação contábil) e entregas para Baker Hughes.",
-      en: "Three stages at Gomind (Oct 2023–Jan 2025): Mid-Level RPA, Senior, and Tech Lead — MIA product (accounting automation) and Baker Hughes deliveries.",
+      pt: "Três etapas na Gomind (nov/2023–jan/2025): Pleno RPA, Fullstack Sênior e Líder Técnico — produto MIA (automação contábil).",
+      en: "Three stages at Gomind (Nov 2023–Jan 2025): Mid-Level RPA, Senior Full-Stack, and Tech Lead — MIA product (accounting automation).",
     },
     tenures: [
       {
         company: "Gomind",
         role: {
-          pt: "Desenvolvedor Pleno RPA",
+          pt: "Desenvolvedor RPA Pleno",
           en: "Mid-Level RPA Developer",
         },
-        period: { start: "2023-10", end: "2024-08" },
+        period: { start: "2023-11", end: "2024-05" },
         highlight: {
-          pt: "Ingresso em outubro de 2023, logo após a Devnology. Automação e orquestração de processos críticos, com atuação no **MIA** — produto da Gomind para **automatizar processos de contabilidade**.",
-          en: "Joined in October 2023, right after Devnology. Automation and orchestration of critical processes, including work on **MIA** — Gomind's product to **automate accounting processes**.",
+          pt: "**Realizado:** automação RPA e orquestração no **MIA** (automação contábil), integrações AWS e entregas em processos críticos. **Evolução:** promoção a Fullstack Sênior após ~6 meses por volume de entregas, domínio do produto e impacto técnico nas integrações.",
+          en: "**Delivered:** RPA automation and orchestration on **MIA** (accounting automation), AWS integrations, and critical process deliveries. **Growth:** promoted to Senior Full-Stack after ~6 months for delivery volume, product mastery, and integration impact.",
         },
       },
       {
         company: "Gomind",
         role: {
-          pt: "Desenvolvedor Sênior",
-          en: "Senior Developer",
+          pt: "Desenvolvedor Fullstack Sênior",
+          en: "Senior Full-Stack Developer",
         },
-        period: { start: "2024-09", end: "2024-10" },
+        period: { start: "2024-05", end: "2024-08" },
         highlight: {
-          pt: "Nova evolução por entregas e qualidade técnica nas frentes de RPA e automação em escala.",
-          en: "Further advancement through delivery impact and technical quality across RPA and large-scale automation.",
+          pt: "**Realizado:** frentes fullstack além do RPA, evolução do MIA e integrações de alto volume. **Evolução:** promoção a Líder Técnico após ~3 meses por liderança informal, qualidade de código e confiança da empresa em conduzir subgrupo.",
+          en: "**Delivered:** full-stack work beyond RPA, MIA evolution, and high-volume integrations. **Growth:** promoted to Tech Lead after ~3 months for informal leadership, code quality, and company trust to run a subgroup.",
         },
       },
       {
         company: "Gomind",
-        role: { pt: "Tech Lead", en: "Tech Lead" },
-        period: { start: "2024-11", end: "2025-01" },
+        role: { pt: "Líder Técnico", en: "Tech Lead" },
+        period: { start: "2024-08", end: "2025-01" },
         highlight: {
-          pt: "Liderança de subgrupo que orquestrava entregas para a Baker Hughes; automação SAP, mentoria e code reviews.",
-          en: "Led a subgroup orchestrating deliveries for Baker Hughes; SAP automation, mentoring, and code reviews.",
+          pt: "**Realizado:** liderança de subgrupo, automação SAP, mentoria e code reviews em produção. **Saída:** retorno à Devnology em janeiro/2025 como Líder Técnico em projeto de maior escala técnica.",
+          en: "**Delivered:** subgroup leadership, SAP automation, mentoring, and production code reviews. **Exit:** returned to Devnology in January 2025 as Tech Lead on a larger-scale technical project.",
         },
       },
     ],
@@ -322,7 +419,7 @@ Key highlights:
 
 **Outros destaques técnicos**
 
-- Automação SAP com workers para fluxos financeiros e logísticos (Baker Hughes)
+- Automação SAP com workers para fluxos financeiros e logísticos
 - Orquestração e integrações em ambiente de alto volume (Lambda, filas, APIs)
 - Redução de latência e erros em processamento em segundo plano`,
       en: `Tenure at **Gomind** with continuous role progression (see roadmap above).
@@ -334,7 +431,7 @@ Key highlights:
 
 **Other technical highlights**
 
-- SAP automation with workers for financial and logistics flows (Baker Hughes)
+- SAP automation with workers for financial and logistics flows
 - Orchestration and integrations in high-volume environments (Lambda, queues, APIs)
 - Lower latency and fewer errors in background processing`,
     },
@@ -353,21 +450,19 @@ Key highlights:
       "SQL Server",
       "LLM Integrations",
     ],
-    clients: [
-      { name: "Gomind", relationship: "direct" },
-      { name: "Baker Hughes", relationship: "indirect" },
-    ],
+    clients: [{ name: "Gomind", relationship: "direct" }],
     media: [],
   },
   {
     id: "grupo-domini-freelance",
     type: "freelance",
+    includeInJourney: false,
     company: "Grupo Domini",
     role: {
       pt: "Engenheiro de IA · Sales Bot (Chat & Voz)",
       en: "AI Engineer · Sales Bot (Chat & Voice)",
     },
-    period: { start: "2025-02", end: "2025-04" },
+    productionDuration: { pt: "3 meses", en: "3 months" },
     recruiterImpact: {
       pt: "Freelance de 3 meses: Sales Bot omnicanal (chat e ligações) para vender o portfólio do Grupo Domini — incluindo a Gomind e o MIA (automação contábil).",
       en: "3-month freelance: omnichannel Sales Bot (chat and voice calls) to sell Grupo Domini's portfolio — including Gomind and MIA (accounting automation).",
@@ -424,33 +519,53 @@ Key highlights:
   {
     id: "andrinno",
     type: "freelance",
+    includeInJourney: false,
+    freelanceOrder: 1,
     company: "Andrinno Software House",
     role: {
-      pt: "Engenheiro de Backend Sênior",
-      en: "Senior Backend Engineer",
+      pt: "Especialista em Automação Web · Líder Técnico",
+      en: "Web Automation Specialist · Technical Lead",
     },
-    period: { start: "2024-03", end: "2024-10" },
+    productionDuration: { pt: "7 meses", en: "7 months" },
+    recruiterImpact: {
+      pt: "Freelance de 7 meses: automação web para companhias aéreas — contratado como especialista; liderei 4 devs até a entrega.",
+      en: "7-month freelance: web automation for airlines — hired as a specialist; led 4 developers through delivery.",
+    },
     shortDescription: {
-      pt: "Freelance (2024) para empresa parceira — APIs escaláveis, microsserviços de alta concorrência e tuning de PostgreSQL e Redis.",
-      en: "Freelance (2024) for a partner company — scalable APIs, high-concurrency microservices, and PostgreSQL and Redis tuning.",
+      pt: "Automação web de sites de companhias aéreas — contratado como especialista; liderei time de 4 devs na entrega das soluções.",
+      en: "Web automation for airline company sites — hired as a specialist; led a team of 4 developers to delivery.",
     },
     fullDescription: {
-      pt: `Construí e mantive APIs RESTful escaláveis e microsserviços preparados para altos volumes de requisições concorrentes.
+      pt: `Projeto freelance de **7 meses** na **Andrinno Software House** — contratado como **especialista em automação web** para o setor de **companhias aéreas**, um dos nichos mais exigentes em scraping, anti-bot e alta concorrência.
 
-Principais destaques:
+**Papel**
 
-- **APIs e microsserviços:** arquitetura backend para cargas concorrentes elevadas
-- **Bancos de dados:** modelagem relacional e não relacional com tuning de queries e indexação
-- **Baixa latência:** otimização de respostas em cenários de alto throughput`,
-      en: `I built and maintained scalable RESTful APIs and microservices designed for high concurrent request volumes.
+- **Liderança técnica** de um time de **4 desenvolvedores** — arquitetura, code review e priorização de entregas
+- Referência técnica pela experiência prévia em extração de alta concorrência
 
-Key highlights:
+**Entregas**
 
-- **APIs and microservices:** backend architecture for heavy concurrent loads
-- **Databases:** relational and non-relational modeling with query and indexing tuning
-- **Low latency:** response optimization under high-throughput scenarios`,
+- Automação de extração e integração com portais de companhias aéreas em produção
+- Pipelines resilientes com tratamento de bloqueios, rate-limit e falhas intermitentes
+- APIs e microsserviços para **alto volume de requisições concorrentes**
+- Tuning de **PostgreSQL** e **Redis** para baixa latência sob carga`,
+      en: `A **7-month freelance** project at **Andrinno Software House** — hired as a **web automation specialist** for the **airline** sector, one of the most demanding niches in scraping, anti-bot, and high concurrency.
+
+**Role**
+
+- **Technical leadership** of a **4-developer team** — architecture, code review, and delivery prioritization
+- Technical reference based on prior experience in high-concurrency extraction
+
+**Deliverables**
+
+- Automation of extraction and integration with airline portals in production
+- Resilient pipelines handling blocks, rate limits, and intermittent failures
+- APIs and microservices for **high concurrent request volumes**
+- **PostgreSQL** and **Redis** tuning for low latency under load`,
     },
     technologies: [
+      "Web Scraping",
+      "Python",
       "Node.js",
       "TypeScript",
       "Fastify",
@@ -462,62 +577,241 @@ Key highlights:
     media: [],
   },
   {
+    id: "attus-bloom",
+    type: "freelance",
+    includeInJourney: false,
+    freelanceOrder: 3,
+    company: "Attus Bloom",
+    role: {
+      pt: "Engenheiro de Software · Sistema de Estoque",
+      en: "Software Engineer · Inventory System",
+    },
+    productionDuration: {
+      pt: "~2 meses (múltiplas entregas)",
+      en: "~2 months (multiple engagements)",
+    },
+    recruiterImpact: {
+      pt: "Freelance em sistema de controle de estoque — múltiplas entregas ao longo do tempo para compor a plataforma atual.",
+      en: "Freelance inventory control system — multiple engagements over time to build the current platform.",
+    },
+    shortDescription: {
+      pt: "Sistema de controle de estoque — conciliação, movimentações e alertas; prestei serviço mais de uma vez para compor a plataforma atual.",
+      en: "Inventory control system — reconciliation, movements, and alerts; multiple engagements to build the current platform.",
+    },
+    fullDescription: {
+      pt: `Projeto freelance na **Attus Bloom** — **sistema de controle de estoque** para dar visibilidade e previsibilidade à operação. Atuei em **mais de uma entrega** ao longo do tempo, cada ciclo com foco em evoluir a plataforma até o estado atual.
+
+**Entregas**
+
+- Modelagem e implementação de fluxos de **entrada, saída e conciliação** de estoque
+- Integrações com ERPs e planilhas para sincronização em tempo quase real
+- **Alertas de reabastecimento** e relatórios para o time operacional
+- APIs e painéis para acompanhamento do inventário sem depender de processos manuais`,
+      en: `Freelance project at **Attus Bloom** — an **inventory control system** to give operations visibility and predictability. I worked across **multiple engagements** over time, each cycle focused on evolving the platform to its current state.
+
+**Deliverables**
+
+- Modeling and implementation of **inbound, outbound, and reconciliation** stock flows
+- Integrations with ERPs and spreadsheets for near-real-time synchronization
+- **Replenishment alerts** and reports for the operations team
+- APIs and dashboards for inventory tracking without manual processes`,
+    },
+    technologies: [
+      "Node.js",
+      "TypeScript",
+      "PostgreSQL",
+      "Integrações ERP",
+      "APIs REST",
+    ],
+    clients: [{ name: "Attus Bloom", relationship: "direct" }],
+    media: [],
+  },
+  {
+    id: "beleza-tal",
+    type: "freelance",
+    includeInJourney: false,
+    freelanceOrder: 4,
+    company: "Beleza & Tal",
+    role: {
+      pt: "Engenheiro de Automação & IA",
+      en: "Automation & AI Engineer",
+    },
+    productionDuration: { pt: "~2 meses", en: "~2 months" },
+    recruiterImpact: {
+      pt: "Freelance: automação de reposição e análise de vendas por IA via plataforma Google.",
+      en: "Freelance: replenishment automation and AI-powered sales analysis on the Google platform.",
+    },
+    shortDescription: {
+      pt: "Automação do sistema de reposição e análise de vendas por IA via plataforma Google.",
+      en: "Replenishment automation and AI-powered sales analysis via the Google platform.",
+    },
+    fullDescription: {
+      pt: `Projeto freelance para **Beleza & Tal** — automação da **reposição de produtos** e **análise de vendas** com apoio de IA.
+
+**Entregas**
+
+- Pipeline de **análise de vendas** com modelos de IA para identificar tendências e rupturas
+- Automação de **sugestões de reposição** com base em histórico e sazonalidade
+- Integração com **Google Cloud** e planilhas operacionais usadas pelo time comercial
+- Redução de trabalho manual na leitura de dados e tomada de decisão de estoque`,
+      en: `Freelance project for **Beleza & Tal** — **product replenishment** automation and **sales analysis** powered by AI.
+
+**Deliverables**
+
+- **Sales analysis** pipeline with AI models to identify trends and stockouts
+- **Replenishment suggestion** automation based on history and seasonality
+- Integration with **Google Cloud** and operational spreadsheets used by the sales team
+- Less manual work reading data and making inventory decisions`,
+    },
+    technologies: [
+      "Python",
+      "Google Cloud",
+      "IA / LLMs",
+      "Automação",
+      "Planilhas / APIs",
+    ],
+    clients: [{ name: "Beleza & Tal", relationship: "direct" }],
+    media: [],
+  },
+  {
+    id: "contmais",
+    type: "freelance",
+    includeInJourney: false,
+    freelanceOrder: 5,
+    company: "ContMais",
+    role: {
+      pt: "Desenvolvedor Web",
+      en: "Web Developer",
+    },
+    productionDuration: { pt: "~2 meses", en: "~2 months" },
+    recruiterImpact: {
+      pt: "Freelance: sites WordPress/Elementor e gestão de domínios no Registro.br para a ContMais.",
+      en: "Freelance: WordPress/Elementor sites and Registro.br domain management for ContMais.",
+    },
+    shortDescription: {
+      pt: "Criação de websites com WordPress e Elementor; manutenção de domínios no Registro.br conforme solicitado pela empresa.",
+      en: "WordPress and Elementor website builds; Registro.br domain maintenance as requested by the company.",
+    },
+    fullDescription: {
+      pt: `Projeto freelance para a **ContMais** — criação e manutenção de presença digital.
+
+**Entregas**
+
+- **Websites** com **WordPress** e **Elementor** — layout, conteúdo e publicação
+- Manutenção de **domínios no Registro.br** conforme solicitado pela empresa
+- Acompanhamento de **vencimento e renovação** de domínios para evitar indisponibilidade
+- Suporte pontual a ajustes visuais e atualizações de conteúdo`,
+      en: `Freelance project for **ContMais** — building and maintaining their digital presence.
+
+**Deliverables**
+
+- **Websites** with **WordPress** and **Elementor** — layout, content, and publishing
+- **Registro.br domain** maintenance as requested by the company
+- Tracking **expiration and renewal** dates to prevent downtime
+- Ad-hoc support for visual tweaks and content updates`,
+    },
+    technologies: ["WordPress", "Elementor", "PHP", "Registro.br", "HTML/CSS"],
+    clients: [{ name: "ContMais", relationship: "direct" }],
+    media: [],
+  },
+  {
+    id: "barrarey-freelance",
+    type: "freelance",
+    includeInJourney: false,
+    freelanceOrder: 6,
+    company: "Barrarey",
+    role: {
+      pt: "Desenvolvedor de Automação",
+      en: "Automation Developer",
+    },
+    productionDuration: { pt: "~2 meses", en: "~2 months" },
+    recruiterImpact: {
+      pt: "Freelance na Barrarey: automação de etiquetas e otimização da embalagem — listas de pedidos AWS e Bling (Python/PHP).",
+      en: "Freelance at Barrarey: label printing automation and packing optimization — AWS and Bling order lists (Python/PHP).",
+    },
+    shortDescription: {
+      pt: "Automação de impressão de etiquetas e otimização da operação de embalagem — listas de pedidos AWS e Bling em Python e PHP.",
+      en: "Label printing automation and packing workflow optimization — AWS and Bling order lists in Python and PHP.",
+    },
+    fullDescription: {
+      pt: `Projeto freelance na **Barrarey** — automação operacional do fluxo de **impressão de etiquetas** e **embalagem de pedidos**.
+
+**Entregas**
+
+- Sistema de **impressão automatizada de etiquetas** para expedição
+- **Listas de pedidos** que ajudavam o time de embalagem a processar pedidos da **AWS** e do **Bling** sem se perder na operação
+- Scripts em **Python** e **PHP** para sincronização e geração de filas de trabalho
+- Redução de erros manuais e ganho de velocidade no picking e packing`,
+      en: `Freelance project at **Barrarey** — operational automation for **label printing** and **order packing** workflows.
+
+**Deliverables**
+
+- **Automated label printing** system for shipping
+- **Order lists** helping the packing team process **AWS** and **Bling** orders without losing track in operations
+- **Python** and **PHP** scripts for synchronization and work-queue generation
+- Fewer manual errors and faster picking and packing`,
+    },
+    technologies: ["Python", "PHP", "Bling ERP", "AWS", "MySQL", "Automação"],
+    clients: [{ name: "Barrarey", relationship: "direct" }],
+    media: [],
+  },
+  {
     id: "devnology-scraping",
     type: "fulltime",
     employment: "clt",
     company: "Devnology",
     role: {
-      pt: "Desenvolvedor Júnior → Pleno · Scraping & RPA",
-      en: "Junior → Mid-Level Developer · Scraping & RPA",
+      pt: "Engenheiro de Software Pleno",
+      en: "Mid-Level Software Engineer",
     },
     period: { start: "2022-09", end: "2023-09" },
     recruiterImpact: {
-      pt: "Promovido de Júnior a Pleno em 6 meses por impacto em plantões e entregas; trajetória até quase Especialista em Scraping/RPA.",
-      en: "Promoted from Junior to Mid-Level in 6 months for on-call and delivery impact; path toward Scraping/RPA Specialist.",
+      pt: "Primeira passagem na Devnology (set/2022–set/2023): Júnior a Pleno em 6 meses por impacto em plantões e entregas em scraping e RPA.",
+      en: "First stint at Devnology (Sep 2022–Sep 2023): Junior to Mid-Level in 6 months for on-call and delivery impact in scraping and RPA.",
     },
     exitReason: {
       pt: "Saída em setembro de 2023 por layoff após a crise jurídica da 123 Milhas — desligamento estrutural do setor, não por desempenho.",
       en: "Left in September 2023 due to layoff after the 123 Milhas legal crisis — sector-wide restructuring, not performance-related.",
     },
     shortDescription: {
-      pt: "1 ano na Devnology (set/2022–set/2023): 6 meses como Júnior e 7 meses como Pleno — promoção por impacto em plantões e entregas.",
-      en: "1 year at Devnology (Sep 2022–Sep 2023): 6 months as Junior and 7 months as Mid-Level — promoted for on-call and delivery impact.",
+      pt: "1 ano na Devnology (set/2022–set/2023): 6 meses como Eng. Júnior e 7 meses como Eng. Pleno — promoção por plantões e entregas.",
+      en: "1 year at Devnology (Sep 2022–Sep 2023): 6 months as Junior Engineer and 7 months as Mid-Level — promoted for on-call and delivery impact.",
     },
     tenures: [
       {
         company: "Devnology",
         role: {
-          pt: "Desenvolvedor Júnior",
-          en: "Junior Developer",
+          pt: "Engenheiro de Software Júnior",
+          en: "Junior Software Engineer",
         },
         period: { start: "2022-09", end: "2023-02" },
         highlight: {
-          pt: "Web scraping, automação e suporte a clientes do setor de viagens (123 Milhas e MaxMilhas, via Devnology).",
-          en: "Web scraping, automation, and support for travel-sector clients (123 Milhas and MaxMilhas, via Devnology).",
+          pt: "**Realizado:** web scraping, automação e suporte a 123 Milhas/MaxMilhas (via Devnology) — plantões e entregas em extração de alta concorrência. **Evolução:** promoção a Pleno após 6 meses pelo impacto em desenvolvimento, confiabilidade em produção e resolução de incidentes.",
+          en: "**Delivered:** web scraping, automation, and support for 123 Milhas/MaxMilhas (via Devnology) — on-call and high-concurrency extraction. **Growth:** promoted to Mid-Level after 6 months for development impact, production reliability, and incident resolution.",
         },
       },
       {
         company: "Devnology",
         role: {
-          pt: "Desenvolvedor Pleno",
-          en: "Mid-Level Developer",
+          pt: "Engenheiro de Software Pleno",
+          en: "Mid-Level Software Engineer",
         },
-        period: { start: "2023-03", end: "2023-09" },
+        period: { start: "2023-02", end: "2023-09" },
         highlight: {
-          pt: "Promovido após 6 meses pelo impacto no desenvolvimento, plantões e entregas. Prestes a assumir Especialista em Web Scraping e RPA quando um layoff no setor (crise jurídica da 123 Milhas) encerrou a operação em setembro de 2023.",
-          en: "Promoted after 6 months for development impact, on-call rotations, and deliveries. About to become Scraping/RPA Specialist when a sector layoff (123 Milhas legal crisis) ended the operation in September 2023.",
+          pt: "**Realizado:** liderança técnica informal em scraping/RPA, engenharia reversa e operação AWS. **Saída:** layoff em set/2023 pela crise da 123 Milhas — desligamento estrutural, não por desempenho; prestes a assumir Especialista em Scraping/RPA.",
+          en: "**Delivered:** informal technical leadership in scraping/RPA, reverse engineering, and AWS operations. **Exit:** layoff in Sep 2023 due to the 123 Milhas crisis — structural, not performance-related; about to become Scraping/RPA Specialist.",
         },
       },
     ],
     fullDescription: {
-      pt: `Primeira passagem na Devnology — **permanência de 1 ano** (set/2022 a set/2023), com evolução explícita de Júnior para Pleno (veja datas acima). Em outubro de 2023 iniciei no Grupo Domini/Gomind.
+      pt: `Primeira passagem na Devnology — **permanência de 1 ano** (set/2022 a set/2023), com evolução de Júnior para Pleno (veja roadmap acima). Em novembro de 2023 iniciei na Gomind.
 
 **Destaques técnicos**
 
 - Extração em larga escala com alta concorrência
 - Engenharia reversa e contorno de anti-bots (frontend e rede)
 - Puppeteer, Selenium, Python, JavaScript e operação na AWS`,
-      en: `First stint at Devnology — **1 year total** (Sep 2022 to Sep 2023), with a clear Junior-to-Mid-Level progression (see dates above). I joined Grupo Domini/Gomind in October 2023.
+      en: `First stint at Devnology — **1 year total** (Sep 2022 to Sep 2023), with Junior-to-Mid-Level progression (see roadmap above). I joined Gomind in November 2023.
 
 **Technical highlights**
 
@@ -541,43 +835,67 @@ Key highlights:
     media: [],
   },
   {
-    id: "bbr-barrarey",
+    id: "bbr-toys",
     type: "fulltime",
     employment: "clt",
-    company: "BBR / Barrarey",
+    company: "BBR Toys",
     role: {
-      pt: "Desenvolvedor de Software Júnior (Desenvolvedor Único)",
-      en: "Junior Software Developer (Sole Developer)",
+      pt: "Desenvolvedor Web Júnior",
+      en: "Junior Web Developer",
     },
-    period: { start: "2019-07", end: "2021-01" },
+    period: { start: "2021-08", end: "2022-10" },
     recruiterImpact: {
-      pt: "Primeiro emprego na área como desenvolvedor único — autonomia ponta a ponta em e-commerce, automação ERP e evolução do stack para React.",
-      en: "First industry role as the sole developer — end-to-end ownership across e-commerce, ERP automation, and stack evolution toward React.",
+      pt: "Primeiro emprego formal na área (ago/2021–out/2022): de Aprendiz a Web Júnior em e-commerce e desenvolvimento web.",
+      en: "First formal industry role (Aug 2021–Oct 2022): from Apprentice to Junior Web Developer in e-commerce and web development.",
     },
     shortDescription: {
-      pt: "Único desenvolvedor da empresa: e-commerce, automação Bling ERP em Python e transição do frontend para React.js.",
-      en: "Company's sole developer: e-commerce, Bling ERP automation in Python, and frontend transition to React.js.",
+      pt: "BBR Toys (ago/2021–out/2022): Aprendiz (ago/21–ago/22) e Web Júnior (ago–out/22) — e-commerce e desenvolvimento web.",
+      en: "BBR Toys (Aug 2021–Oct 2022): Apprentice (Aug 21–Aug 22) and Junior Web Developer (Aug–Oct 22) — e-commerce and web development.",
     },
+    tenures: [
+      {
+        company: "BBR Toys",
+        role: {
+          pt: "Desenvolvedor Aprendiz",
+          en: "Apprentice Developer",
+        },
+        period: { start: "2021-08", end: "2022-08" },
+        highlight: {
+          pt: "**Realizado (ago/2021–ago/2022):** suporte ao e-commerce, manutenção de sites e aprendizado prático em PHP, JavaScript e MySQL. **Evolução:** promoção a Web Júnior após 1 ano pela consistência nas entregas e autonomia crescente no front-end da loja.",
+          en: "**Delivered (Aug 2021–Aug 2022):** e-commerce support, site maintenance, and hands-on PHP, JavaScript, and MySQL. **Growth:** promoted to Junior Web Developer after 1 year for consistent deliveries and growing front-end autonomy.",
+        },
+      },
+      {
+        company: "BBR Toys",
+        role: {
+          pt: "Desenvolvedor Web Júnior",
+          en: "Junior Web Developer",
+        },
+        period: { start: "2022-08", end: "2022-10" },
+        highlight: {
+          pt: "**Realizado (3 meses):** entregas em front-end e integrações do e-commerce com maior responsabilidade. **Saída:** transição para a Devnology em setembro/2022 como Engenheiro de Software Júnior.",
+          en: "**Delivered (3 months):** front-end work and e-commerce integrations with greater ownership. **Exit:** moved to Devnology in September 2022 as Junior Software Engineer.",
+        },
+      },
+    ],
     fullDescription: {
-      pt: `Atuei como o único desenvolvedor, com responsabilidade ponta a ponta sobre produtos digitais, manutenção e deploy.
+      pt: `Carreira na **BBR Toys** (ago/2021–out/2022): **Aprendiz** de ago/2021 a ago/2022 e **Web Júnior** de ago a out/2022 (veja cada etapa acima).
 
-Principais destaques:
+**Destaques**
 
-- **Autonomia total:** gestão completa do ciclo de desenvolvimento
-- **Automação Bling ERP:** scripts Python para sincronização em tempo real e otimização operacional
-- **Web e e-commerce:** sites institucionais em PHP e evolução para React.js
-- **Banco de dados:** modelagem e operação com MySQL`,
-      en: `I worked as the sole developer with end-to-end ownership of digital products, maintenance, and deployment.
+- E-commerce: manutenção, melhorias e integrações da loja online
+- Desenvolvimento web com **PHP**, **JavaScript** e **MySQL**
+- Base sólida para a carreira em scraping, automação e engenharia de software`,
+      en: `Career at **BBR Toys** (Aug 2021–Oct 2022): **Apprentice** from Aug 2021 to Aug 2022 and **Junior Web Developer** from Aug to Oct 2022 (see each stage above).
 
-Key highlights:
+**Highlights**
 
-- **Full autonomy:** complete ownership of the development lifecycle
-- **Bling ERP automation:** Python scripts for real-time sync and operational optimization
-- **Web and e-commerce:** institutional sites in PHP and evolution toward React.js
-- **Database:** modeling and operations with MySQL`,
+- E-commerce: maintenance, improvements, and online store integrations
+- Web development with **PHP**, **JavaScript**, and **MySQL**
+- Strong foundation for a career in scraping, automation, and software engineering`,
     },
-    technologies: ["Python", "PHP", "React.js", "JavaScript", "Bling ERP", "MySQL"],
-    clients: [{ name: "BBR / Barrarey", relationship: "direct" }],
+    technologies: ["PHP", "JavaScript", "MySQL", "HTML/CSS", "E-commerce"],
+    clients: [{ name: "BBR Toys", relationship: "direct" }],
     media: [],
   },
 ];

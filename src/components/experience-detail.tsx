@@ -4,8 +4,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import ReactMarkdown, { type Components } from "react-markdown";
 import { useTranslation } from "@/components/language-provider";
 import { MediaGallery } from "@/components/media-gallery";
-import { ExperienceTenures } from "@/components/experience-tenures";
-import { formatMonthRange } from "@/lib/tenure-duration";
+import { formatMonthRange, formatTenureDuration } from "@/lib/tenure-duration";
 import {
   EMPLOYMENT_BADGE,
   TYPE_BADGE,
@@ -14,6 +13,7 @@ import {
 
 interface Props {
   entry: ExperienceEntry;
+  tenureIndex?: number | null;
   onClose: () => void;
 }
 
@@ -35,8 +35,23 @@ const markdownComponents: Components = {
   ),
 };
 
-export function ExperienceDetail({ entry, onClose }: Props) {
+export function ExperienceDetail({ entry, tenureIndex = null, onClose }: Props) {
   const { locale, t } = useTranslation();
+
+  const tenure =
+    tenureIndex != null && entry.tenures?.[tenureIndex]
+      ? entry.tenures[tenureIndex]
+      : null;
+
+  const isSingleRoleView = tenure != null;
+  const isLastTenure =
+    tenureIndex != null && entry.tenures
+      ? tenureIndex === entry.tenures.length - 1
+      : true;
+
+  const displayCompany = tenure?.company ?? entry.company;
+  const displayRole = tenure?.role ?? entry.role;
+  const displayPeriod = tenure?.period ?? entry.period;
 
   const employmentLabel =
     entry.employment === "clt"
@@ -44,6 +59,40 @@ export function ExperienceDetail({ entry, onClose }: Props) {
       : entry.employment === "pj"
         ? t.experience.employmentPj
         : null;
+
+  const periodLabel =
+    entry.type === "freelance"
+      ? entry.productionDuration
+        ? `${t.freelances.productionTime}: ${entry.productionDuration[locale]}`
+        : t.freelances.productionTime
+      : displayPeriod
+        ? formatMonthRange(
+            displayPeriod.start,
+            displayPeriod.end,
+            locale,
+            t.experience.present,
+          )
+        : "—";
+
+  const tenureDurationLabel =
+    isSingleRoleView && tenure
+      ? formatTenureDuration(
+          tenure.period.start,
+          tenure.period.end,
+          locale,
+          t.experience.present,
+        )
+      : null;
+
+  const contributionMarkdown = isSingleRoleView
+    ? tenure?.highlight?.[locale] ?? entry.shortDescription[locale]
+    : entry.fullDescription[locale];
+
+  const contributionTitle = isSingleRoleView
+    ? t.experience.contribution
+    : entry.tenures?.length
+      ? t.experience.contributionExtra
+      : t.experience.contribution;
 
   return (
     <AnimatePresence>
@@ -65,7 +114,6 @@ export function ExperienceDetail({ entry, onClose }: Props) {
         className="fixed bottom-0 right-0 top-0 z-91 w-full overflow-y-auto bg-background shadow-2xl sm:w-135 lg:w-150"
       >
         <div className="p-5 sm:p-8">
-          {/* Close */}
           <button
             onClick={onClose}
             className="mb-6 flex h-9 w-9 items-center justify-center rounded-full border border-border text-foreground transition-colors hover:bg-accent/10"
@@ -76,10 +124,9 @@ export function ExperienceDetail({ entry, onClose }: Props) {
             </svg>
           </button>
 
-          {/* Header */}
           <div className="mb-6">
             <div className="flex flex-wrap items-center gap-2">
-              <p className="text-sm font-medium text-accent">{entry.company}</p>
+              <p className="text-sm font-medium text-accent">{displayCompany}</p>
               <span
                 className={`shrink-0 rounded-full px-2.5 py-0.5 text-xs font-semibold ${TYPE_BADGE[entry.type]}`}
               >
@@ -94,27 +141,17 @@ export function ExperienceDetail({ entry, onClose }: Props) {
               )}
             </div>
             <h3 className="mt-1 text-xl font-bold tracking-tight text-foreground sm:text-2xl">
-              {entry.role[locale]}
+              {displayRole[locale]}
             </h3>
-            <p className="mt-1 text-sm text-muted">
-              {formatMonthRange(entry.period.start, entry.period.end, locale, t.experience.present)}
-            </p>
-            {entry.tenures && entry.tenures.length > 0 && (
-              <p className="mt-2 text-xs text-muted">
-                {t.experience.careerPathHint.replace(
-                  "{count}",
-                  String(entry.tenures.length),
-                )}
+            <p className="mt-1 text-sm text-muted">{periodLabel}</p>
+            {tenureDurationLabel && (
+              <p className="mt-1 text-xs text-muted">
+                {t.experience.tenureDuration.replace("{duration}", tenureDurationLabel)}
               </p>
             )}
           </div>
 
-          {entry.tenures && entry.tenures.length > 0 && (
-            <ExperienceTenures tenures={entry.tenures} />
-          )}
-
-          {/* Overview — what the project is */}
-          {entry.overview && (
+          {entry.overview && !isSingleRoleView && (
             <div className="mb-6">
               <h4 className="mb-3 text-sm font-semibold uppercase tracking-wider text-foreground">
                 {t.experience.overview}
@@ -129,7 +166,7 @@ export function ExperienceDetail({ entry, onClose }: Props) {
             </div>
           )}
 
-          {entry.exitReason && (
+          {entry.exitReason && isLastTenure && (
             <div className="mb-8">
               <h4 className="mb-3 text-sm font-semibold uppercase tracking-wider text-foreground">
                 {t.experience.exitReason}
@@ -140,23 +177,41 @@ export function ExperienceDetail({ entry, onClose }: Props) {
             </div>
           )}
 
-          {/* Description — my work on it */}
           <div className="mb-8">
             <h4 className="mb-3 text-sm font-semibold uppercase tracking-wider text-foreground">
-              {entry.tenures?.length
-                ? t.experience.contributionExtra
-                : t.experience.contribution}
+              {contributionTitle}
             </h4>
             <div className="rounded-2xl border border-border/70 bg-foreground/1.5 p-5 text-base shadow-sm dark:bg-white/2.5 sm:p-6">
               <div className="space-y-4">
                 <ReactMarkdown components={markdownComponents}>
-                  {entry.fullDescription[locale]}
+                  {contributionMarkdown}
                 </ReactMarkdown>
               </div>
             </div>
           </div>
 
-          {/* Clients */}
+          {!isSingleRoleView && entry.tenures && entry.tenures.length > 1 && (
+            <div className="mb-8">
+              <h4 className="mb-3 text-sm font-semibold uppercase tracking-wider text-foreground">
+                {t.experience.careerPath}
+              </h4>
+              <p className="mb-3 text-xs text-muted">{t.experience.careerPathHint.replace("{count}", String(entry.tenures.length))}</p>
+              <ul className="space-y-3">
+                {entry.tenures.map((tenureItem, i) => (
+                  <li
+                    key={`${tenureItem.role.pt}-${tenureItem.period.start}`}
+                    className="rounded-xl border border-border px-4 py-3 text-sm"
+                  >
+                    <p className="font-semibold text-foreground">{tenureItem.role[locale]}</p>
+                    <p className="mt-0.5 text-xs text-muted">
+                      {formatMonthRange(tenureItem.period.start, tenureItem.period.end, locale, t.experience.present)}
+                    </p>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+
           {entry.clients && entry.clients.length > 0 && (
             <div className="mb-8">
               <h4 className="mb-3 text-sm font-semibold uppercase tracking-wider text-foreground">
@@ -188,7 +243,6 @@ export function ExperienceDetail({ entry, onClose }: Props) {
             </div>
           )}
 
-          {/* Technologies */}
           <div className="mb-8">
             <h4 className="mb-3 text-sm font-semibold uppercase tracking-wider text-foreground">
               {t.experience.technologies}
@@ -205,7 +259,6 @@ export function ExperienceDetail({ entry, onClose }: Props) {
             </div>
           </div>
 
-          {/* Link */}
           {entry.link && (
             <div className="mb-8">
               {entry.id === "prodia" && (
@@ -229,7 +282,6 @@ export function ExperienceDetail({ entry, onClose }: Props) {
             </div>
           )}
 
-          {/* Gallery */}
           {entry.media.length > 0 && (
             <div>
               <h4 className="mb-3 text-sm font-semibold uppercase tracking-wider text-foreground">

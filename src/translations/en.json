@@ -5,6 +5,7 @@
   "nav": {
     "about": "About",
     "experience": "Experience",
+    "freelances": "Freelance",
     "skills": "Skills",
     "education": "Education",
     "courses": "Courses",
@@ -39,7 +40,8 @@
     "careerPathHint": "{count} stages with time in each role — see below",
     "tenureSingular": "career stage",
     "tenurePlural": "career stages",
-    "tenureListHint": "tap to view timelines",
+    "tenureDuration": "Time in role: {duration}",
+    "tenureListHint": "tap to view full context",
     "clients": "Companies",
     "clientDirect": "Direct",
     "clientIndirect": "Indirect",
@@ -62,12 +64,17 @@
     "viewModeLabel": "View mode",
     "viewJourney": "Journey",
     "viewList": "List",
-    "journeyIntro": "Walk through my path from choosing a tech degree to each professional chapter — use the arrows or click the milestones.",
+    "journeyIntro": "Each milestone is one role and its period — walk through the main career path (full-time, contractor, and personal ventures).",
     "journeyExplore": "Explore this chapter in detail",
     "journeyPrev": "Previous",
     "journeyNext": "Next",
     "journeyStep": "Step {current} of {total}",
     "journeyHint": "Tip: use ← → on your keyboard to navigate"
+  },
+  "freelances": {
+    "title": "Freelance",
+    "subtitle": "Client projects — production time only, no calendar dates.",
+    "productionTime": "Production time"
   },
   "skills": {
     "title": "Technical Skills",
