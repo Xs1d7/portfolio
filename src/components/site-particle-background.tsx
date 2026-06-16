@@ -26,6 +26,7 @@ function Scene({
     sectionProgress,
     scaleProgress,
     heroScrollProgress,
+    pageScrollProgress,
     anchor,
     experienceJourney,
     mouse,
@@ -65,6 +66,7 @@ function Scene({
             sectionProgress={sectionProgress}
             scaleProgress={scaleProgress}
             heroScrollProgress={heroScrollProgress}
+            pageScrollProgress={pageScrollProgress}
             anchor={anchor}
             experienceJourney={experienceJourney}
             mouse={mouse}

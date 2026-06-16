@@ -11,10 +11,7 @@ import {
 } from "react";
 import dynamic from "next/dynamic";
 import { useActiveSection, type SectionId } from "@/hooks/use-active-section";
-import {
-  useSilhouetteAnchor,
-  type SilhouetteAnchorRect,
-} from "@/hooks/use-silhouette-anchor";
+import type { SilhouetteAnchorRect } from "@/hooks/use-silhouette-anchor";
 import { useMediaCapabilities } from "@/hooks/use-media-capabilities";
 import { useParticleScroll } from "@/hooks/use-particle-scroll";
 import {
@@ -60,6 +57,13 @@ const ParticleBackgroundContext = createContext<ParticleBackgroundState | null>(
   null,
 );
 
+const VIEWPORT_PLANET_ANCHOR: SilhouetteAnchorRect = {
+  centerX: 0.5,
+  centerY: 0.48,
+  width: 0.5,
+  height: 0.5,
+};
+
 export function ParticleBackgroundProvider({ children }: { children: ReactNode }) {
   const { isMobile, isCoarsePointer, prefersReducedMotion } =
     useMediaCapabilities();
@@ -67,10 +71,9 @@ export function ParticleBackgroundProvider({ children }: { children: ReactNode }
   const { pageScrollProgress, heroScrollProgress, scaleProgress } =
     useParticleScroll();
   const [mouse, setMouseState] = useState({ x: 0.5, y: 0.5 });
-  const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
   const [journeyEl, setJourneyEl] = useState<HTMLElement | null>(null);
   const [journeyCount, setJourneyCount] = useState(1);
-  const anchor = useSilhouetteAnchor(anchorEl);
+  const anchor = VIEWPORT_PLANET_ANCHOR;
   const experienceJourney = useExperienceJourneyScroll(journeyEl, journeyCount);
 
   const enabled =
@@ -107,8 +110,8 @@ export function ParticleBackgroundProvider({ children }: { children: ReactNode }
     return () => window.removeEventListener("mousemove", onMove);
   }, [trackMouse]);
 
-  const registerSilhouetteAnchor = useCallback((el: HTMLElement | null) => {
-    setAnchorEl(el);
+  const registerSilhouetteAnchor = useCallback((_el: HTMLElement | null) => {
+    // Planet anchor is viewport-fixed; hero no longer drives position.
   }, []);
 
   const registerExperienceJourney = useCallback(

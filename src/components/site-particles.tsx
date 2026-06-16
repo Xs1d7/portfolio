@@ -14,8 +14,11 @@ const REPULSE_RADIUS = 0.1;
 const REPULSE_STRENGTH = 0.055;
 const AMBIENT_REPULSE_RADIUS = 0.07;
 const AMBIENT_REPULSE_STRENGTH = 0.028;
-const FULL_SCALE = 1.35;
-const PORTRAIT_FILL = 0.72;
+const SHAPE_NORMALIZE = 1.35;
+const PLANET_SCALE_START = 0.34;
+const PLANET_SCALE_HERO = 0.48;
+const AMBIENT_SCALE = 0.68;
+const PAGE_DRIFT = 0.2;
 const MODE_LERP = 0.1;
 const MODE_LERP_LOWER = 0.14;
 const DISSOLVE_LERP = 0.12;
@@ -55,7 +58,7 @@ interface SectionMode {
 }
 
 const SECTION_MODES: Record<SectionId, SectionMode> = {
-  about: { opacity: 0.9, scatter: 0, drift: 0.00015, attractor: "silhouette" },
+  about: { opacity: 0.78, scatter: 0, drift: 0.00015, attractor: "silhouette" },
   experience: {
     opacity: 0.5,
     scatter: 0.5,
@@ -106,6 +109,7 @@ interface Props {
   sectionProgress: number;
   scaleProgress: number;
   heroScrollProgress: number;
+  pageScrollProgress: number;
   anchor: SilhouetteAnchorRect;
   experienceJourney: ExperienceJourneyScroll;
   mouse: { x: number; y: number };
@@ -149,8 +153,8 @@ function subsample(points: SilhouettePoint[], max: number): SilhouettePoint[] {
 }
 
 function toWorld(p: SilhouettePoint): THREE.Vector3 {
-  const x = (p.x - 0.5) * FULL_SCALE;
-  const y = (p.y - 0.5) * FULL_SCALE;
+  const x = (p.x - 0.5) * SHAPE_NORMALIZE;
+  const y = (p.y - 0.5) * SHAPE_NORMALIZE;
   const z = p.z * 0.5;
   return new THREE.Vector3(x, y, z);
 }
@@ -418,6 +422,7 @@ export function SiteParticles({
   sectionProgress,
   scaleProgress,
   heroScrollProgress,
+  pageScrollProgress,
   anchor,
   experienceJourney,
   mouse,
@@ -429,7 +434,7 @@ export function SiteParticles({
   const modeRef = useRef(SECTION_MODES.about);
   const opacityRef = useRef(SECTION_MODES.about.opacity);
   const dissolveRef = useRef(0);
-  const scaleRef = useRef(0.35);
+  const scaleRef = useRef(PLANET_SCALE_START);
   const frozenAnchorRef = useRef({ x: 0, y: 0 });
   const centerRef = useRef({ x: 0, y: 0 });
   const experienceEnterTimeRef = useRef<number | null>(null);
@@ -572,40 +577,32 @@ export function SiteParticles({
     const burst = burstRef.current;
 
     const anchorWorld = anchorToWorld(anchor, aspect);
+    void anchorWorld;
 
-    if (phase === "portrait") {
-      frozenAnchorRef.current = anchorWorld;
-    }
-
-    const positionProgress =
-      phase === "portrait"
-        ? 0
-        : phase === "expanding"
-          ? easeInOutCubic(scaleProgress)
-          : 1;
-
-    const targetCenterX = lerp(frozenAnchorRef.current.x, 0, positionProgress);
-    const targetCenterY = lerp(frozenAnchorRef.current.y, 0, positionProgress);
-
-    if (phase === "portrait") {
-      centerRef.current = anchorWorld;
-    } else {
-      centerRef.current.x = targetCenterX;
-      centerRef.current.y = targetCenterY;
-    }
+    const pageDriftY = (pageScrollProgress - 0.5) * PAGE_DRIFT;
+    centerRef.current.x = 0;
+    centerRef.current.y = pageDriftY;
+    frozenAnchorRef.current = { x: 0, y: 0 };
 
     const centerX = centerRef.current.x;
     const centerY = centerRef.current.y;
 
-    const portraitScale =
-      ((anchor.height * 1.85 * PORTRAIT_FILL) / FULL_SCALE) * 0.95;
-    const fullScale = 1.15;
-    let targetScale = portraitScale;
+    let targetScale = PLANET_SCALE_START;
 
-    if (phase === "expanding") {
-      targetScale = lerp(portraitScale, fullScale, easeInOutCubic(scaleProgress));
-    } else if (phase === "dissolving" || phase === "ambient") {
-      targetScale = fullScale;
+    if (phase === "portrait") {
+      targetScale = PLANET_SCALE_START;
+    } else if (phase === "expanding" && activeSection === "about") {
+      targetScale = lerp(
+        PLANET_SCALE_START,
+        PLANET_SCALE_HERO,
+        easeInOutCubic(scaleProgress),
+      );
+    } else if (phase === "dissolving") {
+      targetScale = lerp(PLANET_SCALE_HERO, AMBIENT_SCALE, dissolve);
+    } else if (phase === "ambient") {
+      targetScale = AMBIENT_SCALE;
+    } else {
+      targetScale = PLANET_SCALE_HERO;
     }
 
     scaleRef.current = lerp(scaleRef.current, targetScale, SCALE_LERP);
@@ -643,7 +640,7 @@ export function SiteParticles({
         ? lerp(mode.opacity, 0.03, burst)
         : phase === "ambient" || phase === "dissolving"
           ? mode.opacity
-          : 0.9,
+          : mode.opacity,
       modeLerp,
     );
 

@@ -10,10 +10,10 @@ export interface SilhouetteAnchorRect {
 }
 
 const DEFAULT_ANCHOR: SilhouetteAnchorRect = {
-  centerX: 0.72,
-  centerY: 0.52,
-  width: 0.35,
-  height: 0.55,
+  centerX: 0.5,
+  centerY: 0.5,
+  width: 0.88,
+  height: 0.72,
 };
 
 export function useSilhouetteAnchor(element: HTMLElement | null) {
