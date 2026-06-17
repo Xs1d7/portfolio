@@ -28,7 +28,6 @@ function Scene({
     heroScrollProgress,
     pageScrollProgress,
     anchor,
-    experienceJourney,
     mouse,
     interactive,
     ambientRepulse,
@@ -68,7 +67,6 @@ function Scene({
             heroScrollProgress={heroScrollProgress}
             pageScrollProgress={pageScrollProgress}
             anchor={anchor}
-            experienceJourney={experienceJourney}
             mouse={mouse}
             interactive={interactive}
             ambientRepulse={ambientRepulse}

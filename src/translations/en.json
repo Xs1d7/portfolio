@@ -67,7 +67,10 @@
     "journeyPrev": "Previous",
     "journeyNext": "Next",
     "journeyStep": "Step {current} of {total}",
-    "journeyHint": "Scroll to move through the timeline, or use ← → on your keyboard"
+    "journeyHint": "Use the buttons or ← → on your keyboard to navigate",
+    "companyHighlightLabel": "My company",
+    "companyHighlightTitle": "Mãos Livres",
+    "companyHighlightDescription": "Custom automation, software, and products for businesses — free diagnosis within 48 hours."
   },
   "freelances": {
     "title": "Freelance",

@@ -5,7 +5,6 @@ import * as THREE from "three";
 import { useFrame, useThree } from "@react-three/fiber";
 import type { SectionId } from "@/hooks/use-active-section";
 import type { SilhouetteAnchorRect } from "@/hooks/use-silhouette-anchor";
-import type { ExperienceJourneyScroll } from "@/hooks/use-experience-journey-scroll";
 import type { SilhouettePoint } from "@/lib/silhouette-data";
 
 const MAX_POINTS = 1200;
@@ -28,8 +27,6 @@ const SCALE_LERP = 0.08;
 const BURST_LERP = 0.09;
 const BURST_MAX = 7.5;
 const REFORM_DURATION = 0.6;
-
-const BURST_HOLD_SECTIONS = new Set<SectionId>(["experience"]);
 
 const LOWER_SECTIONS = new Set<SectionId>([
   "freelances",
@@ -111,7 +108,6 @@ interface Props {
   heroScrollProgress: number;
   pageScrollProgress: number;
   anchor: SilhouetteAnchorRect;
-  experienceJourney: ExperienceJourneyScroll;
   mouse: { x: number; y: number };
   interactive: boolean;
   ambientRepulse: boolean;
@@ -208,8 +204,6 @@ function computeBurstIntensity(
   heroScrollProgress: number,
   scaleProgress: number,
 ): number {
-  if (BURST_HOLD_SECTIONS.has(activeSection)) return 1;
-
   if (activeSection === "about") {
     if (scaleProgress < 0.85) return 0;
     const p = clamp01((heroScrollProgress - 0.72) / 0.28);
@@ -343,7 +337,11 @@ function applyExperienceVariant(
   y: number,
   i: number,
   variant: ExperienceVariant,
-  journey: ExperienceJourneyScroll,
+  journey: {
+    milestoneIndex: number;
+    milestoneProgress: number;
+    journeyProgress: number;
+  },
   time: number,
 ): [number, number] {
   const scrollPhase =
@@ -390,20 +388,14 @@ function applyExperienceAttractor(
   x: number,
   y: number,
   i: number,
-  journey: ExperienceJourneyScroll,
   time: number,
 ): [number, number] {
-  const effective = journey.active
-    ? journey
-    : {
-        ...journey,
-        active: true,
-        milestoneCount: EXPERIENCE_VARIANTS.length,
-        milestoneIndex:
-          Math.floor(time * 0.12) % EXPERIENCE_VARIANTS.length,
-        milestoneProgress: (time * 0.12) % 1,
-        journeyProgress: (time * 0.06) % 1,
-      };
+  const effective = {
+    milestoneCount: EXPERIENCE_VARIANTS.length,
+    milestoneIndex: Math.floor(time * 0.12) % EXPERIENCE_VARIANTS.length,
+    milestoneProgress: (time * 0.12) % 1,
+    journeyProgress: (time * 0.06) % 1,
+  };
 
   const len = EXPERIENCE_VARIANTS.length;
   const current = EXPERIENCE_VARIANTS[effective.milestoneIndex % len];
@@ -424,7 +416,6 @@ export function SiteParticles({
   heroScrollProgress,
   pageScrollProgress,
   anchor,
-  experienceJourney,
   mouse,
   interactive,
   ambientRepulse,
@@ -721,13 +712,7 @@ export function SiteParticles({
           let ax: number;
           let ay: number;
           if (activeSection === "experience") {
-            [ax, ay] = applyExperienceAttractor(
-              x,
-              y,
-              i,
-              experienceJourney,
-              time,
-            );
+            [ax, ay] = applyExperienceAttractor(x, y, i, time);
           } else if (inLower) {
             [ax, ay] = computeLowerAmbientTarget(
               activeSection,
@@ -748,12 +733,8 @@ export function SiteParticles({
         }
 
         if (activeSection === "experience" && phase === "ambient") {
-          const jp = experienceJourney.active
-            ? experienceJourney.journeyProgress
-            : (time * 0.06) % 1;
-          const mp = experienceJourney.active
-            ? experienceJourney.milestoneProgress
-            : (time * 0.12) % 1;
+          const jp = (time * 0.06) % 1;
+          const mp = (time * 0.12) % 1;
           ambientX += Math.sin(jp * 16 + i * 0.07 + time * 0.3) * 0.045;
           ambientY += Math.cos(jp * 13 + i * 0.05 + mp * 4) * 0.04;
         }

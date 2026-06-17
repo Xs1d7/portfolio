@@ -67,7 +67,10 @@
     "journeyPrev": "Anterior",
     "journeyNext": "Próximo",
     "journeyStep": "Etapa {current} de {total}",
-    "journeyHint": "Role para avançar na linha do tempo, ou use ← → no teclado"
+    "journeyHint": "Use os botões ou as setas ← → no teclado para navegar",
+    "companyHighlightLabel": "Minha empresa",
+    "companyHighlightTitle": "Mãos Livres",
+    "companyHighlightDescription": "Automação, software e produtos sob medida para empresas — diagnóstico gratuito em até 48h."
   },
   "freelances": {
     "title": "Freelances",

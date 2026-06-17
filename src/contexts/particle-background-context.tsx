@@ -14,10 +14,6 @@ import { useActiveSection, type SectionId } from "@/hooks/use-active-section";
 import type { SilhouetteAnchorRect } from "@/hooks/use-silhouette-anchor";
 import { useMediaCapabilities } from "@/hooks/use-media-capabilities";
 import { useParticleScroll } from "@/hooks/use-particle-scroll";
-import {
-  useExperienceJourneyScroll,
-  type ExperienceJourneyScroll,
-} from "@/hooks/use-experience-journey-scroll";
 
 const SiteCursor = dynamic(
   () => import("@/components/site-cursor").then((m) => m.SiteCursor),
@@ -39,7 +35,6 @@ interface ParticleBackgroundState {
   heroScrollProgress: number;
   scaleProgress: number;
   anchor: SilhouetteAnchorRect;
-  experienceJourney: ExperienceJourneyScroll;
   mouse: { x: number; y: number };
   interactive: boolean;
   ambientRepulse: boolean;
@@ -47,10 +42,6 @@ interface ParticleBackgroundState {
   enabled: boolean;
   setMouse: (mouse: { x: number; y: number }) => void;
   registerSilhouetteAnchor: (el: HTMLElement | null) => void;
-  registerExperienceJourney: (
-    el: HTMLElement | null,
-    milestoneCount: number,
-  ) => void;
 }
 
 const ParticleBackgroundContext = createContext<ParticleBackgroundState | null>(
@@ -71,10 +62,7 @@ export function ParticleBackgroundProvider({ children }: { children: ReactNode }
   const { pageScrollProgress, heroScrollProgress, scaleProgress } =
     useParticleScroll();
   const [mouse, setMouseState] = useState({ x: 0.5, y: 0.5 });
-  const [journeyEl, setJourneyEl] = useState<HTMLElement | null>(null);
-  const [journeyCount, setJourneyCount] = useState(1);
   const anchor = VIEWPORT_PLANET_ANCHOR;
-  const experienceJourney = useExperienceJourneyScroll(journeyEl, journeyCount);
 
   const enabled =
     !isMobile && !isCoarsePointer && !prefersReducedMotion;
@@ -114,14 +102,6 @@ export function ParticleBackgroundProvider({ children }: { children: ReactNode }
     // Planet anchor is viewport-fixed; hero no longer drives position.
   }, []);
 
-  const registerExperienceJourney = useCallback(
-    (el: HTMLElement | null, milestoneCount: number) => {
-      setJourneyEl(el);
-      setJourneyCount(Math.max(1, milestoneCount));
-    },
-    [],
-  );
-
   const value = useMemo(
     () => ({
       activeSection,
@@ -130,7 +110,6 @@ export function ParticleBackgroundProvider({ children }: { children: ReactNode }
       heroScrollProgress,
       scaleProgress,
       anchor,
-      experienceJourney,
       mouse,
       interactive,
       ambientRepulse,
@@ -138,7 +117,6 @@ export function ParticleBackgroundProvider({ children }: { children: ReactNode }
       enabled,
       setMouse,
       registerSilhouetteAnchor,
-      registerExperienceJourney,
     }),
     [
       activeSection,
@@ -147,7 +125,6 @@ export function ParticleBackgroundProvider({ children }: { children: ReactNode }
       heroScrollProgress,
       scaleProgress,
       anchor,
-      experienceJourney,
       mouse,
       interactive,
       ambientRepulse,
@@ -155,7 +132,6 @@ export function ParticleBackgroundProvider({ children }: { children: ReactNode }
       enabled,
       setMouse,
       registerSilhouetteAnchor,
-      registerExperienceJourney,
     ],
   );
 

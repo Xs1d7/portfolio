@@ -37,29 +37,15 @@ function stripMarkdown(text: string): string {
 
 interface Props {
   onOpenDetail: (selection: ExperienceSelection) => void;
-  scrollActiveIndex?: number;
-  scrollEnabled?: boolean;
-  onUserNavigate?: (index: number) => void;
 }
 
-export function ExperienceJourney({
-  onOpenDetail,
-  scrollActiveIndex,
-  scrollEnabled = false,
-  onUserNavigate,
-}: Props) {
+export function ExperienceJourney({ onOpenDetail }: Props) {
   const { t, locale } = useTranslation();
   const prefersReducedMotion = useReducedMotion();
   const milestones = useMemo(() => getCareerMilestones(), []);
   const [activeIndex, setActiveIndex] = useState(0);
 
-  const displayIndex =
-    scrollEnabled &&
-    scrollActiveIndex !== undefined &&
-    scrollActiveIndex >= 0
-      ? scrollActiveIndex
-      : activeIndex;
-
+  const displayIndex = activeIndex;
   const active = milestones[displayIndex];
   const linkedEntry = active.experienceId
     ? getExperienceById(active.experienceId)
@@ -69,9 +55,8 @@ export function ExperienceJourney({
     (index: number) => {
       const next = Math.max(0, Math.min(milestones.length - 1, index));
       setActiveIndex(next);
-      onUserNavigate?.(next);
     },
-    [milestones.length, onUserNavigate],
+    [milestones.length],
   );
 
   useEffect(() => {
@@ -252,27 +237,59 @@ export function ExperienceJourney({
             )}
 
             {linkedEntry && (
-              <motion.button
-                type="button"
-                whileHover={prefersReducedMotion ? undefined : { x: 4 }}
-                onClick={openLinkedDetail}
-                className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-accent transition-colors hover:text-accent-hover"
-              >
-                {t.experience.journeyExplore}
-                <svg
-                  width="16"
-                  height="16"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
+              <div className="mt-6 flex flex-wrap items-center gap-4">
+                <motion.button
+                  type="button"
+                  whileHover={prefersReducedMotion ? undefined : { x: 4 }}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    openLinkedDetail();
+                  }}
+                  className="inline-flex items-center gap-2 text-sm font-semibold text-accent transition-colors hover:text-accent-hover"
                 >
-                  <path d="M5 12h14" />
-                  <path d="m12 5 7 7-7 7" />
-                </svg>
-              </motion.button>
+                  {t.experience.journeyExplore}
+                  <svg
+                    width="16"
+                    height="16"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  >
+                    <path d="M5 12h14" />
+                    <path d="m12 5 7 7-7 7" />
+                  </svg>
+                </motion.button>
+
+                {linkedEntry.link && (
+                  <a
+                    href={linkedEntry.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={(e) => e.stopPropagation()}
+                    className="inline-flex items-center gap-2 rounded-full border border-border px-4 py-2 text-sm font-semibold text-foreground transition-colors hover:border-accent/40 hover:text-accent"
+                  >
+                    {linkedEntry.id === "maos-livres"
+                      ? t.experience.visitHub
+                      : t.experience.visitSite}
+                    <svg
+                      width="14"
+                      height="14"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    >
+                      <path d="M7 7h10v10" />
+                      <path d="M7 17 17 7" />
+                    </svg>
+                  </a>
+                )}
+              </div>
             )}
           </motion.article>
         </AnimatePresence>
