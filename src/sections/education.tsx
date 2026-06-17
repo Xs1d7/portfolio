@@ -20,7 +20,7 @@ export function Education() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.4, delay: i * 0.1 }}
-            className="group rounded-2xl border border-border p-5 transition-all duration-200 hover:border-accent/30 hover:shadow-lg hover:shadow-accent/5 sm:p-6"
+            className="group rounded-2xl border border-border bg-background p-5 transition-all duration-200 hover:border-accent/30 hover:shadow-lg hover:shadow-accent/5 sm:p-6"
           >
             <div className="flex flex-col gap-4 min-[420px]:flex-row min-[420px]:items-start">
               {/* Icon */}

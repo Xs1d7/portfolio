@@ -171,7 +171,7 @@ export function ExperienceJourney({ onOpenDetail }: Props) {
                   }
                 : undefined
             }
-            className={`rounded-2xl border border-border bg-linear-to-br from-accent/3 via-transparent to-transparent p-5 shadow-sm sm:p-8${
+            className={`rounded-2xl border border-border bg-background p-5 shadow-sm sm:p-8${
               linkedEntry
                 ? " cursor-pointer transition-colors hover:border-accent/30 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/40"
                 : ""

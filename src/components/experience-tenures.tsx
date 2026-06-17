@@ -59,7 +59,7 @@ export function ExperienceTenures({ tenures }: Props) {
                 {index + 1}
               </span>
 
-              <div className="min-w-0 flex-1 rounded-2xl border border-border bg-foreground/1.5 p-4 dark:bg-white/2">
+              <div className="min-w-0 flex-1 rounded-2xl border border-border bg-background p-4">
                 <div className="flex flex-wrap items-start justify-between gap-2">
                   <div>
                     <p className="text-xs font-semibold uppercase tracking-wide text-accent">

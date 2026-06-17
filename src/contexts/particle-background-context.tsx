@@ -6,6 +6,7 @@ import {
   useContext,
   useEffect,
   useMemo,
+  useRef,
   useState,
   type ReactNode,
 } from "react";
@@ -40,8 +41,10 @@ interface ParticleBackgroundState {
   ambientRepulse: boolean;
   trackMouse: boolean;
   enabled: boolean;
+  overlaySuppressed: boolean;
   setMouse: (mouse: { x: number; y: number }) => void;
   registerSilhouetteAnchor: (el: HTMLElement | null) => void;
+  registerOverlaySuppression: (active: boolean) => void;
 }
 
 const ParticleBackgroundContext = createContext<ParticleBackgroundState | null>(
@@ -62,6 +65,8 @@ export function ParticleBackgroundProvider({ children }: { children: ReactNode }
   const { pageScrollProgress, heroScrollProgress, scaleProgress } =
     useParticleScroll();
   const [mouse, setMouseState] = useState({ x: 0.5, y: 0.5 });
+  const overlayCountRef = useRef(0);
+  const [overlaySuppressed, setOverlaySuppressed] = useState(false);
   const anchor = VIEWPORT_PLANET_ANCHOR;
 
   const enabled =
@@ -102,6 +107,12 @@ export function ParticleBackgroundProvider({ children }: { children: ReactNode }
     // Planet anchor is viewport-fixed; hero no longer drives position.
   }, []);
 
+  const registerOverlaySuppression = useCallback((active: boolean) => {
+    overlayCountRef.current += active ? 1 : -1;
+    if (overlayCountRef.current < 0) overlayCountRef.current = 0;
+    setOverlaySuppressed(overlayCountRef.current > 0);
+  }, []);
+
   const value = useMemo(
     () => ({
       activeSection,
@@ -115,8 +126,10 @@ export function ParticleBackgroundProvider({ children }: { children: ReactNode }
       ambientRepulse,
       trackMouse,
       enabled,
+      overlaySuppressed,
       setMouse,
       registerSilhouetteAnchor,
+      registerOverlaySuppression,
     }),
     [
       activeSection,
@@ -130,8 +143,10 @@ export function ParticleBackgroundProvider({ children }: { children: ReactNode }
       ambientRepulse,
       trackMouse,
       enabled,
+      overlaySuppressed,
       setMouse,
       registerSilhouetteAnchor,
+      registerOverlaySuppression,
     ],
   );
 
@@ -152,4 +167,14 @@ export function useParticleBackground() {
     );
   }
   return ctx;
+}
+
+/** Fade particle layer while modals/panels are open over page content. */
+export function useParticleOverlaySuppression(active: boolean) {
+  const { registerOverlaySuppression } = useParticleBackground();
+
+  useEffect(() => {
+    registerOverlaySuppression(active);
+    return () => registerOverlaySuppression(false);
+  }, [active, registerOverlaySuppression]);
 }

@@ -10,10 +10,10 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
     <ParticleBackgroundProvider>
       <PanelMascotProvider>
         <Header />
-        <div className="relative z-10 mx-auto w-full max-w-5xl px-5 sm:px-6 lg:px-8">
+        <div className="relative z-10 mx-auto w-full max-w-5xl isolate px-5 sm:px-6 lg:px-8">
           {children}
         </div>
-        <div className="relative z-10 mx-auto w-full max-w-5xl px-5 sm:px-6 lg:px-8">
+        <div className="relative z-10 mx-auto w-full max-w-5xl isolate px-5 sm:px-6 lg:px-8">
           <Footer />
         </div>
       </PanelMascotProvider>

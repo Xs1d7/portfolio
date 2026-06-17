@@ -10,7 +10,7 @@ export function MaosLivresHighlight() {
       href="https://maoslivres.com"
       target="_blank"
       rel="noopener noreferrer"
-      className="group mb-8 flex flex-col gap-3 rounded-2xl border border-border bg-linear-to-br from-sky-500/5 via-transparent to-accent/5 p-5 transition-colors hover:border-accent/35 sm:flex-row sm:items-center sm:justify-between sm:p-6"
+      className="group mb-8 flex flex-col gap-3 rounded-2xl border border-border bg-background bg-linear-to-br from-sky-500/5 via-background to-accent/5 p-5 transition-colors hover:border-accent/35 sm:flex-row sm:items-center sm:justify-between sm:p-6"
     >
       <div className="min-w-0">
         <p className="text-xs font-semibold uppercase tracking-widest text-sky-600 dark:text-sky-400">

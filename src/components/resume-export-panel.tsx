@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { useTranslation } from "@/components/language-provider";
+import { useParticleOverlaySuppression } from "@/contexts/particle-background-context";
 import {
   buildResumePdfPayload,
   resumeFileName,
@@ -19,6 +20,8 @@ export function ResumeExportPanel() {
   const [includeFreelances, setIncludeFreelances] = useState(true);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+
+  useParticleOverlaySuppression(open);
 
   const toggleTech = (tech: TechFocus) => {
     setTechFocus((prev) =>
@@ -88,7 +91,7 @@ export function ResumeExportPanel() {
     t.resumeExport.techs[key as keyof typeof t.resumeExport.techs];
 
   return (
-    <div className="flex w-full flex-col items-start min-[380px]:w-auto">
+    <div className="relative z-20 flex w-full flex-col items-start min-[380px]:w-auto">
       <button
         type="button"
         onClick={() => setOpen((v) => !v)}
@@ -130,7 +133,7 @@ export function ResumeExportPanel() {
       {open && (
         <div
           id="resume-export-panel"
-          className="mt-3 w-full max-w-xl rounded-2xl border border-border bg-foreground/2 p-4 shadow-sm sm:p-5"
+          className="mt-3 w-full max-w-xl rounded-2xl border border-border bg-background/95 p-4 shadow-lg ring-1 ring-border/60 backdrop-blur-md sm:p-5"
         >
           <h2 className="text-sm font-semibold text-foreground">
             {t.resumeExport.title}
