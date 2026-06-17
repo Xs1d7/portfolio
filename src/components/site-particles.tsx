@@ -13,10 +13,10 @@ const REPULSE_RADIUS = 0.1;
 const REPULSE_STRENGTH = 0.055;
 const AMBIENT_REPULSE_RADIUS = 0.07;
 const AMBIENT_REPULSE_STRENGTH = 0.028;
-const SHAPE_NORMALIZE = 1.35;
-const PLANET_SCALE_START = 0.34;
-const PLANET_SCALE_HERO = 0.48;
-const AMBIENT_SCALE = 0.68;
+const SHAPE_NORMALIZE = 1.55;
+const PLANET_SCALE_START = 0.46;
+const PLANET_SCALE_HERO = 0.66;
+const AMBIENT_SCALE = 0.8;
 const PAGE_DRIFT = 0.2;
 const MODE_LERP = 0.1;
 const MODE_LERP_LOWER = 0.14;
@@ -481,7 +481,7 @@ export function SiteParticles({
       new THREE.PointsMaterial({
         color: new THREE.Color(accentColor),
         map: circleMap ?? undefined,
-        size: 0.011,
+        size: 0.013,
         sizeAttenuation: true,
         transparent: true,
         opacity: 0.9,
@@ -637,14 +637,14 @@ export function SiteParticles({
 
     material.size =
       phase === "portrait"
-        ? 0.012
+        ? 0.015
         : inBurst
-          ? 0.007
+          ? 0.008
           : inLower && phase === "ambient"
-            ? 0.01
+            ? 0.012
             : phase === "ambient"
-              ? 0.009
-              : 0.01;
+              ? 0.011
+              : 0.012;
 
     for (let i = 0; i < sampled.length; i++) {
       if (phase === "ambient" && !ambientSet.has(i) && !inBurst) {
