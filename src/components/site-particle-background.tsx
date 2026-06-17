@@ -33,6 +33,7 @@ function Scene({
     ambientRepulse,
     trackMouse,
     setMouse,
+    overlaySuppressed,
   } = useParticleBackground();
 
   const onPointerMove = useCallback(
@@ -71,6 +72,7 @@ function Scene({
             interactive={interactive}
             ambientRepulse={ambientRepulse}
             accentColor={accentColor}
+            overlaySuppressed={overlaySuppressed}
           />
         </Suspense>
       </Canvas>

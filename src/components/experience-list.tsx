@@ -68,7 +68,7 @@ export function ExperienceList({ entries, onSelect }: Props) {
                 transition={{ duration: 0.4, delay: Math.min(i * 0.05, 0.4) }}
                 {...cardMotion}
                 onClick={() => onSelect({ entry, tenureIndex: step.tenureIndex })}
-                className="group w-full rounded-2xl border border-border p-4 text-left transition-all duration-200 hover:border-accent/40 hover:shadow-lg hover:shadow-accent/5 sm:p-5"
+                className="group w-full rounded-2xl border border-border bg-background p-4 text-left transition-all duration-200 hover:border-accent/40 hover:shadow-lg hover:shadow-accent/5 sm:p-5"
               >
                 <div className="flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between">
                   <div className="min-w-0 flex-1">

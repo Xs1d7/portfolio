@@ -11,7 +11,7 @@ import { Contact } from "@/sections/contact";
 
 export default function Home() {
   return (
-    <main className="relative z-10">
+    <main className="relative isolate z-10">
       <Hero />
       <Experience />
       <Freelances />

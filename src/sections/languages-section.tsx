@@ -27,7 +27,7 @@ export function Languages() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.4, delay: i * 0.1 }}
-            className="rounded-2xl border border-border p-5 text-center transition-all duration-200 hover:border-accent/30 hover:shadow-lg hover:shadow-accent/5 sm:p-6"
+            className="rounded-2xl border border-border bg-background p-5 text-center transition-all duration-200 hover:border-accent/30 hover:shadow-lg hover:shadow-accent/5 sm:p-6"
           >
             {/* Flag */}
             <span className="text-4xl">{lang.flag}</span>

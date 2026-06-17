@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import ReactMarkdown, { type Components } from "react-markdown";
 import { useTranslation } from "@/components/language-provider";
 import { usePanelMascot } from "@/contexts/panel-mascot-context";
+import { useParticleOverlaySuppression } from "@/contexts/particle-background-context";
 import { MediaGallery } from "@/components/media-gallery";
 import { formatMonthRange, formatTenureDuration } from "@/lib/tenure-duration";
 import {
@@ -40,6 +41,8 @@ const markdownComponents: Components = {
 export function ExperienceDetail({ entry, tenureIndex = null, onClose }: Props) {
   const { locale, t } = useTranslation();
   const { notifyPanelOpen, notifyPanelClose } = usePanelMascot();
+
+  useParticleOverlaySuppression(true);
 
   useEffect(() => {
     notifyPanelOpen();

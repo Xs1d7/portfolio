@@ -112,6 +112,7 @@ interface Props {
   interactive: boolean;
   ambientRepulse: boolean;
   accentColor: string;
+  overlaySuppressed: boolean;
 }
 
 function createCircleParticleTexture() {
@@ -420,6 +421,7 @@ export function SiteParticles({
   interactive,
   ambientRepulse,
   accentColor,
+  overlaySuppressed,
 }: Props) {
   const ref = useRef<THREE.Points>(null);
   const modeRef = useRef(SECTION_MODES.about);
@@ -784,7 +786,7 @@ export function SiteParticles({
     }
     attr.needsUpdate = true;
 
-    material.opacity = opacityRef.current;
+    material.opacity = overlaySuppressed ? 0 : opacityRef.current;
   });
 
   return <points ref={ref} geometry={geometry} material={material} />;

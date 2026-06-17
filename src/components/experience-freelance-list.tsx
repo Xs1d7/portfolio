@@ -40,7 +40,7 @@ export function ExperienceFreelanceList({ entries, onSelect }: Props) {
             transition={{ duration: 0.35, delay: Math.min(i * 0.04, 0.3) }}
             {...cardMotion}
             onClick={() => onSelect({ entry, tenureIndex: null })}
-            className="group flex h-full flex-col rounded-2xl border border-border p-4 text-left transition-all duration-200 hover:border-amber-500/40 hover:shadow-lg hover:shadow-amber-500/5 sm:p-5"
+            className="group flex h-full flex-col rounded-2xl border border-border bg-background p-4 text-left transition-all duration-200 hover:border-amber-500/40 hover:shadow-lg hover:shadow-amber-500/5 sm:p-5"
           >
             <div className="flex items-start justify-between gap-3">
               <div className="min-w-0 flex-1">

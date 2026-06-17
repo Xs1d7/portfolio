@@ -76,7 +76,7 @@ export function Skills() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.4 }}
-              className="rounded-2xl border border-border p-5 sm:p-6"
+              className="rounded-2xl border border-border bg-background p-5 sm:p-6"
             >
               {/* Category header */}
               <div className="mb-5 flex items-center gap-3">
