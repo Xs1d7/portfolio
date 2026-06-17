@@ -53,7 +53,7 @@ function Scene({
       style={{ pointerEvents: trackMouse ? "auto" : "none" }}
     >
       <Canvas
-        camera={{ position: [0, 0, 1.4], fov: 55 }}
+        camera={{ position: [0, 0, 1.15], fov: 55 }}
         dpr={[1, 1.5]}
         gl={{ alpha: true, antialias: true }}
         style={{ background: "transparent" }}
