@@ -7,7 +7,9 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "generate:silhouette": "node scripts/generate-silhouette-points.mjs"
+    "generate:silhouette": "node scripts/generate-silhouette-points.mjs",
+    "linkedin:setup": "npm install -D playwright && npx playwright install chromium",
+    "linkedin:capture": "node scripts/linkedin-capture.mjs"
   },
   "dependencies": {
     "@react-pdf/renderer": "^4.5.1",
@@ -30,6 +32,7 @@
     "@types/three": "^0.184.1",
     "eslint": "^9",
     "eslint-config-next": "16.1.6",
+    "playwright": "^1.61.0",
     "sharp": "^0.35.1",
     "tailwindcss": "^4",
     "typescript": "^5"

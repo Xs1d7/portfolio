@@ -39,3 +39,6 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# linkedin promo assets (local only — screenshots + copy drafts)
+/linkedin/
