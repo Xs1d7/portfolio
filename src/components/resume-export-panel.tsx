@@ -157,7 +157,8 @@ export function ResumeExportPanel() {
                     if (
                       key === "full" ||
                       key === "frontend" ||
-                      key === "dotnet"
+                      key === "dotnet" ||
+                      key === "rpa"
                     ) {
                       setIncludeFreelances(true);
                     }

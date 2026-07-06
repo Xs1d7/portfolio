@@ -120,7 +120,7 @@
     "toggleOpen": "Resume PDF",
     "toggleClose": "Hide options",
     "title": "Export resume as PDF",
-    "subtitle": "Generates a PDF with career blocks, freelance projects, and skills. Full: automation and AI; Frontend: React/Next.js; .NET: C#, ASP.NET Core, and SQL Server.",
+    "subtitle": "Generates a PDF with career blocks, freelance projects, and skills. Full: automation and AI; Frontend: React/Next.js; .NET: C#/ASP.NET Core; RPA: orchestration, governance, and hyperautomation.",
     "roleLabel": "Job focus",
     "techLabel": "Technologies (optional)",
     "includeFreelances": "Include freelance projects",

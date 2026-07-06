@@ -79,9 +79,7 @@ export function getCareerEntries(): ExperienceEntry[] {
 
 export function getFreelanceEntries(): ExperienceEntry[] {
   return experienceEntries
-    .filter(
-      (e) => e.type === "freelance" && e.id !== "grupo-domini-freelance",
-    )
+    .filter((e) => e.type === "freelance")
     .sort(
       (a, b) =>
         (a.freelanceOrder ?? 99) - (b.freelanceOrder ?? 99) ||
@@ -120,8 +118,8 @@ export const experienceEntries: ExperienceEntry[] = [
       },
     ],
     recruiterImpact: {
-      pt: "Empresa de automação e software sob medida: entrego integrações REST API, RPA e pipelines CI/CD (GitHub Actions, Docker) em AWS para eliminar trabalho repetitivo.",
-      en: "Custom automation and software company: I deliver REST API integrations, RPA, and CI/CD pipelines (GitHub Actions, Docker) on AWS to remove repetitive work.",
+      pt: "Empresa de automação e software sob medida: entrego integrações REST API, RPA e pipelines CI/CD (GitHub Actions, Docker) em AWS para eliminar trabalho repetitivo — com portfólio de produtos SaaS proprietários (Minha Agenda, Prodia).",
+      en: "Custom automation and software company: I deliver REST API integrations, RPA, and CI/CD pipelines (GitHub Actions, Docker) on AWS to remove repetitive work — with proprietary SaaS products (Minha Agenda, Prodia).",
     },
     shortDescription: {
       pt: "Automação, software e produtos — tecnologia sob medida para tirar o repetitivo da operação de outras empresas (desde abr/2026).",
@@ -149,7 +147,12 @@ export const experienceEntries: ExperienceEntry[] = [
 - Eliminar tarefas manuais e repetitivas em operações, financeiro, vendas e back-office
 - Integrações entre ERPs, planilhas, WhatsApp, e-commerce e ferramentas do dia a dia
 - **REST APIs**, testes e pipeline **CI/CD** (GitHub Actions, Docker) em **AWS**
-- Arquitetura e implementação ponta a ponta — sem depender de equipe técnica interna do cliente`,
+- Arquitetura e implementação ponta a ponta — sem depender de equipe técnica interna do cliente
+
+**Produtos SaaS proprietários**
+
+- **Minha Agenda** ([minhaagenda.maoslivres.com](https://minhaagenda.maoslivres.com)) — agendamento online multi-segmento com Stripe, WhatsApp, QR Code e CRM
+- **Prodia** (em desenvolvimento) — hyperautomation de anúncios com LLMs e pipelines generativos em AWS`,
       en: `Mãos Livres exists to **automate processes** and **own the technology side** for other companies — from diagnosis to delivery.
 
 **How we work**
@@ -163,7 +166,12 @@ export const experienceEntries: ExperienceEntry[] = [
 - Removing manual, repetitive work across operations, finance, sales, and back office
 - Integrations across ERPs, spreadsheets, WhatsApp, e-commerce, and everyday tools
 - **REST APIs**, testing, and **CI/CD** pipelines (GitHub Actions, Docker) on **AWS**
-- End-to-end architecture and implementation — without requiring an in-house tech team at the client`,
+- End-to-end architecture and implementation — without requiring an in-house tech team at the client
+
+**Proprietary SaaS products**
+
+- **Minha Agenda** ([minhaagenda.maoslivres.com](https://minhaagenda.maoslivres.com)) — multi-segment online scheduling with Stripe, WhatsApp, QR codes, and CRM
+- **Prodia** (in development) — ad hyperautomation with LLMs and generative pipelines on AWS`,
     },
     technologies: [
       "Automação de Processos",
@@ -185,6 +193,7 @@ export const experienceEntries: ExperienceEntry[] = [
   {
     id: "minha-agenda",
     type: "personal",
+    includeInJourney: false,
     company: "Mãos Livres · Minha Agenda",
     period: { start: "2026-06", end: null },
     role: {
@@ -276,6 +285,7 @@ Available at **[minhaagenda.maoslivres.com](https://minhaagenda.maoslivres.com)*
   {
     id: "prodia",
     type: "personal",
+    includeInJourney: false,
     company: "Mãos Livres · Prodia",
     role: {
       pt: "Cofundador do Produto & Arquiteto Principal de IA",
@@ -407,8 +417,8 @@ Key highlights:
     },
     period: { start: "2025-01", end: "2026-03" },
     recruiterImpact: {
-      pt: "Segunda passagem na Devnology (jan/2025–mar/2026): liderei squads em extração de dados com Go/Rust, reduzindo latência de pipelines legados e aumentando throughput sob alto volume.",
-      en: "Second stint at Devnology (Jan 2025–Mar 2026): led data-extraction squads with Go/Rust, reducing legacy pipeline latency and increasing throughput under high volume.",
+      pt: "Segunda passagem na Devnology (jan/2025–mar/2026): liderei squads em extração e automação com Go/Rust — orquestração distribuída de workers, DLQ, redução de latência e governança técnica sob alto volume.",
+      en: "Second stint at Devnology (Jan 2025–Mar 2026): led extraction and automation squads with Go/Rust — distributed worker orchestration, DLQ, latency reduction, and technical governance under high volume.",
     },
     shortDescription: {
       pt: "Volta à Devnology como Líder Técnico (jan/2025–mar/2026) — squads, Go/Rust e engenharia reversa em escala.",
@@ -420,8 +430,8 @@ Key highlights:
         role: { pt: "Líder Técnico", en: "Tech Lead" },
         period: { start: "2025-01", end: "2026-03" },
         highlight: {
-          pt: "Recontratado após a Gomind para liderar squads de extração de dados — motores Go/Rust, QA em code reviews, pipeline CI/CD (GitHub Actions, Docker) e migração de legados para performance extrema.",
-          en: "Rehired after Gomind to lead data-extraction squads — Go/Rust engines, QA in code reviews, CI/CD pipelines (GitHub Actions, Docker), and legacy migrations for extreme performance.",
+          pt: "Recontratado após a Gomind para liderar squads de extração e automação — motores Go/Rust, orquestração distribuída de workers, Dead Letter Queues (DLQ), logs centralizados e migração de legados para throughput extremo.",
+          en: "Rehired after Gomind to lead extraction and automation squads — Go/Rust engines, distributed worker orchestration, Dead Letter Queues (DLQ), centralized logs, and legacy migrations for extreme throughput.",
         },
       },
     ],
@@ -431,16 +441,18 @@ Key highlights:
 Principais destaques:
 
 - **Liderança técnica:** definição de arquitetura, padrões, QA e testes automatizados em squads de engenharia
+- **Orquestração distribuída:** desenho de arquitetura para workers de extração com filas de reprocessamento (DLQ) e logs centralizados para auditoria
 - **Engenharia reversa avançada:** motores em Go e Rust otimizados para contornar Akamai, Cloudflare e CAPTCHA
-- **Alta performance:** migração de legados para linguagens compiladas com latência ultra-baixa e máxima concorrência
+- **Alta performance:** migração de legados para linguagens compiladas — redução drástica de latência e aumento de throughput sob milhares de requisições concorrentes
 - **CI/CD e operação em escala:** pipelines com GitHub Actions e Docker sob volumes massivos de dados`,
       en: `I returned to Devnology to lead technical squads and architecture for elite data extraction and reverse-engineering projects.
 
 Key highlights:
 
 - **Technical leadership:** architecture, standards, QA, and automated testing across engineering squads
+- **Distributed orchestration:** architecture for extraction workers with Dead Letter Queue (DLQ) reprocessing and centralized audit logs
 - **Advanced reverse engineering:** Go and Rust engines optimized to bypass Akamai, Cloudflare, and CAPTCHA
-- **High performance:** migration of legacy systems to compiled languages for ultra-low latency and maximum concurrency
+- **High performance:** legacy migration to compiled languages — drastic latency reduction and throughput increase under thousands of concurrent requests
 - **CI/CD and scale operations:** GitHub Actions and Docker pipelines under massive data volumes`,
     },
     technologies: [
@@ -473,8 +485,8 @@ Key highlights:
     },
     period: { start: "2023-11", end: "2025-01" },
     recruiterImpact: {
-      pt: "Três evoluções na Gomind (nov/2023–jan/2025): RPA no MIA (accounts payable/AP e accounts receivable/AR), Fullstack Sênior e Líder Técnico — SAP, CI/CD e automação em produção.",
-      en: "Three progressions at Gomind (Nov 2023–Jan 2025): RPA on MIA (accounts payable/AP and accounts receivable/AR), Senior Full-Stack, and Tech Lead — SAP, CI/CD, and production automation.",
+      pt: "Três evoluções na Gomind (nov/2023–jan/2025): RPA no MIA (AP/AR), orquestração de workers, hyperautomation com IA/LLMs, Fullstack Sênior e Líder Técnico — SAP, CI/CD e governança de dezenas de bots em produção.",
+      en: "Three progressions at Gomind (Nov 2023–Jan 2025): RPA on MIA (AP/AR), worker orchestration, hyperautomation with AI/LLMs, Senior Full-Stack, and Tech Lead — SAP, CI/CD, and governance of dozens of production bots.",
     },
     shortDescription: {
       pt: "Três etapas na Gomind (nov/2023–jan/2025): Pleno RPA, Fullstack Sênior e Líder Técnico — produto MIA (automação contábil).",
@@ -489,8 +501,8 @@ Key highlights:
         },
         period: { start: "2023-11", end: "2024-05" },
         highlight: {
-          pt: "**Realizado:** automação RPA no **MIA** com fluxos de accounts payable (AP) e accounts receivable (AR), integrações AWS e pipeline CI/CD com Docker e testes em produção. **Evolução:** promoção a Fullstack Sênior após ~6 meses por volume de entregas e impacto técnico.",
-          en: "**Delivered:** RPA automation on **MIA** with accounts payable (AP) and accounts receivable (AR) flows, AWS integrations, and CI/CD pipelines with Docker and production testing. **Growth:** promoted to Senior Full-Stack after ~6 months for delivery volume and technical impact.",
+          pt: "**Realizado:** plataforma de automação contábil no **MIA** — fluxos AP/AR, integrações AWS e pipeline CI/CD, reduzindo esforço operacional manual de squads parceiras. **Evolução:** promoção a Fullstack Sênior após ~6 meses por volume de entregas RPA e impacto técnico.",
+          en: "**Delivered:** accounting automation platform on **MIA** — AP/AR flows, AWS integrations, and CI/CD pipelines, reducing manual operational effort for partner squads. **Growth:** promoted to Senior Full-Stack after ~6 months for RPA delivery volume and technical impact.",
         },
       },
       {
@@ -501,8 +513,8 @@ Key highlights:
         },
         period: { start: "2024-05", end: "2024-08" },
         highlight: {
-          pt: "**Realizado:** integrações **REST API** de alto volume no MIA e evolução fullstack além do RPA. **Evolução:** promoção a Líder Técnico após ~3 meses por liderança informal, QA em code reviews e entregas consistentes.",
-          en: "**Delivered:** high-volume **REST API** integrations on MIA and full-stack work beyond RPA. **Growth:** promoted to Tech Lead after ~3 months for informal leadership, QA in code reviews, and consistent delivery.",
+          pt: "**Realizado:** orquestração de workers e integrações **REST API** de alto volume no MIA — filas, reprocessamento e monitoramento de jobs. **Evolução:** promoção a Líder Técnico após ~3 meses por liderança informal, QA em code reviews e entregas consistentes.",
+          en: "**Delivered:** worker orchestration and high-volume **REST API** integrations on MIA — queues, reprocessing, and job monitoring. **Growth:** promoted to Tech Lead after ~3 months for informal leadership, QA in code reviews, and consistent delivery.",
         },
       },
       {
@@ -510,8 +522,8 @@ Key highlights:
         role: { pt: "Líder Técnico", en: "Tech Lead" },
         period: { start: "2024-08", end: "2025-01" },
         highlight: {
-          pt: "**Realizado:** liderança de subgrupo, automação SAP, mentoria, QA e testes de regressão em produção. **Saída:** retorno à Devnology em janeiro/2025 como Líder Técnico em projeto de maior escala técnica.",
-          en: "**Delivered:** subgroup leadership, SAP automation, mentoring, QA, and regression testing in production. **Exit:** returned to Devnology in January 2025 as Tech Lead on a larger-scale technical project.",
+          pt: "**Realizado:** governança e sustentação de dezenas de fluxos RPA no MIA — orquestração distribuída, DLQ, logs centralizados, integração de agentes IA/LLMs e automação SAP. **Saída:** retorno à Devnology em janeiro/2025 como Líder Técnico.",
+          en: "**Delivered:** governance and sustainment of dozens of RPA flows on MIA — distributed orchestration, DLQ, centralized logs, AI/LLM agent integration, and SAP automation. **Exit:** returned to Devnology in January 2025 as Tech Lead.",
         },
       },
     ],
@@ -520,26 +532,30 @@ Key highlights:
 
 **MIA (produto Gomind)**
 
-- Plataforma focada em **automatizar processos de contabilidade** — accounts payable (AP), accounts receivable (AR), conciliações e rotinas fiscais
-- Integrações **REST API**, orquestração e IA aplicada onde reduz trabalho manual
+- Plataforma focada em **automatizar processos de contabilidade** — accounts payable (AP), accounts receivable (AR), conciliações e rotinas fiscais, **reduzindo esforço operacional manual** de squads parceiras e mitigando erros em produção
+- **Orquestração distribuída** de workers com filas SQS, **Dead Letter Queues (DLQ)** para reprocessamento e **logs centralizados** para auditoria
+- Integração de **agentes de Inteligência Artificial e LLMs** aos fluxos RPA para análise semântica de documentos fiscais e classificação inteligente de dados operacionais
+- Integrações **REST API** e hyperautomation onde reduz trabalho manual repetitivo
 
 **Outros destaques técnicos**
 
-- Automação SAP com workers para fluxos financeiros e logísticos
+- Automação SAP com workers para fluxos financeiros e logísticos — governança de dezenas de bots simultâneos
 - Pipeline **CI/CD** com **GitHub Actions** e **Docker** para deploy seguro em AWS Lambda
-- **Testes** e **QA** em integrações de alto volume; redução de latência e erros em processamento em segundo plano`,
+- **Testes**, **QA** e testes de regressão em integrações de alto volume; redução de latência e erros em processamento em segundo plano`,
       en: `Tenure at **Gomind** with continuous role progression (see roadmap above).
 
 **MIA (Gomind product)**
 
-- Platform focused on **automating accounting processes** — accounts payable (AP), accounts receivable (AR), reconciliations, and tax routines
-- **REST API** integrations, orchestration, and AI where it removes manual work
+- Platform focused on **automating accounting processes** — accounts payable (AP), accounts receivable (AR), reconciliations, and tax routines, **reducing manual operational effort** for partner squads and mitigating production errors
+- **Distributed orchestration** of workers with SQS queues, **Dead Letter Queues (DLQ)** for reprocessing, and **centralized logs** for audit
+- Integration of **AI agents and LLMs** into RPA flows for semantic analysis of tax documents and intelligent operational data classification
+- **REST API** integrations and hyperautomation where it removes repetitive manual work
 
 **Other technical highlights**
 
-- SAP automation with workers for financial and logistics flows
+- SAP automation with workers for financial and logistics flows — governance of dozens of concurrent bots
 - **CI/CD** pipelines with **GitHub Actions** and **Docker** for safe deploys on AWS Lambda
-- **Testing** and **QA** on high-volume integrations; lower latency and fewer errors in background processing`,
+- **Testing**, **QA**, and regression testing on high-volume integrations; lower latency and fewer errors in background processing`,
     },
     technologies: [
       "Node.js",

@@ -19,6 +19,10 @@ import {
 } from "@/lib/resume-pdf-ats";
 import { enrichResumePdfPayloadForFrontend } from "@/lib/resume-pdf-frontend";
 import { enrichResumePdfPayloadForDotnet } from "@/lib/resume-pdf-dotnet";
+import {
+  enrichResumePdfPayloadForFull,
+  enrichResumePdfPayloadForRpa,
+} from "@/lib/resume-pdf-rpa";
 import type { Locale } from "@/components/language-provider";
 import {
   expandExperienceSteps,
@@ -232,16 +236,16 @@ const ROLE_PROFILE: Record<
   },
   rpa: {
     headline: {
-      pt: "Engenheiro de Automação & RPA Sênior",
-      en: "Senior Automation & RPA Engineer",
+      pt: "Especialista em Automação & RPA Sênior",
+      en: "Senior Automation & RPA Specialist",
     },
     summary: {
-      pt: "Especialista em automação avançada — web scraping em larga escala, engenharia reversa (anti-bot), RPA, integração SAP e orquestração de processos críticos em produção. Diferencial construído ao longo da carreira em CLT, PJ e projetos freelance.",
-      en: "Specialist in advanced automation — large-scale web scraping, reverse engineering (anti-bot), RPA, SAP integration, and orchestration of critical production processes. Core strength built across full-time roles and freelance projects.",
+      pt: "Especialista em automação avançada e hyperautomation — orquestração distribuída de workers, Dead Letter Queues (DLQ), logs centralizados, RPA contábil (MIA/Gomind), scraping em escala, integração SAP e agentes de IA/LLMs em fluxos operacionais.",
+      en: "Specialist in advanced automation and hyperautomation — distributed worker orchestration, Dead Letter Queues (DLQ), centralized logs, accounting RPA (MIA/Gomind), large-scale scraping, SAP integration, and AI/LLM agents in operational flows.",
     },
     coreStrengths: {
-      pt: ["Automação & RPA", "Scraping em escala", "Integrações", "Produção crítica"],
-      en: ["Automation & RPA", "Large-scale scraping", "Integrations", "Mission-critical"],
+      pt: ["Orquestração & Governança", "RPA & Hyperautomation", "ROI Operacional", "Produção crítica"],
+      en: ["Orchestration & Governance", "RPA & Hyperautomation", "Operational ROI", "Mission-critical"],
     },
     skillCategories: ["backend", "tools"],
   },
@@ -534,19 +538,24 @@ export function buildResumePdfPayload(
     options?.includeFreelances ??
     (roleFocus === "full" ||
       roleFocus === "frontend" ||
-      roleFocus === "dotnet");
+      roleFocus === "dotnet" ||
+      roleFocus === "rpa");
 
   const useAllCareer =
     roleFocus === "full" ||
     roleFocus === "frontend" ||
-    roleFocus === "dotnet";
+    roleFocus === "dotnet" ||
+    roleFocus === "rpa";
 
   const careerSource = useAllCareer
     ? getCareerEntries()
     : getJourneyEntries();
 
   const useExpandedPdfContent =
-    roleFocus === "frontend" || roleFocus === "dotnet";
+    roleFocus === "full" ||
+    roleFocus === "frontend" ||
+    roleFocus === "dotnet" ||
+    roleFocus === "rpa";
 
   const careerSteps = sortExperienceSteps(
     expandExperienceSteps(
@@ -643,12 +652,20 @@ export function buildResumePdfPayload(
 
   let payload = enrichResumePdfPayloadForAts(basePayload);
 
+  if (roleFocus === "full") {
+    payload = enrichResumePdfPayloadForFull(payload);
+  }
+
   if (roleFocus === "frontend") {
     payload = enrichResumePdfPayloadForFrontend(payload);
   }
 
   if (roleFocus === "dotnet") {
     payload = enrichResumePdfPayloadForDotnet(payload);
+  }
+
+  if (roleFocus === "rpa") {
+    payload = enrichResumePdfPayloadForRpa(payload);
   }
 
   return payload;

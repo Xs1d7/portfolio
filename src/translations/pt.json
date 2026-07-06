@@ -120,7 +120,7 @@
     "toggleOpen": "Currículo PDF",
     "toggleClose": "Ocultar opções",
     "title": "Exportar currículo em PDF",
-    "subtitle": "Gera um PDF com carreira (um bloco por cargo), projetos freelance e competências. Completa: automação e IA; Frontend: React/Next.js; .NET: C#, ASP.NET Core e SQL Server.",
+    "subtitle": "Gera um PDF com carreira (um bloco por cargo), projetos freelance e competências. Completa: automação e IA; Frontend: React/Next.js; .NET: C#/ASP.NET Core; RPA: orquestração, governança e hyperautomation.",
     "roleLabel": "Foco da vaga",
     "techLabel": "Tecnologias (opcional)",
     "includeFreelances": "Incluir projetos freelance",
