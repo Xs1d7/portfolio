@@ -130,154 +130,16 @@ function enrichSkillPillars(
   ];
 }
 
-type ExperienceAtsOverlay = {
-  impact?: { pt: string; en: string };
-  highlights: { pt: string[]; en: string[] };
-};
-
-const EXPERIENCE_ATS_OVERLAYS: Record<string, ExperienceAtsOverlay> = {
-  "devnology-lead-0": {
-    impact: {
-      pt: "Liderei squads de extração de dados com motores Go/Rust, reduzindo latência de pipelines legados e aumentando throughput sob volumes massivos de requisições.",
-      en: "Led data-extraction squads with Go/Rust engines, reducing legacy pipeline latency and increasing throughput under massive request volumes.",
-    },
-    highlights: {
-      pt: [
-        "Defini arquitetura, padrões de código e QA em code reviews para 2 squads de engenharia.",
-        "Migrei motores críticos para Go/Rust com pipeline CI/CD (GitHub Actions, Docker) em produção AWS.",
-        "Orquestrei pipelines de extração resilientes com testes automatizados e monitoramento de falhas.",
-      ],
-      en: [
-        "Defined architecture, coding standards, and QA in code reviews for 2 engineering squads.",
-        "Migrated critical engines to Go/Rust with CI/CD pipelines (GitHub Actions, Docker) on AWS production.",
-        "Orchestrated resilient extraction pipelines with automated testing and failure monitoring.",
-      ],
-    },
-  },
-  "gomind-0": {
-    highlights: {
-      pt: [
-        "Implementei automação RPA no produto MIA (accounts payable/AP e accounts receivable/AR) com integrações AWS.",
-        "Entreguei pipelines CI/CD com Docker e testes em processos contábeis críticos em produção.",
-      ],
-      en: [
-        "Implemented RPA automation on MIA (accounts payable/AP and accounts receivable/AR) with AWS integrations.",
-        "Delivered CI/CD pipelines with Docker and testing on mission-critical accounting processes in production.",
-      ],
-    },
-  },
-  "gomind-1": {
-    highlights: {
-      pt: [
-        "Desenvolvi integrações REST API de alto volume no MIA, acelerando fluxos financeiros do escritório contábil.",
-        "Promovido a Líder Técnico em ~3 meses por liderança informal, qualidade de código e entregas consistentes.",
-      ],
-      en: [
-        "Developed high-volume REST API integrations on MIA, accelerating accounting-firm financial flows.",
-        "Promoted to Tech Lead in ~3 months for informal leadership, code quality, and consistent delivery.",
-      ],
-    },
-  },
-  "gomind-2": {
-    impact: {
-      pt: "Liderei subgrupo técnico na Gomind com automação SAP, mentoria e QA via code reviews em ambiente de produção crítica.",
-      en: "Led a technical subgroup at Gomind with SAP automation, mentoring, and QA through code reviews in mission-critical production.",
-    },
-    highlights: {
-      pt: [
-        "Conduzi code reviews e testes de regressão em integrações SAP e workers financeiros.",
-        "Estabeleci padrões de pipeline CI/CD (GitHub Actions) para deploy seguro em AWS Lambda.",
-      ],
-      en: [
-        "Conducted code reviews and regression testing on SAP integrations and financial workers.",
-        "Established CI/CD pipeline standards (GitHub Actions) for safe deploys on AWS Lambda.",
-      ],
-    },
-  },
-  "devnology-scraping-0": {
-    highlights: {
-      pt: [
-        "Desenvolvi web scraping e automação para 123 Milhas/MaxMilhas com testes em plantões de produção.",
-        "Promovido a Pleno em 6 meses por impacto em entregas, confiabilidade e resolução de incidentes.",
-      ],
-      en: [
-        "Developed web scraping and automation for 123 Milhas/MaxMilhas with on-call production testing.",
-        "Promoted to Mid-Level in 6 months for delivery impact, reliability, and incident resolution.",
-      ],
-    },
-  },
-  "devnology-scraping-1": {
-    highlights: {
-      pt: [
-        "Otimizei pipelines de extração com Docker e REST APIs, melhorando estabilidade sob alta concorrência.",
-        "Executei QA e testes automatizados em motores de scraping antes de releases em produção.",
-      ],
-      en: [
-        "Optimized extraction pipelines with Docker and REST APIs, improving stability under high concurrency.",
-        "Executed QA and automated testing on scraping engines before production releases.",
-      ],
-    },
-  },
-  "pop-plus": {
-    highlights: {
-      pt: [
-        "Mantive módulos financeiro, comercial, marketing automation e estoque em WMS legado de alta criticidade.",
-        "Estabilizei APIs REST e SQL Server em Vue.js e C# (.NET) sem interrupção da operação.",
-      ],
-      en: [
-        "Maintained finance, sales, marketing automation, and inventory modules on a mission-critical legacy WMS.",
-        "Stabilized REST APIs and SQL Server in Vue.js and C# (.NET) without disrupting operations.",
-      ],
-    },
-  },
-  "andrinno": {
-    impact: {
-      pt: "Liderei time de 4 desenvolvedores em automação web para companhias aéreas, entregando APIs de alto volume com baixa latência.",
-      en: "Led a 4-developer team on web automation for airlines, delivering high-volume APIs with low latency.",
-    },
-    highlights: {
-      pt: [
-        "Arquitetei microsserviços com Docker, PostgreSQL e Redis para milhares de requisições concorrentes.",
-        "Implementei testes e QA em pipelines resilientes com tratamento de bloqueios e rate-limit.",
-      ],
-      en: [
-        "Architected microservices with Docker, PostgreSQL, and Redis for thousands of concurrent requests.",
-        "Implemented testing and QA on resilient pipelines handling blocks and rate limits.",
-      ],
-    },
-  },
-  "maos-livres-0": {
-    highlights: {
-      pt: [
-        "Fundei empresa de automação e software sob medida com diagnóstico gratuito em até 48 horas.",
-        "Entreguei integrações REST API, RPA e pipelines CI/CD (GitHub Actions, Docker) em AWS.",
-      ],
-      en: [
-        "Founded a custom automation and software company with free diagnosis within 48 hours.",
-        "Delivered REST API integrations, RPA, and CI/CD pipelines (GitHub Actions, Docker) on AWS.",
-      ],
-    },
-  },
-};
-
 function enrichExperience(
   exp: PdfExperienceItem,
   locale: Locale,
 ): PdfExperienceItem {
-  const overlay = EXPERIENCE_ATS_OVERLAYS[exp.id];
-
-  const highlights =
-    overlay?.highlights[locale]?.map((h) => ensureActionBullet(h, locale)) ??
-    exp.highlights.map((h) => ensureActionBullet(h, locale));
-
-  const impact = overlay?.impact?.[locale]
-    ? expandAtsAcronyms(overlay.impact[locale], locale)
-    : expandAtsAcronyms(exp.impact, locale);
-
   return {
     ...exp,
-    impact,
-    highlights: highlights.slice(0, 4),
+    impact: expandAtsAcronyms(exp.impact, locale),
+    highlights: exp.highlights
+      .map((h) => ensureActionBullet(h, locale))
+      .slice(0, 4),
   };
 }
 
@@ -285,20 +147,12 @@ function enrichFreelance(
   project: PdfFreelanceItem,
   locale: Locale,
 ): PdfFreelanceItem {
-  const overlay = EXPERIENCE_ATS_OVERLAYS[project.id];
-
-  const highlights =
-    overlay?.highlights[locale]?.map((h) => ensureActionBullet(h, locale)) ??
-    project.highlights.map((h) => ensureActionBullet(h, locale));
-
-  const impact = overlay?.impact?.[locale]
-    ? expandAtsAcronyms(overlay.impact[locale], locale)
-    : expandAtsAcronyms(project.impact, locale);
-
   return {
     ...project,
-    impact,
-    highlights: highlights.slice(0, 4),
+    impact: expandAtsAcronyms(project.impact, locale),
+    highlights: project.highlights
+      .map((h) => ensureActionBullet(h, locale))
+      .slice(0, 4),
   };
 }
 

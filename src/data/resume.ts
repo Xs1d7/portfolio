@@ -90,7 +90,10 @@ export const skills: Skill[] = [
   { name: "AWS", level: 4, category: "tools" },
   { name: "Docker", level: 4, category: "tools" },
   { name: "Git & GitHub", level: 5, category: "tools" },
+  { name: "GitHub Actions", level: 4, category: "tools" },
   { name: "CI/CD", level: 4, category: "tools" },
+  { name: "Automated Testing", level: 4, category: "tools" },
+  { name: "QA", level: 4, category: "tools" },
   { name: "Web Scraping & RPA", level: 5, category: "tools" },
 
   { name: "PostgreSQL", level: 4, category: "database" },
