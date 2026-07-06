@@ -155,3 +155,4 @@ export const socials: Social[] = [
 ];
 
 export const EMAIL_ADDRESS = "jeffersonalves.developer@gmail.com";
+export const PHONE_NUMBER = "+55 (21) 98206-2703";

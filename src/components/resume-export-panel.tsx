@@ -43,6 +43,7 @@ export function ResumeExportPanel() {
         roleFocus,
         techFocus,
         {
+          name: t.header.name,
           present: t.experience.present,
           types: t.experience.types,
           employment: {

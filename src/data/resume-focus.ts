@@ -9,15 +9,19 @@ import {
   languages,
   skills,
   EMAIL_ADDRESS,
+  PHONE_NUMBER,
   type Skill,
 } from "@/data/resume";
+import {
+  enrichResumePdfPayloadForAts,
+  formatAtsMonthRange,
+} from "@/lib/resume-pdf-ats";
 import type { Locale } from "@/components/language-provider";
 import {
   expandExperienceSteps,
   sortExperienceSteps,
 } from "@/lib/experience-steps";
 import {
-  formatMonthRange,
   formatTenureDuration,
 } from "@/lib/tenure-duration";
 
@@ -344,7 +348,9 @@ export interface ResumePdfPayload {
   careerNarrative: string;
   focusLabel: string | null;
   contact: {
+    name: string;
     email: string;
+    phone: string;
     linkedin: string;
     github: string;
     location: string;
@@ -429,7 +435,7 @@ function stepToPdfExperience(
     id: step.id,
     company: step.company,
     role: step.role[locale],
-    period: formatMonthRange(
+    period: formatAtsMonthRange(
       step.period.start,
       step.period.end,
       locale,
@@ -479,6 +485,7 @@ export function buildResumePdfPayload(
   roleFocus: RoleFocus,
   techFocus: TechFocus[],
   labels: {
+    name: string;
     present: string;
     types: Record<ExperienceEntry["type"], string>;
     employment: { clt: string; pj: string };
@@ -519,7 +526,7 @@ export function buildResumePdfPayload(
       ? null
       : `${labels.focusPrefix}: ${roleFocus}${techPart}`;
 
-  return {
+  const basePayload: ResumePdfPayload = {
     locale,
     headline: profile.headline[locale],
     summary: profile.summary[locale],
@@ -527,7 +534,9 @@ export function buildResumePdfPayload(
     careerNarrative: buildCareerNarrative(careerSteps.length, locale),
     focusLabel,
     contact: {
+      name: labels.name,
       email: EMAIL_ADDRESS,
+      phone: PHONE_NUMBER,
       linkedin: "linkedin.com/in/jeffersonalves7",
       github: "github.com/Xs1d7",
       location: labels.location,
@@ -541,7 +550,7 @@ export function buildResumePdfPayload(
       institution: e.institution,
       degree: e.degree[locale],
       field: e.field[locale],
-      period: formatMonthRange(
+      period: formatAtsMonthRange(
         e.period.start,
         e.period.end,
         locale,
@@ -561,6 +570,8 @@ export function buildResumePdfPayload(
       };
     }),
   };
+
+  return enrichResumePdfPayloadForAts(basePayload);
 }
 
 export function resumeFileName(
