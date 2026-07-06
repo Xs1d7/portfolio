@@ -515,7 +515,9 @@ export function buildResumePdfPayload(
     (roleFocus === "full" || roleFocus === "frontend");
 
   const careerSource =
-    roleFocus === "frontend" ? getCareerEntries() : getJourneyEntries();
+    roleFocus === "full" || roleFocus === "frontend"
+      ? getCareerEntries()
+      : getJourneyEntries();
 
   const careerSteps = sortExperienceSteps(
     expandExperienceSteps(

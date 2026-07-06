@@ -276,8 +276,7 @@ Available at **[minhaagenda.maoslivres.com](https://minhaagenda.maoslivres.com)*
   {
     id: "prodia",
     type: "personal",
-    includeInJourney: false,
-    company: "Prodia",
+    company: "Mãos Livres · Prodia",
     role: {
       pt: "Cofundador do Produto & Arquiteto Principal de IA",
       en: "Product Co-founder & Lead AI Architect",
@@ -285,28 +284,36 @@ Available at **[minhaagenda.maoslivres.com](https://minhaagenda.maoslivres.com)*
     period: { start: "2026-05", end: null },
     tenures: [
       {
-        company: "Prodia",
+        company: "Mãos Livres · Prodia",
         role: {
           pt: "Cofundador do Produto & Arquiteto Principal de IA",
           en: "Product Co-founder & Lead AI Architect",
         },
         period: { start: "2026-05", end: null },
         highlight: {
-          pt: "Início em maio/2026, logo após a Mãos Livres — arquitetura do SaaS de anúncios com IA generativa (produto ainda em lançamento).",
-          en: "Started in May 2026, right after Mãos Livres — architecture of the AI ads SaaS (product not launched yet).",
+          pt: "Produto SaaS da Mãos Livres (mai/2026) — criação e otimização de anúncios com IA generativa; em desenvolvimento.",
+          en: "Mãos Livres SaaS product (May 2026) — AI-powered ad creation and optimization; in development.",
         },
       },
     ],
+    recruiterImpact: {
+      pt: "Produto SaaS da Mãos Livres para anúncios com IA generativa — arquitetura full stack com LLMs, pipelines de geração e backend escalável em AWS.",
+      en: "Mãos Livres SaaS product for generative AI ads — full-stack architecture with LLMs, generation pipelines, and scalable AWS backend.",
+    },
     shortDescription: {
-      pt: "Produto do portfólio (mai/2026) — SaaS de anúncios com IA, iniciado logo após a Mãos Livres (abr/2026); em desenvolvimento.",
-      en: "Portfolio product (May 2026) — AI ads SaaS, started right after Mãos Livres (Apr 2026); in development.",
+      pt: "SaaS de anúncios com IA da Mãos Livres (mai/2026) — produto digital da empresa, em desenvolvimento.",
+      en: "Mãos Livres AI ads SaaS (May 2026) — company digital product, in development.",
     },
     overview: {
-      pt: `O **Prodia** é um **produto independente** do portfólio da Mãos Livres: SaaS de **criação e otimização de anúncios** com IA generativa, **iniciado em maio de 2026** — logo após a fundação da empresa (abril). O produto **ainda não foi lançado**; dúvidas e parcerias pelo **Hub de contato** em **[maoslivres.com](https://maoslivres.com)**.`,
-      en: `**Prodia** is a **standalone product** in the Mãos Livres portfolio: a SaaS for **creating and optimizing ads** with generative AI, **started in May 2026** — right after the company was founded (April). The product **has not launched yet**; inquiries and partnerships via the **contact Hub** at **[maoslivres.com](https://maoslivres.com)**.`,
+      pt: `O **Prodia** é um **produto SaaS da Mãos Livres** para **criação e otimização de anúncios** com IA generativa, **iniciado em maio de 2026** — logo após a fundação da empresa (abril).
+
+O produto **ainda está em desenvolvimento**; dúvidas e parcerias pelo **Hub de contato** em **[maoslivres.com](https://maoslivres.com)**.`,
+      en: `**Prodia** is a **Mãos Livres SaaS product** for **creating and optimizing ads** with generative AI, **started in May 2026** — right after the company was founded (April).
+
+The product **is still in development**; inquiries and partnerships via the **contact Hub** at **[maoslivres.com](https://maoslivres.com)**.`,
     },
     fullDescription: {
-      pt: `Arquitetei e cofundei o **Prodia** em **maio de 2026**, logo após criar a **Mãos Livres** — produto de anúncios separado das entregas de consultoria e automação da empresa.
+      pt: `Arquitetei e cofundei o **Prodia** como **produto digital da Mãos Livres** em **maio de 2026** — SaaS de anúncios com IA, no mesmo portfólio de produtos da empresa (como o Minha Agenda).
 
 Principais destaques:
 
@@ -314,7 +321,7 @@ Principais destaques:
 - **Pipelines de IA generativa:** LLMs e engenharia de prompt em larga escala
 - **Backend escalável:** preparado para alto volume de geração de conteúdo
 - **Stack:** Go, Node.js, Python, OpenAI API, bancos vetoriais e AWS`,
-      en: `I architected and co-founded **Prodia** in **May 2026**, right after launching **Mãos Livres** — an ads product separate from the company's consulting and automation work.
+      en: `I architected and co-founded **Prodia** as a **Mãos Livres digital product** in **May 2026** — an AI ads SaaS in the same company product portfolio (alongside Minha Agenda).
 
 Key highlights:
 
