@@ -154,7 +154,11 @@ export function ResumeExportPanel() {
                   type="button"
                   onClick={() => {
                     setRoleFocus(key);
-                    if (key === "full" || key === "frontend") {
+                    if (
+                      key === "full" ||
+                      key === "frontend" ||
+                      key === "dotnet"
+                    ) {
                       setIncludeFreelances(true);
                     }
                   }}

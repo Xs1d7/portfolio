@@ -120,7 +120,7 @@
     "toggleOpen": "Resume PDF",
     "toggleClose": "Hide options",
     "title": "Export resume as PDF",
-    "subtitle": "Generates a PDF with career history (one block per role), freelance projects, and skills. Full version covers automation and AI; Frontend version highlights React, Next.js, and production interfaces.",
+    "subtitle": "Generates a PDF with career blocks, freelance projects, and skills. Full: automation and AI; Frontend: React/Next.js; .NET: C#, ASP.NET Core, and SQL Server.",
     "roleLabel": "Job focus",
     "techLabel": "Technologies (optional)",
     "includeFreelances": "Include freelance projects",
@@ -131,6 +131,7 @@
     "roles": {
       "full": "Full",
       "fullstack": "Full-stack",
+      "dotnet": ".NET / Full-stack",
       "backend": "Backend",
       "frontend": "Frontend",
       "rpa": "RPA / Automation",

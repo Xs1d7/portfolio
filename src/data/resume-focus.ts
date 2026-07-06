@@ -18,6 +18,7 @@ import {
   formatAtsMonthRange,
 } from "@/lib/resume-pdf-ats";
 import { enrichResumePdfPayloadForFrontend } from "@/lib/resume-pdf-frontend";
+import { enrichResumePdfPayloadForDotnet } from "@/lib/resume-pdf-dotnet";
 import type { Locale } from "@/components/language-provider";
 import {
   expandExperienceSteps,
@@ -30,6 +31,7 @@ import {
 export type RoleFocus =
   | "full"
   | "frontend"
+  | "dotnet"
   | "backend"
   | "fullstack"
   | "rpa"
@@ -50,6 +52,7 @@ export type TechFocus =
 export const ROLE_FOCUS_OPTIONS: RoleFocus[] = [
   "full",
   "fullstack",
+  "dotnet",
   "backend",
   "frontend",
   "rpa",
@@ -71,9 +74,9 @@ export const TECH_FOCUS_OPTIONS: TechFocus[] = [
 
 /** Tags por experiência para filtro de currículo */
 export const EXPERIENCE_FOCUS_TAGS: Record<string, (RoleFocus | TechFocus)[]> = {
-  "maos-livres": ["fullstack", "frontend", "backend", "tech-lead", "node", "react", "aws"],
-  "minha-agenda": ["fullstack", "frontend", "backend", "tech-lead", "node", "react", "aws"],
-  prodia: ["ai", "backend", "fullstack", "frontend", "go", "node", "python", "react"],
+  "maos-livres": ["fullstack", "frontend", "backend", "tech-lead", "dotnet", "node", "react", "aws"],
+  "minha-agenda": ["fullstack", "frontend", "backend", "tech-lead", "dotnet", "node", "react", "aws"],
+  prodia: ["ai", "backend", "fullstack", "frontend", "dotnet", "go", "node", "python", "react"],
   "pop-plus": ["fullstack", "frontend", "backend", "dotnet", "vue"],
   "devnology-lead": [
     "backend",
@@ -81,6 +84,7 @@ export const EXPERIENCE_FOCUS_TAGS: Record<string, (RoleFocus | TechFocus)[]> = 
     "tech-lead",
     "fullstack",
     "frontend",
+    "dotnet",
     "ai",
     "go",
     "rust",
@@ -89,10 +93,10 @@ export const EXPERIENCE_FOCUS_TAGS: Record<string, (RoleFocus | TechFocus)[]> = 
     "aws",
     "react",
   ],
-  gomind: ["backend", "rpa", "tech-lead", "fullstack", "frontend", "node", "python", "aws", "react"],
-  "grupo-domini-freelance": ["ai", "backend", "rpa", "node", "tech-lead", "frontend", "react"],
+  gomind: ["backend", "rpa", "tech-lead", "fullstack", "frontend", "dotnet", "node", "python", "aws", "react"],
+  "grupo-domini-freelance": ["ai", "backend", "rpa", "node", "tech-lead", "frontend", "dotnet", "react"],
   andrinno: ["backend", "rpa", "scraping", "python", "node", "tech-lead", "fullstack", "frontend"],
-  "attus-bloom": ["backend", "node", "fullstack", "frontend", "react"],
+  "attus-bloom": ["backend", "node", "fullstack", "frontend", "dotnet", "react"],
   "beleza-tal": ["ai", "python", "backend", "fullstack", "frontend"],
   contmais: ["frontend", "fullstack"],
   "barrarey-freelance": ["backend", "rpa", "python", "fullstack", "frontend"],
@@ -105,6 +109,7 @@ export const EXPERIENCE_FOCUS_TAGS: Record<string, (RoleFocus | TechFocus)[]> = 
     "aws",
     "fullstack",
     "frontend",
+    "dotnet",
   ],
   "bbr-toys": ["fullstack", "frontend", "backend"],
 };
@@ -179,6 +184,21 @@ const ROLE_PROFILE: Record<
       en: ["Full-stack", "APIs & integrations", "Automation", "AWS Cloud"],
     },
     skillCategories: ["frontend", "backend", "database", "tools"],
+  },
+  dotnet: {
+    headline: {
+      pt: "Engenheiro Full Stack Sênior · .NET",
+      en: "Senior Full-Stack Engineer · .NET",
+    },
+    summary: {
+      pt: "Engenheiro full stack com experiência em C#, ASP.NET e .NET Core — APIs REST, SQL Server, integrações corporativas e front-end em React/TypeScript.",
+      en: "Full-stack engineer with experience in C#, ASP.NET, and .NET Core — REST APIs, SQL Server, enterprise integrations, and React/TypeScript front end.",
+    },
+    coreStrengths: {
+      pt: ["C# & .NET Core", "ASP.NET Web API", "SQL Server", "React"],
+      en: ["C# & .NET Core", "ASP.NET Web API", "SQL Server", "React"],
+    },
+    skillCategories: ["backend", "frontend", "database", "tools"],
   },
   frontend: {
     headline: {
@@ -512,17 +532,26 @@ export function buildResumePdfPayload(
   const profile = ROLE_PROFILE[roleFocus];
   const includeFreelances =
     options?.includeFreelances ??
-    (roleFocus === "full" || roleFocus === "frontend");
+    (roleFocus === "full" ||
+      roleFocus === "frontend" ||
+      roleFocus === "dotnet");
 
-  const careerSource =
-    roleFocus === "full" || roleFocus === "frontend"
-      ? getCareerEntries()
-      : getJourneyEntries();
+  const useAllCareer =
+    roleFocus === "full" ||
+    roleFocus === "frontend" ||
+    roleFocus === "dotnet";
+
+  const careerSource = useAllCareer
+    ? getCareerEntries()
+    : getJourneyEntries();
+
+  const useExpandedPdfContent =
+    roleFocus === "frontend" || roleFocus === "dotnet";
 
   const careerSteps = sortExperienceSteps(
     expandExperienceSteps(
       careerSource.filter((e) =>
-        roleFocus === "frontend"
+        useExpandedPdfContent
           ? e.type !== "freelance"
           : experienceMatchesFocus(e, roleFocus, techFocus),
       ),
@@ -534,11 +563,17 @@ export function buildResumePdfPayload(
     includeFreelances
       ? getFreelanceEntries()
           .filter((e) =>
-            roleFocus === "frontend"
+            useExpandedPdfContent
               ? true
               : experienceMatchesFocus(e, roleFocus, techFocus),
           )
-          .map((e) => freelanceToPdfItem(e, locale, roleFocus === "frontend" ? 6 : 3))
+          .map((e) =>
+            freelanceToPdfItem(
+              e,
+              locale,
+              useExpandedPdfContent ? 6 : 3,
+            ),
+          )
       : [];
 
   const filteredSkills = skills
@@ -558,7 +593,7 @@ export function buildResumePdfPayload(
     summary: profile.summary[locale],
     coreStrengths: profile.coreStrengths[locale],
     careerNarrative:
-      roleFocus === "frontend"
+      useExpandedPdfContent
         ? ""
         : buildCareerNarrative(careerSteps.length, locale),
     focusLabel,
@@ -572,7 +607,12 @@ export function buildResumePdfPayload(
     },
     skillPillars: buildSkillPillars(filteredSkills, labels.skillPillars),
     experiences: careerSteps.map((step) =>
-      stepToPdfExperience(step, locale, labels, roleFocus === "frontend" ? 6 : 3),
+      stepToPdfExperience(
+        step,
+        locale,
+        labels,
+        useExpandedPdfContent ? 6 : 3,
+      ),
     ),
     freelanceProjects,
     education: education.map((e) => ({
@@ -605,6 +645,10 @@ export function buildResumePdfPayload(
 
   if (roleFocus === "frontend") {
     payload = enrichResumePdfPayloadForFrontend(payload);
+  }
+
+  if (roleFocus === "dotnet") {
+    payload = enrichResumePdfPayloadForDotnet(payload);
   }
 
   return payload;
