@@ -120,8 +120,8 @@ export const experienceEntries: ExperienceEntry[] = [
       },
     ],
     recruiterImpact: {
-      pt: "Empresa de automação e software sob medida: assumo a tecnologia de outras empresas para eliminar trabalho repetitivo e acelerar a operação.",
-      en: "Custom automation and software company: I own the technology side for other businesses to remove repetitive work and speed up operations.",
+      pt: "Empresa de automação e software sob medida: entrego integrações REST API, RPA e pipelines CI/CD (GitHub Actions, Docker) em AWS para eliminar trabalho repetitivo.",
+      en: "Custom automation and software company: I deliver REST API integrations, RPA, and CI/CD pipelines (GitHub Actions, Docker) on AWS to remove repetitive work.",
     },
     shortDescription: {
       pt: "Automação, software e produtos — tecnologia sob medida para tirar o repetitivo da operação de outras empresas (desde abr/2026).",
@@ -148,6 +148,7 @@ export const experienceEntries: ExperienceEntry[] = [
 
 - Eliminar tarefas manuais e repetitivas em operações, financeiro, vendas e back-office
 - Integrações entre ERPs, planilhas, WhatsApp, e-commerce e ferramentas do dia a dia
+- **REST APIs**, testes e pipeline **CI/CD** (GitHub Actions, Docker) em **AWS**
 - Arquitetura e implementação ponta a ponta — sem depender de equipe técnica interna do cliente`,
       en: `Mãos Livres exists to **automate processes** and **own the technology side** for other companies — from diagnosis to delivery.
 
@@ -161,15 +162,20 @@ export const experienceEntries: ExperienceEntry[] = [
 
 - Removing manual, repetitive work across operations, finance, sales, and back office
 - Integrations across ERPs, spreadsheets, WhatsApp, e-commerce, and everyday tools
+- **REST APIs**, testing, and **CI/CD** pipelines (GitHub Actions, Docker) on **AWS**
 - End-to-end architecture and implementation — without requiring an in-house tech team at the client`,
     },
     technologies: [
       "Automação de Processos",
       "RPA",
+      "REST APIs",
       "Integrações & APIs",
       "Node.js",
       "TypeScript",
       "Python",
+      "Docker",
+      "GitHub Actions",
+      "CI/CD",
       "AWS",
       "IA / LLMs",
     ],
@@ -251,8 +257,8 @@ Key highlights:
     },
     productionDuration: { pt: "3 meses", en: "3 months" },
     recruiterImpact: {
-      pt: "Freelance de 3 meses em WMS legado — manutenção crítica nos módulos financeiro, comercial, marketing e estoque.",
-      en: "3-month freelance on a legacy WMS — critical maintenance across finance, sales, marketing, and inventory modules.",
+      pt: "Freelance de 3 meses em WMS legado — manutenção crítica em financeiro (accounts payable/AP e accounts receivable/AR), comercial, marketing automation e estoque.",
+      en: "3-month freelance on a legacy WMS — critical maintenance across finance (accounts payable/AP and accounts receivable/AR), sales, marketing automation, and inventory.",
     },
     shortDescription: {
       pt: "Manutenção em sistema legado de larga escala — módulos financeiro, comercial, marketing e estoque (Vue.js e C# .NET).",
@@ -263,29 +269,29 @@ Key highlights:
 
 **Módulos atendidos**
 
-- **Financeiro:** rotinas contábeis, conciliações e relatórios críticos em produção
+- **Financeiro:** rotinas de accounts payable (AP) e accounts receivable (AR), conciliações e relatórios críticos em produção
 - **Comercial:** fluxos de vendas, precificação e integrações com canais
-- **Marketing:** campanhas, promoções e regras de negócio no back-office
+- **Marketing automation:** campanhas, promoções e regras de negócio no back-office
 - **Estoque:** controle de inventário, movimentações e sincronização operacional
 
 **Entregas**
 
 - Correções e evoluções full-stack em **Vue.js** (front) e **C# (.NET)** (back)
-- Manutenção de **APIs REST** e **SQL Server** sem interromper a operação
+- Manutenção de **REST APIs** e **SQL Server** com testes de regressão, sem interromper a operação
 - Estabilização de funcionalidades legadas em ambiente de alta criticidade`,
       en: `A **3-month freelance** project at **POP+** — **maintenance and evolution** of a legacy WMS spanning the entire business operation.
 
 **Modules covered**
 
-- **Finance:** accounting routines, reconciliations, and critical production reports
+- **Finance:** accounts payable (AP) and accounts receivable (AR) routines, reconciliations, and critical production reports
 - **Sales:** sales flows, pricing, and channel integrations
-- **Marketing:** campaigns, promotions, and back-office business rules
+- **Marketing automation:** campaigns, promotions, and back-office business rules
 - **Inventory:** stock control, movements, and operational synchronization
 
 **Deliverables**
 
 - Full-stack fixes and enhancements in **Vue.js** (front) and **C# (.NET)** (back)
-- **REST API** and **SQL Server** maintenance without disrupting operations
+- **REST API** and **SQL Server** maintenance with regression testing, without disrupting operations
 - Legacy feature stabilization in a mission-critical environment`,
     },
     technologies: ["C# (.NET)", "Vue.js", "SQL Server", "REST APIs"],
@@ -303,8 +309,8 @@ Key highlights:
     },
     period: { start: "2025-01", end: "2026-03" },
     recruiterImpact: {
-      pt: "Segunda passagem na Devnology (jan/2025–mar/2026): liderança técnica de squads em extração de dados, Go/Rust e engenharia reversa em escala.",
-      en: "Second stint at Devnology (Jan 2025–Mar 2026): technical leadership of data-extraction squads, Go/Rust, and reverse engineering at scale.",
+      pt: "Segunda passagem na Devnology (jan/2025–mar/2026): liderei squads em extração de dados com Go/Rust, reduzindo latência de pipelines legados e aumentando throughput sob alto volume.",
+      en: "Second stint at Devnology (Jan 2025–Mar 2026): led data-extraction squads with Go/Rust, reducing legacy pipeline latency and increasing throughput under high volume.",
     },
     shortDescription: {
       pt: "Volta à Devnology como Líder Técnico (jan/2025–mar/2026) — squads, Go/Rust e engenharia reversa em escala.",
@@ -316,8 +322,8 @@ Key highlights:
         role: { pt: "Líder Técnico", en: "Tech Lead" },
         period: { start: "2025-01", end: "2026-03" },
         highlight: {
-          pt: "Recontratado após a Gomind para liderar squads de extração de dados — motores em Go/Rust, contorno de Akamai/Cloudflare e migração de legados para performance extrema.",
-          en: "Rehired after Gomind to lead data-extraction squads — Go/Rust engines, Akamai/Cloudflare bypass, and legacy migrations for extreme performance.",
+          pt: "Recontratado após a Gomind para liderar squads de extração de dados — motores Go/Rust, QA em code reviews, pipeline CI/CD (GitHub Actions, Docker) e migração de legados para performance extrema.",
+          en: "Rehired after Gomind to lead data-extraction squads — Go/Rust engines, QA in code reviews, CI/CD pipelines (GitHub Actions, Docker), and legacy migrations for extreme performance.",
         },
       },
     ],
@@ -326,18 +332,18 @@ Key highlights:
 
 Principais destaques:
 
-- **Liderança técnica:** definição de arquitetura, padrões e qualidade em squads de engenharia
+- **Liderança técnica:** definição de arquitetura, padrões, QA e testes automatizados em squads de engenharia
 - **Engenharia reversa avançada:** motores em Go e Rust otimizados para contornar Akamai, Cloudflare e CAPTCHA
 - **Alta performance:** migração de legados para linguagens compiladas com latência ultra-baixa e máxima concorrência
-- **Operação em escala:** pipelines sob volumes massivos de dados com uso eficiente de CPU e recursos`,
+- **CI/CD e operação em escala:** pipelines com GitHub Actions e Docker sob volumes massivos de dados`,
       en: `I returned to Devnology to lead technical squads and architecture for elite data extraction and reverse-engineering projects.
 
 Key highlights:
 
-- **Technical leadership:** architecture, standards, and quality across engineering squads
+- **Technical leadership:** architecture, standards, QA, and automated testing across engineering squads
 - **Advanced reverse engineering:** Go and Rust engines optimized to bypass Akamai, Cloudflare, and CAPTCHA
 - **High performance:** migration of legacy systems to compiled languages for ultra-low latency and maximum concurrency
-- **Scale operations:** pipelines under massive data volumes with efficient CPU and resource utilization`,
+- **CI/CD and scale operations:** GitHub Actions and Docker pipelines under massive data volumes`,
     },
     technologies: [
       "Go",
@@ -346,8 +352,10 @@ Key highlights:
       "Puppeteer",
       "Playwright",
       "Reverse Engineering",
-      "AWS",
       "Docker",
+      "GitHub Actions",
+      "CI/CD",
+      "AWS",
     ],
     clients: [
       { name: "Devnology", relationship: "direct" },
@@ -367,8 +375,8 @@ Key highlights:
     },
     period: { start: "2023-11", end: "2025-01" },
     recruiterImpact: {
-      pt: "Três evoluções na Gomind (nov/2023–jan/2025): Pleno RPA no MIA (automação contábil), Fullstack Sênior e Líder Técnico — RPA, SAP e automação em produção.",
-      en: "Three progressions at Gomind (Nov 2023–Jan 2025): Mid-Level RPA on MIA (accounting automation), Senior Full-Stack, and Tech Lead — RPA, SAP, and production automation.",
+      pt: "Três evoluções na Gomind (nov/2023–jan/2025): RPA no MIA (accounts payable/AP e accounts receivable/AR), Fullstack Sênior e Líder Técnico — SAP, CI/CD e automação em produção.",
+      en: "Three progressions at Gomind (Nov 2023–Jan 2025): RPA on MIA (accounts payable/AP and accounts receivable/AR), Senior Full-Stack, and Tech Lead — SAP, CI/CD, and production automation.",
     },
     shortDescription: {
       pt: "Três etapas na Gomind (nov/2023–jan/2025): Pleno RPA, Fullstack Sênior e Líder Técnico — produto MIA (automação contábil).",
@@ -383,8 +391,8 @@ Key highlights:
         },
         period: { start: "2023-11", end: "2024-05" },
         highlight: {
-          pt: "**Realizado:** automação RPA e orquestração no **MIA** (automação contábil), integrações AWS e entregas em processos críticos. **Evolução:** promoção a Fullstack Sênior após ~6 meses por volume de entregas, domínio do produto e impacto técnico nas integrações.",
-          en: "**Delivered:** RPA automation and orchestration on **MIA** (accounting automation), AWS integrations, and critical process deliveries. **Growth:** promoted to Senior Full-Stack after ~6 months for delivery volume, product mastery, and integration impact.",
+          pt: "**Realizado:** automação RPA no **MIA** com fluxos de accounts payable (AP) e accounts receivable (AR), integrações AWS e pipeline CI/CD com Docker e testes em produção. **Evolução:** promoção a Fullstack Sênior após ~6 meses por volume de entregas e impacto técnico.",
+          en: "**Delivered:** RPA automation on **MIA** with accounts payable (AP) and accounts receivable (AR) flows, AWS integrations, and CI/CD pipelines with Docker and production testing. **Growth:** promoted to Senior Full-Stack after ~6 months for delivery volume and technical impact.",
         },
       },
       {
@@ -395,8 +403,8 @@ Key highlights:
         },
         period: { start: "2024-05", end: "2024-08" },
         highlight: {
-          pt: "**Realizado:** frentes fullstack além do RPA, evolução do MIA e integrações de alto volume. **Evolução:** promoção a Líder Técnico após ~3 meses por liderança informal, qualidade de código e confiança da empresa em conduzir subgrupo.",
-          en: "**Delivered:** full-stack work beyond RPA, MIA evolution, and high-volume integrations. **Growth:** promoted to Tech Lead after ~3 months for informal leadership, code quality, and company trust to run a subgroup.",
+          pt: "**Realizado:** integrações **REST API** de alto volume no MIA e evolução fullstack além do RPA. **Evolução:** promoção a Líder Técnico após ~3 meses por liderança informal, QA em code reviews e entregas consistentes.",
+          en: "**Delivered:** high-volume **REST API** integrations on MIA and full-stack work beyond RPA. **Growth:** promoted to Tech Lead after ~3 months for informal leadership, QA in code reviews, and consistent delivery.",
         },
       },
       {
@@ -404,8 +412,8 @@ Key highlights:
         role: { pt: "Líder Técnico", en: "Tech Lead" },
         period: { start: "2024-08", end: "2025-01" },
         highlight: {
-          pt: "**Realizado:** liderança de subgrupo, automação SAP, mentoria e code reviews em produção. **Saída:** retorno à Devnology em janeiro/2025 como Líder Técnico em projeto de maior escala técnica.",
-          en: "**Delivered:** subgroup leadership, SAP automation, mentoring, and production code reviews. **Exit:** returned to Devnology in January 2025 as Tech Lead on a larger-scale technical project.",
+          pt: "**Realizado:** liderança de subgrupo, automação SAP, mentoria, QA e testes de regressão em produção. **Saída:** retorno à Devnology em janeiro/2025 como Líder Técnico em projeto de maior escala técnica.",
+          en: "**Delivered:** subgroup leadership, SAP automation, mentoring, QA, and regression testing in production. **Exit:** returned to Devnology in January 2025 as Tech Lead on a larger-scale technical project.",
         },
       },
     ],
@@ -414,36 +422,39 @@ Key highlights:
 
 **MIA (produto Gomind)**
 
-- Plataforma focada em **automatizar processos de contabilidade** — conciliações, rotinas fiscais e fluxos repetitivos do escritório contábil
-- Integrações, orquestração e IA aplicada onde reduz trabalho manual
+- Plataforma focada em **automatizar processos de contabilidade** — accounts payable (AP), accounts receivable (AR), conciliações e rotinas fiscais
+- Integrações **REST API**, orquestração e IA aplicada onde reduz trabalho manual
 
 **Outros destaques técnicos**
 
 - Automação SAP com workers para fluxos financeiros e logísticos
-- Orquestração e integrações em ambiente de alto volume (Lambda, filas, APIs)
-- Redução de latência e erros em processamento em segundo plano`,
+- Pipeline **CI/CD** com **GitHub Actions** e **Docker** para deploy seguro em AWS Lambda
+- **Testes** e **QA** em integrações de alto volume; redução de latência e erros em processamento em segundo plano`,
       en: `Tenure at **Gomind** with continuous role progression (see roadmap above).
 
 **MIA (Gomind product)**
 
-- Platform focused on **automating accounting processes** — reconciliations, tax routines, and repetitive accounting-firm workflows
-- Integrations, orchestration, and AI where it removes manual work
+- Platform focused on **automating accounting processes** — accounts payable (AP), accounts receivable (AR), reconciliations, and tax routines
+- **REST API** integrations, orchestration, and AI where it removes manual work
 
 **Other technical highlights**
 
 - SAP automation with workers for financial and logistics flows
-- Orchestration and integrations in high-volume environments (Lambda, queues, APIs)
-- Lower latency and fewer errors in background processing`,
+- **CI/CD** pipelines with **GitHub Actions** and **Docker** for safe deploys on AWS Lambda
+- **Testing** and **QA** on high-volume integrations; lower latency and fewer errors in background processing`,
     },
     technologies: [
       "Node.js",
       "TypeScript",
       "Python",
+      "REST APIs",
       "AWS Lambda",
       "SQS",
       "EventBridge",
       "API Gateway",
       "Docker",
+      "GitHub Actions",
+      "CI/CD",
       "Redis",
       "PostgreSQL",
       "SAP Integration",
@@ -528,8 +539,8 @@ Key highlights:
     },
     productionDuration: { pt: "7 meses", en: "7 months" },
     recruiterImpact: {
-      pt: "Freelance de 7 meses: automação web para companhias aéreas — contratado como especialista; liderei 4 devs até a entrega.",
-      en: "7-month freelance: web automation for airlines — hired as a specialist; led 4 developers through delivery.",
+      pt: "Freelance de 7 meses: liderei 4 devs em automação web para companhias aéreas — APIs de alto volume com baixa latência sob milhares de requisições concorrentes.",
+      en: "7-month freelance: led 4 developers on web automation for airlines — high-volume APIs with low latency under thousands of concurrent requests.",
     },
     shortDescription: {
       pt: "Automação web de sites de companhias aéreas — contratado como especialista; liderei time de 4 devs na entrega das soluções.",
@@ -546,8 +557,8 @@ Key highlights:
 **Entregas**
 
 - Automação de extração e integração com portais de companhias aéreas em produção
-- Pipelines resilientes com tratamento de bloqueios, rate-limit e falhas intermitentes
-- APIs e microsserviços para **alto volume de requisições concorrentes**
+- Pipelines resilientes com **testes**, **QA** e tratamento de bloqueios, rate-limit e falhas intermitentes
+- **REST APIs** e microsserviços com **Docker** para alto volume de requisições concorrentes
 - Tuning de **PostgreSQL** e **Redis** para baixa latência sob carga`,
       en: `A **7-month freelance** project at **Andrinno Software House** — hired as a **web automation specialist** for the **airline** sector, one of the most demanding niches in scraping, anti-bot, and high concurrency.
 
@@ -559,8 +570,8 @@ Key highlights:
 **Deliverables**
 
 - Automation of extraction and integration with airline portals in production
-- Resilient pipelines handling blocks, rate limits, and intermittent failures
-- APIs and microservices for **high concurrent request volumes**
+- Resilient pipelines with **testing**, **QA**, and handling of blocks, rate limits, and intermittent failures
+- **REST APIs** and microservices with **Docker** for high concurrent request volumes
 - **PostgreSQL** and **Redis** tuning for low latency under load`,
     },
     technologies: [
@@ -569,6 +580,7 @@ Key highlights:
       "Node.js",
       "TypeScript",
       "Fastify",
+      "REST APIs",
       "Docker",
       "PostgreSQL",
       "Redis",
@@ -786,8 +798,8 @@ Key highlights:
         },
         period: { start: "2022-09", end: "2023-02" },
         highlight: {
-          pt: "**Realizado:** web scraping, automação e suporte a 123 Milhas/MaxMilhas (via Devnology) — plantões e entregas em extração de alta concorrência. **Evolução:** promoção a Pleno após 6 meses pelo impacto em desenvolvimento, confiabilidade em produção e resolução de incidentes.",
-          en: "**Delivered:** web scraping, automation, and support for 123 Milhas/MaxMilhas (via Devnology) — on-call and high-concurrency extraction. **Growth:** promoted to Mid-Level after 6 months for development impact, production reliability, and incident resolution.",
+          pt: "**Realizado:** web scraping, automação e suporte a 123 Milhas/MaxMilhas com testes em plantões de produção. **Evolução:** promoção a Pleno após 6 meses por impacto em entregas, confiabilidade e resolução de incidentes.",
+          en: "**Delivered:** web scraping, automation, and support for 123 Milhas/MaxMilhas with on-call production testing. **Growth:** promoted to Mid-Level after 6 months for delivery impact, reliability, and incident resolution.",
         },
       },
       {
@@ -798,8 +810,8 @@ Key highlights:
         },
         period: { start: "2023-02", end: "2023-09" },
         highlight: {
-          pt: "**Realizado:** liderança técnica informal em scraping/RPA, engenharia reversa e operação AWS. **Saída:** layoff em set/2023 pela crise da 123 Milhas — desligamento estrutural, não por desempenho; prestes a assumir Especialista em Scraping/RPA.",
-          en: "**Delivered:** informal technical leadership in scraping/RPA, reverse engineering, and AWS operations. **Exit:** layoff in Sep 2023 due to the 123 Milhas crisis — structural, not performance-related; about to become Scraping/RPA Specialist.",
+          pt: "**Realizado:** otimização de pipelines com Docker e REST APIs; QA e testes automatizados antes de releases. **Saída:** layoff em set/2023 pela crise da 123 Milhas — desligamento estrutural, não por desempenho.",
+          en: "**Delivered:** pipeline optimization with Docker and REST APIs; QA and automated testing before releases. **Exit:** layoff in Sep 2023 due to the 123 Milhas crisis — structural, not performance-related.",
         },
       },
     ],
@@ -808,15 +820,17 @@ Key highlights:
 
 **Destaques técnicos**
 
-- Extração em larga escala com alta concorrência
+- Extração em larga escala com alta concorrência e **REST APIs**
 - Engenharia reversa e contorno de anti-bots (frontend e rede)
+- **Docker**, **testes automatizados** e **QA** em motores de scraping antes de releases
 - Puppeteer, Selenium, Python, JavaScript e operação na AWS`,
       en: `First stint at Devnology — **1 year total** (Sep 2022 to Sep 2023), with Junior-to-Mid-Level progression (see roadmap above). I joined Gomind in November 2023.
 
 **Technical highlights**
 
-- Large-scale extraction under high concurrency
+- Large-scale extraction under high concurrency with **REST APIs**
 - Reverse engineering and anti-bot bypass (frontend and network)
+- **Docker**, **automated testing**, and **QA** on scraping engines before releases
 - Puppeteer, Selenium, Python, JavaScript, and AWS operations`,
     },
     technologies: [
@@ -825,6 +839,9 @@ Key highlights:
       "Puppeteer",
       "Selenium",
       "Web Scraping",
+      "REST APIs",
+      "Docker",
+      "GitHub Actions",
       "AWS",
     ],
     clients: [
