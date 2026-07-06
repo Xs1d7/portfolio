@@ -183,6 +183,97 @@ export const experienceEntries: ExperienceEntry[] = [
     media: [],
   },
   {
+    id: "minha-agenda",
+    type: "personal",
+    company: "Mãos Livres · Minha Agenda",
+    period: { start: "2026-06", end: null },
+    role: {
+      pt: "Desenvolvedor Full Stack · Produto SaaS",
+      en: "Full-Stack Developer · SaaS Product",
+    },
+    tenures: [
+      {
+        company: "Mãos Livres · Minha Agenda",
+        role: {
+          pt: "Desenvolvedor Full Stack · Produto SaaS",
+          en: "Full-Stack Developer · SaaS Product",
+        },
+        period: { start: "2026-06", end: null },
+        highlight: {
+          pt: "Agendador online multi-segmento (barbearias, clínicas estéticas, psicólogos e outros) — produto SaaS da Mãos Livres em minhaagenda.maoslivres.com, com Next.js, Stripe, WhatsApp e CRM integrado.",
+          en: "Multi-segment online scheduler (barbershops, aesthetic clinics, psychologists, and more) — Mãos Livres SaaS at minhaagenda.maoslivres.com, with Next.js, Stripe, WhatsApp, and built-in CRM.",
+        },
+      },
+    ],
+    recruiterImpact: {
+      pt: "Produto SaaS de agendamento online da Mãos Livres — Next.js, pagamentos Stripe, notificações por e-mail, automação WhatsApp, QR Code e CRM para negócios de serviços.",
+      en: "Mãos Livres online scheduling SaaS — Next.js, Stripe payments, email notifications, WhatsApp automation, QR codes, and CRM for service businesses.",
+    },
+    shortDescription: {
+      pt: "Agendador online multi-segmento da Mãos Livres — barbearias, clínicas, psicólogos e outros. Em minhaagenda.maoslivres.com.",
+      en: "Mãos Livres multi-segment online scheduler — barbershops, clinics, psychologists, and more. At minhaagenda.maoslivres.com.",
+    },
+    overview: {
+      pt: `O **Minha Agenda** é um produto **SaaS da Mãos Livres** para **agendamento online** — pensado para negócios de serviços como **barbearias, clínicas estéticas, psicólogos** e dezenas de outros segmentos.
+
+Disponível em **[minhaagenda.maoslivres.com](https://minhaagenda.maoslivres.com)** — cada empresa contratante recebe fluxo de cadastro, agenda, pagamentos e comunicação com clientes em um único painel.`,
+      en: `**Minha Agenda** is a **Mãos Livres SaaS product** for **online scheduling** — built for service businesses such as **barbershops, aesthetic clinics, psychologists**, and many other segments.
+
+Available at **[minhaagenda.maoslivres.com](https://minhaagenda.maoslivres.com)** — each subscribing business gets scheduling, payments, and client communication in a single panel.`,
+    },
+    fullDescription: {
+      pt: `Desenvolvi o **Minha Agenda** como produto digital da **Mãos Livres** — aplicação **full stack em Next.js** para empresas que vendem horários e precisam de operação enxuta sem planilhas ou WhatsApp manual.
+
+**O que a plataforma faz**
+
+- **Agendamento online** por segmento (barbearia, clínica estética, psicologia, etc.) com fluxos adaptados ao tipo de negócio
+- **CRM leve** — histórico de clientes, serviços, status de agendamento e visão operacional para o dono do negócio
+- **Pagamentos com Stripe** — cobrança e confirmação integradas ao fluxo de reserva
+- **Notificações por e-mail** — confirmações, lembretes e comunicações transacionais
+- **Automação via WhatsApp** — mensagens automáticas para cliente e empresa no ciclo do agendamento
+- **QR Code** — o negócio contratante expõe um código que leva o cliente final direto ao **formulário de cadastro/agendamento**
+
+**Como foi construído**
+
+- **Frontend:** Next.js, React, TypeScript — painéis do estabelecimento, fluxos do cliente final e componentes reutilizáveis por vertical
+- **Backend & integrações:** APIs REST, webhooks Stripe, filas de notificação e orquestração de mensagens
+- **Entrega:** arquitetura multi-tenant para atender diversos setores com a mesma base de produto`,
+      en: `I built **Minha Agenda** as a **Mãos Livres** digital product — a **full-stack Next.js application** for businesses that sell appointments and need lean operations without spreadsheets or manual WhatsApp.
+
+**What the platform does**
+
+- **Online scheduling** by segment (barbershop, aesthetic clinic, psychology, etc.) with flows adapted to each business type
+- **Lightweight CRM** — client history, services, booking status, and an operational view for the business owner
+- **Stripe payments** — billing and confirmation integrated into the booking flow
+- **Email notifications** — confirmations, reminders, and transactional messages
+- **WhatsApp automation** — automated messages to clients and businesses across the booking lifecycle
+- **QR Code** — subscribing businesses expose a code that takes end customers straight to the **registration/booking form**
+
+**How it was built**
+
+- **Frontend:** Next.js, React, TypeScript — business panels, end-customer flows, and reusable components per vertical
+- **Backend & integrations:** REST APIs, Stripe webhooks, notification queues, and message orchestration
+- **Delivery:** multi-tenant architecture serving multiple industries from a single product base`,
+    },
+    technologies: [
+      "Next.js",
+      "React.js",
+      "TypeScript",
+      "Stripe",
+      "WhatsApp API",
+      "PostgreSQL",
+      "REST APIs",
+      "QR Code",
+      "Email Automation",
+      "CRM",
+      "Tailwind CSS",
+      "AWS",
+    ],
+    clients: [{ name: "Mãos Livres", relationship: "direct" }],
+    link: "https://minhaagenda.maoslivres.com",
+    media: [],
+  },
+  {
     id: "prodia",
     type: "personal",
     includeInJourney: false,

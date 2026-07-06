@@ -120,7 +120,7 @@
     "toggleOpen": "Currículo PDF",
     "toggleClose": "Ocultar opções",
     "title": "Exportar currículo em PDF",
-    "subtitle": "Gera um PDF com carreira (um bloco por cargo), projetos freelance e competências em automação, full-stack e IA/dados. Na versão Completa, os freelas entram por padrão.",
+    "subtitle": "Gera um PDF com carreira (um bloco por cargo), projetos freelance e competências. A versão Completa cobre automação e IA; a versão Frontend destaca React, Next.js e interfaces em produção.",
     "roleLabel": "Foco da vaga",
     "techLabel": "Tecnologias (opcional)",
     "includeFreelances": "Incluir projetos freelance",

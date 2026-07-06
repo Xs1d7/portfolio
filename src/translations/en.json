@@ -120,7 +120,7 @@
     "toggleOpen": "Resume PDF",
     "toggleClose": "Hide options",
     "title": "Export resume as PDF",
-    "subtitle": "Generates a PDF with career history (one block per role), freelance projects, and skills in automation, full-stack, and AI/data. Full version includes freelances by default.",
+    "subtitle": "Generates a PDF with career history (one block per role), freelance projects, and skills. Full version covers automation and AI; Frontend version highlights React, Next.js, and production interfaces.",
     "roleLabel": "Job focus",
     "techLabel": "Technologies (optional)",
     "includeFreelances": "Include freelance projects",

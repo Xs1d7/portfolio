@@ -8,12 +8,6 @@ import { courses } from "@/data/resume";
 export function Courses() {
   const { t, locale } = useTranslation();
 
-  const coursesWithHours = courses.filter((c) => c.hours != null);
-  const maxHours =
-    coursesWithHours.length > 0
-      ? Math.max(...coursesWithHours.map((c) => c.hours!))
-      : 0;
-
   return (
     <section id="courses" className="scroll-mt-20 py-16 sm:py-24">
       <SectionHeading>{t.courses.title}</SectionHeading>
@@ -66,19 +60,15 @@ export function Courses() {
                   )}
                 </div>
 
-                {course.hours != null && maxHours > 0 && (
-                  <div className="mt-3 h-1.5 overflow-hidden rounded-full bg-border">
-                    <motion.div
-                      className="h-full rounded-full bg-accent"
-                      initial={{ width: 0 }}
-                      whileInView={{
-                        width: `${(course.hours / maxHours) * 100}%`,
-                      }}
-                      viewport={{ once: true }}
-                      transition={{ duration: 0.8, delay: 0.2 + i * 0.06 }}
-                    />
-                  </div>
-                )}
+                <div className="mt-3 h-1.5 overflow-hidden rounded-full bg-border">
+                  <motion.div
+                    className="h-full rounded-full bg-accent"
+                    initial={{ width: 0 }}
+                    whileInView={{ width: "100%" }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.8, delay: 0.2 + i * 0.06 }}
+                  />
+                </div>
               </div>
             </div>
           </motion.div>

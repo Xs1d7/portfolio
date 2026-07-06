@@ -1,4 +1,5 @@
 import {
+  getCareerEntries,
   getFreelanceEntries,
   getJourneyEntries,
   type ExperienceEntry,
@@ -16,6 +17,7 @@ import {
   enrichResumePdfPayloadForAts,
   formatAtsMonthRange,
 } from "@/lib/resume-pdf-ats";
+import { enrichResumePdfPayloadForFrontend } from "@/lib/resume-pdf-frontend";
 import type { Locale } from "@/components/language-provider";
 import {
   expandExperienceSteps,
@@ -69,27 +71,31 @@ export const TECH_FOCUS_OPTIONS: TechFocus[] = [
 
 /** Tags por experiência para filtro de currículo */
 export const EXPERIENCE_FOCUS_TAGS: Record<string, (RoleFocus | TechFocus)[]> = {
-  "maos-livres": ["fullstack", "backend", "tech-lead", "node", "aws"],
-  prodia: ["ai", "backend", "fullstack", "go", "node", "python"],
+  "maos-livres": ["fullstack", "frontend", "backend", "tech-lead", "node", "react", "aws"],
+  "minha-agenda": ["fullstack", "frontend", "backend", "tech-lead", "node", "react", "aws"],
+  prodia: ["ai", "backend", "fullstack", "frontend", "go", "node", "python", "react"],
   "pop-plus": ["fullstack", "frontend", "backend", "dotnet", "vue"],
   "devnology-lead": [
     "backend",
     "rpa",
     "tech-lead",
+    "fullstack",
+    "frontend",
     "ai",
     "go",
     "rust",
     "python",
     "scraping",
     "aws",
+    "react",
   ],
-  gomind: ["backend", "rpa", "tech-lead", "node", "python", "aws"],
-  "grupo-domini-freelance": ["ai", "backend", "rpa", "node", "tech-lead"],
-  andrinno: ["backend", "rpa", "scraping", "python", "node", "tech-lead"],
-  "attus-bloom": ["backend", "node", "fullstack"],
-  "beleza-tal": ["ai", "python", "backend"],
+  gomind: ["backend", "rpa", "tech-lead", "fullstack", "frontend", "node", "python", "aws", "react"],
+  "grupo-domini-freelance": ["ai", "backend", "rpa", "node", "tech-lead", "frontend", "react"],
+  andrinno: ["backend", "rpa", "scraping", "python", "node", "tech-lead", "fullstack", "frontend"],
+  "attus-bloom": ["backend", "node", "fullstack", "frontend", "react"],
+  "beleza-tal": ["ai", "python", "backend", "fullstack", "frontend"],
   contmais: ["frontend", "fullstack"],
-  "barrarey-freelance": ["backend", "rpa", "python", "fullstack"],
+  "barrarey-freelance": ["backend", "rpa", "python", "fullstack", "frontend"],
   "devnology-scraping": [
     "backend",
     "rpa",
@@ -97,6 +103,8 @@ export const EXPERIENCE_FOCUS_TAGS: Record<string, (RoleFocus | TechFocus)[]> = 
     "python",
     "node",
     "aws",
+    "fullstack",
+    "frontend",
   ],
   "bbr-toys": ["fullstack", "frontend", "backend"],
 };
@@ -424,6 +432,7 @@ function stepToPdfExperience(
     types: Record<ExperienceEntry["type"], string>;
     employment: { clt: string; pj: string };
   },
+  maxHighlights = 3,
 ): PdfExperienceItem {
   const { entry } = step;
   const isLastTenure =
@@ -432,7 +441,7 @@ function stepToPdfExperience(
       : true;
 
   const impact = stripMarkdown(step.summary[locale]);
-  const highlights = bulletsFromDescription(entry.fullDescription[locale], 3);
+  const highlights = bulletsFromDescription(entry.fullDescription[locale], maxHighlights);
 
   return {
     id: step.id,
@@ -468,6 +477,7 @@ function stepToPdfExperience(
 function freelanceToPdfItem(
   entry: ExperienceEntry,
   locale: Locale,
+  maxHighlights = 3,
 ): PdfFreelanceItem {
   return {
     id: entry.id,
@@ -478,7 +488,7 @@ function freelanceToPdfItem(
     impact:
       entry.recruiterImpact?.[locale] ??
       stripMarkdown(entry.shortDescription[locale]),
-    highlights: bulletsFromDescription(entry.fullDescription[locale], 3),
+    highlights: bulletsFromDescription(entry.fullDescription[locale], maxHighlights),
     technologies: entry.technologies.slice(0, 6),
   };
 }
@@ -500,27 +510,38 @@ export function buildResumePdfPayload(
   options?: { includeFreelances?: boolean },
 ): ResumePdfPayload {
   const profile = ROLE_PROFILE[roleFocus];
-  const includeFreelances = options?.includeFreelances ?? roleFocus === "full";
+  const includeFreelances =
+    options?.includeFreelances ??
+    (roleFocus === "full" || roleFocus === "frontend");
+
+  const careerSource =
+    roleFocus === "frontend" ? getCareerEntries() : getJourneyEntries();
 
   const careerSteps = sortExperienceSteps(
     expandExperienceSteps(
-      getJourneyEntries().filter((e) =>
-        experienceMatchesFocus(e, roleFocus, techFocus),
+      careerSource.filter((e) =>
+        roleFocus === "frontend"
+          ? e.type !== "freelance"
+          : experienceMatchesFocus(e, roleFocus, techFocus),
       ),
     ),
     "desc",
   );
 
-  const filteredSkills = skills
-    .filter((s) => skillMatchesFocus(s, roleFocus, techFocus))
-    .sort((a, b) => b.level - a.level);
-
   const freelanceProjects =
     includeFreelances
       ? getFreelanceEntries()
-          .filter((e) => experienceMatchesFocus(e, roleFocus, techFocus))
-          .map((e) => freelanceToPdfItem(e, locale))
+          .filter((e) =>
+            roleFocus === "frontend"
+              ? true
+              : experienceMatchesFocus(e, roleFocus, techFocus),
+          )
+          .map((e) => freelanceToPdfItem(e, locale, roleFocus === "frontend" ? 6 : 3))
       : [];
+
+  const filteredSkills = skills
+    .filter((s) => skillMatchesFocus(s, roleFocus, techFocus))
+    .sort((a, b) => b.level - a.level);
 
   const techPart =
     techFocus.length > 0 ? ` + ${techFocus.join(", ")}` : "";
@@ -534,7 +555,10 @@ export function buildResumePdfPayload(
     headline: profile.headline[locale],
     summary: profile.summary[locale],
     coreStrengths: profile.coreStrengths[locale],
-    careerNarrative: buildCareerNarrative(careerSteps.length, locale),
+    careerNarrative:
+      roleFocus === "frontend"
+        ? ""
+        : buildCareerNarrative(careerSteps.length, locale),
     focusLabel,
     contact: {
       name: labels.name,
@@ -546,7 +570,7 @@ export function buildResumePdfPayload(
     },
     skillPillars: buildSkillPillars(filteredSkills, labels.skillPillars),
     experiences: careerSteps.map((step) =>
-      stepToPdfExperience(step, locale, labels),
+      stepToPdfExperience(step, locale, labels, roleFocus === "frontend" ? 6 : 3),
     ),
     freelanceProjects,
     education: education.map((e) => ({
@@ -575,7 +599,13 @@ export function buildResumePdfPayload(
     }),
   };
 
-  return enrichResumePdfPayloadForAts(basePayload);
+  let payload = enrichResumePdfPayloadForAts(basePayload);
+
+  if (roleFocus === "frontend") {
+    payload = enrichResumePdfPayloadForFrontend(payload);
+  }
+
+  return payload;
 }
 
 export function resumeFileName(
