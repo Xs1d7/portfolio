@@ -8,7 +8,11 @@ import { courses } from "@/data/resume";
 export function Courses() {
   const { t, locale } = useTranslation();
 
-  const maxHours = Math.max(...courses.map((c) => c.hours));
+  const coursesWithHours = courses.filter((c) => c.hours != null);
+  const maxHours =
+    coursesWithHours.length > 0
+      ? Math.max(...coursesWithHours.map((c) => c.hours!))
+      : 0;
 
   return (
     <section id="courses" className="scroll-mt-20 py-16 sm:py-24">
@@ -42,22 +46,39 @@ export function Courses() {
                 </p>
 
                 {/* Meta */}
-                <div className="mt-3 flex items-center gap-3 text-xs text-muted">
+                <div className="mt-3 flex flex-wrap items-center gap-x-3 gap-y-1 text-xs text-muted">
                   <span>{course.year}</span>
-                  <span className="h-1 w-1 rounded-full bg-border" />
-                  <span>{course.hours}h</span>
+                  {course.hours != null && (
+                    <>
+                      <span className="h-1 w-1 rounded-full bg-border" />
+                      <span>
+                        {course.hours} {t.courses.hours}
+                      </span>
+                    </>
+                  )}
+                  {course.credential && (
+                    <>
+                      <span className="h-1 w-1 rounded-full bg-border" />
+                      <span className="font-mono text-[11px]">
+                        {course.credential}
+                      </span>
+                    </>
+                  )}
                 </div>
 
-                {/* Hours bar */}
-                <div className="mt-3 h-1.5 overflow-hidden rounded-full bg-border">
-                  <motion.div
-                    className="h-full rounded-full bg-accent"
-                    initial={{ width: 0 }}
-                    whileInView={{ width: `${(course.hours / maxHours) * 100}%` }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.8, delay: 0.2 + i * 0.06 }}
-                  />
-                </div>
+                {course.hours != null && maxHours > 0 && (
+                  <div className="mt-3 h-1.5 overflow-hidden rounded-full bg-border">
+                    <motion.div
+                      className="h-full rounded-full bg-accent"
+                      initial={{ width: 0 }}
+                      whileInView={{
+                        width: `${(course.hours / maxHours) * 100}%`,
+                      }}
+                      viewport={{ once: true }}
+                      transition={{ duration: 0.8, delay: 0.2 + i * 0.06 }}
+                    />
+                  </div>
+                )}
               </div>
             </div>
           </motion.div>

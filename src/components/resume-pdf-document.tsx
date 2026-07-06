@@ -298,6 +298,7 @@ export function ResumePdfDocument({ data, labels }: Props) {
             {data.courses.map((c) => (
               <Text key={c.name} style={styles.muted}>
                 {c.name} — {c.institution} ({c.year})
+                {c.credential ? ` · ${c.credential}` : ""}
               </Text>
             ))}
           </>

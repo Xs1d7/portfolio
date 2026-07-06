@@ -45,11 +45,29 @@ export interface Course {
   name: { pt: string; en: string };
   institution: string;
   year: string;
-  hours: number;
+  hours?: number;
   credential?: string;
 }
 
 export const courses: Course[] = [
+  {
+    name: {
+      pt: "Marketing digital: planejar para vender pela Internet",
+      en: "Digital Marketing: Plan to Sell Online",
+    },
+    institution: "Sebrae",
+    year: "jul/2026",
+    credential: "6a477a93b871a4631f9ff7c8",
+  },
+  {
+    name: {
+      pt: "Faça seu negócio acontecer no Instagram",
+      en: "Make Your Business Happen on Instagram",
+    },
+    institution: "Sebrae",
+    year: "jul/2026",
+    credential: "6a479547b871a4631f9ff7e0",
+  },
   {
     name: {
       pt: "Professional Scrum Master (PSM I)",
@@ -58,6 +76,14 @@ export const courses: Course[] = [
     institution: "Agile School",
     year: "2024",
     hours: 16,
+  },
+  {
+    name: {
+      pt: "Desenvolvedor Web",
+      en: "Web Developer",
+    },
+    institution: "Origamid",
+    year: "jun/2022",
   },
 ];
 

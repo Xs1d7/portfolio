@@ -362,7 +362,7 @@ export interface ResumePdfPayload {
   experiences: PdfExperienceItem[];
   freelanceProjects: PdfFreelanceItem[];
   education: { institution: string; degree: string; field: string; period: string }[];
-  courses: { name: string; institution: string; year: string }[];
+  courses: { name: string; institution: string; year: string; credential?: string }[];
   languages: { name: string; level: string }[];
 }
 
@@ -564,6 +564,7 @@ export function buildResumePdfPayload(
       name: c.name[locale],
       institution: c.institution,
       year: c.year,
+      credential: c.credential,
     })),
     languages: languages.map((l) => {
       const base = labels.languageLevels[l.level] ?? l.level;
