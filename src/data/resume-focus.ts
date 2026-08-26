@@ -78,6 +78,7 @@ export const TECH_FOCUS_OPTIONS: TechFocus[] = [
 
 /** Tags por experiência para filtro de currículo */
 export const EXPERIENCE_FOCUS_TAGS: Record<string, (RoleFocus | TechFocus)[]> = {
+  roboteasy: ["ai", "backend", "tech-lead", "fullstack"],
   "maos-livres": ["fullstack", "frontend", "backend", "tech-lead", "dotnet", "node", "react", "aws"],
   "minha-agenda": ["fullstack", "frontend", "backend", "tech-lead", "dotnet", "node", "react", "aws"],
   prodia: ["ai", "backend", "fullstack", "frontend", "dotnet", "go", "node", "python", "react"],
@@ -131,6 +132,8 @@ const SKILL_PILLAR_MAP: Record<string, SkillPillarKey> = {
   NestJS: "fullstack",
   Fastify: "fullstack",
   "C# (.NET)": "fullstack",
+  Java: "fullstack",
+  "Spring Boot": "fullstack",
   "REST APIs": "fullstack",
   Python: "automation",
   "Web Scraping & RPA": "automation",

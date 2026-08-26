@@ -98,6 +98,93 @@ export function getJourneyEntries(): ExperienceEntry[] {
 
 export const experienceEntries: ExperienceEntry[] = [
   {
+    id: "roboteasy",
+    type: "fulltime",
+    company: "Roboteasy",
+    role: {
+      pt: "Arquiteto de Software de IA",
+      en: "AI Software Architect",
+    },
+    period: { start: "2026-07", end: null },
+    recruiterImpact: {
+      pt: "Desde 27/jul/2026: arquitetura de software de IA na Roboteasy, com entregas contínuas e forte atuação no backend Java Spring em uma grande refatoração — time organizado, operação em Santa Catarina a partir de 27/set/2026.",
+      en: "Since 27 Jul 2026: AI software architecture at Roboteasy, with ongoing deliveries and heavy backend support on a Java Spring large-scale refactor — organized team, relocating to Santa Catarina on 27 Sep 2026.",
+    },
+    shortDescription: {
+      pt: "Arquiteto de Software de IA (desde 27/jul/2026) — entregas contínuas e apoio ao backend Java Spring em grande refatoração; mudança para Santa Catarina em 27/set/2026.",
+      en: "AI Software Architect (since 27 Jul 2026) — ongoing deliveries and Java Spring backend support on a large refactor; relocating to Santa Catarina on 27 Sep 2026.",
+    },
+    tenures: [
+      {
+        company: "Roboteasy",
+        role: {
+          pt: "Arquiteto de Software de IA",
+          en: "AI Software Architect",
+        },
+        period: { start: "2026-07", end: null },
+        highlight: {
+          pt: "Início em **27 de julho de 2026**. Nos primeiros meses, entregas frequentes e **apoio intenso ao backend** em um projeto **Java Spring** em **grande refatoração**. Time muito organizado. Mudança para **Santa Catarina em 27 de setembro de 2026**.",
+          en: "Started on **27 July 2026**. In the first months, frequent deliveries and **heavy backend support** on a **Java Spring** project undergoing a **large-scale refactor**. Very organized team. Relocating to **Santa Catarina on 27 September 2026**.",
+        },
+      },
+    ],
+    overview: {
+      pt: `Entrei na **Roboteasy** em **27 de julho de 2026** como **Arquiteto de Software de IA**. O time é **muito organizado**; nesses primeiros meses tenho sido muito utilizado para **prestar apoio no backend**, em um projeto **Java Spring** em **grande refatoração**, com diversas entregas já realizadas.
+
+Em **27 de setembro de 2026** me mudo para **Santa Catarina**, mais próximo da operação da empresa.`,
+      en: `I joined **Roboteasy** on **27 July 2026** as **AI Software Architect**. The team is **highly organized**; in these first months I have been heavily engaged to **support the backend**, on a **Java Spring** project undergoing a **large-scale refactor**, with multiple deliveries already shipped.
+
+On **27 September 2026** I am relocating to **Santa Catarina**, closer to the company's operation.`,
+    },
+    fullDescription: {
+      pt: `Atuação atual na **Roboteasy** como **Arquiteto de Software de IA**, desde **27 de julho de 2026**.
+
+**Contexto**
+
+- Time **muito organizado**, com ritmo claro de entrega
+- Nos primeiros meses, demanda forte de **apoio ao backend** — projeto **Java Spring** em **grande refatoração**
+- Diversas entregas já realizadas nesse ciclo inicial
+
+**Foco técnico**
+
+- Arquitetura de software com **IA** alinhada à operação e ao produto
+- Sustentação e evolução do backend **Java / Spring** durante a refatoração
+- Colaboração próxima com o time para manter qualidade e continuidade em produção
+
+**Próximo passo**
+
+- Mudança para **Santa Catarina em 27 de setembro de 2026**`,
+      en: `Current role at **Roboteasy** as **AI Software Architect**, since **27 July 2026**.
+
+**Context**
+
+- **Highly organized** team with a clear delivery cadence
+- In the first months, strong demand for **backend support** — a **Java Spring** project in a **large-scale refactor**
+- Multiple deliveries already completed in this initial cycle
+
+**Technical focus**
+
+- Software architecture with **AI** aligned to operations and product
+- Sustaining and evolving the **Java / Spring** backend through the refactor
+- Close collaboration with the team to keep quality and continuity in production
+
+**Next step**
+
+- Relocating to **Santa Catarina on 27 September 2026**`,
+    },
+    technologies: [
+      "Java",
+      "Spring",
+      "Spring Boot",
+      "Arquitetura de Software",
+      "IA / LLMs",
+      "Refatoração",
+      "REST APIs",
+    ],
+    clients: [{ name: "Roboteasy", relationship: "direct" }],
+    media: [],
+  },
+  {
     id: "maos-livres",
     type: "personal",
     company: "Mãos Livres",

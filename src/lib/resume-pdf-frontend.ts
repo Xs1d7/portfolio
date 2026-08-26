@@ -91,6 +91,25 @@ type FrontendOverlay = {
 };
 
 const FRONTEND_OVERLAYS: Record<string, FrontendOverlay> = {
+  "roboteasy-0": {
+    impact: {
+      pt: "Arquiteto de Software de IA na Roboteasy (desde 27/jul/2026) — foco em entregas e apoio ao backend Java Spring em grande refatoração, com time organizado e mudança para Santa Catarina em 27/set/2026.",
+      en: "AI Software Architect at Roboteasy (since 27 Jul 2026) — focused on deliveries and Java Spring backend support on a large-scale refactor, with an organized team and relocation to Santa Catarina on 27 Sep 2026.",
+    },
+    highlights: {
+      pt: [
+        "Entreguei evoluções contínuas no projeto Java Spring em grande refatoração.",
+        "Prestei apoio ao backend nos primeiros meses, alinhado ao ritmo organizado do time.",
+        "Conduzi arquitetura de software de IA em paralelo à sustentação do backend.",
+      ],
+      en: [
+        "Delivered ongoing improvements on a Java Spring project in a large-scale refactor.",
+        "Provided backend support in the first months, aligned with the team's organized cadence.",
+        "Led AI software architecture alongside backend sustainment.",
+      ],
+    },
+    technologies: ["Java", "Spring", "Spring Boot", "REST APIs"],
+  },
   "minha-agenda-0": {
     impact: {
       pt: "Desenvolvi o Minha Agenda — SaaS de agendamento online da Mãos Livres (minhaagenda.maoslivres.com) em Next.js, atendendo barbearias, clínicas estéticas, psicólogos e outros segmentos, com Stripe, WhatsApp, e-mail, QR Code e CRM integrado.",

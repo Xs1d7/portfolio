@@ -108,6 +108,8 @@ export const skills: Skill[] = [
   { name: "Rust", level: 3, category: "backend" },
   { name: "Python", level: 5, category: "backend" },
   { name: "C# (.NET)", level: 4, category: "backend" },
+  { name: "Java", level: 3, category: "backend" },
+  { name: "Spring Boot", level: 3, category: "backend" },
   { name: "NestJS", level: 4, category: "backend" },
   { name: "Fastify", level: 4, category: "backend" },
   { name: "REST APIs", level: 5, category: "backend" },

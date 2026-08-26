@@ -94,6 +94,25 @@ type RpaOverlay = {
 };
 
 const RPA_OVERLAYS: Record<string, RpaOverlay> = {
+  "roboteasy-0": {
+    impact: {
+      pt: "Arquiteto de Software de IA na Roboteasy (desde 27/jul/2026) — entregas contínuas e apoio ao backend Java Spring em grande refatoração, em um time organizado; mudança para Santa Catarina em 27/set/2026.",
+      en: "AI Software Architect at Roboteasy (since 27 Jul 2026) — ongoing deliveries and Java Spring backend support on a large-scale refactor, in an organized team; relocating to Santa Catarina on 27 Sep 2026.",
+    },
+    highlights: {
+      pt: [
+        "Entreguei evoluções contínuas no backend Java Spring durante uma grande refatoração em produção.",
+        "Prestei apoio técnico ao time de backend nos primeiros meses, acelerando entregas em um ambiente organizado.",
+        "Integrei visão de arquitetura de IA com a sustentação do backend Java Spring.",
+      ],
+      en: [
+        "Delivered ongoing Java Spring backend improvements during a large-scale production refactor.",
+        "Provided backend support in the first months, accelerating deliveries in an organized environment.",
+        "Integrated AI software architecture with Java Spring backend sustainment.",
+      ],
+    },
+    technologies: ["Java", "Spring", "Spring Boot", "REST APIs", "IA / LLMs"],
+  },
   "gomind-2": {
     impact: {
       pt: "Como Líder Técnico na Gomind, governei a sustentação do MIA — dezenas de fluxos RPA contábeis em produção com orquestração de workers, DLQ para reprocessamento, logs centralizados e integração de agentes de IA/LLMs para classificação semântica de documentos fiscais.",

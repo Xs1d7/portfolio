@@ -92,6 +92,25 @@ type DotnetOverlay = {
 };
 
 const DOTNET_OVERLAYS: Record<string, DotnetOverlay> = {
+  "roboteasy-0": {
+    impact: {
+      pt: "Arquiteto de Software de IA na Roboteasy (desde 27/jul/2026) — apoio ao backend Java Spring em grande refatoração, com diversas entregas e time organizado; mudança para Santa Catarina em 27/set/2026.",
+      en: "AI Software Architect at Roboteasy (since 27 Jul 2026) — Java Spring backend support on a large-scale refactor, with multiple deliveries and an organized team; relocating to Santa Catarina on 27 Sep 2026.",
+    },
+    highlights: {
+      pt: [
+        "Entreguei evoluções no backend Java Spring durante uma grande refatoração.",
+        "Prestei apoio técnico ao backend nos primeiros meses, com ritmo de entregas constante.",
+        "Arquitetei soluções de software de IA alinhadas à operação do time.",
+      ],
+      en: [
+        "Delivered Java Spring backend improvements during a large-scale refactor.",
+        "Provided backend technical support in the first months with a steady delivery cadence.",
+        "Architected AI software solutions aligned with the team's operation.",
+      ],
+    },
+    technologies: ["Java", "Spring", "Spring Boot", "REST APIs"],
+  },
   "pop-plus": {
     impact: {
       pt: "Freelance full stack na POP+ — evolução de WMS legado em ASP.NET Core e C# com SQL Server, APIs REST, módulos financeiro/comercial e SPA Vue.js em produção crítica.",
